@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+    --color: #ffbb00;
+    --hover: #ffea00;
+    --footer-color: #ffbb00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Spartan", sans-serif;
+    color: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    background-color: #000;
+    height: 100vh;
+    background-position: relative;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+}
+
+#store-hero {
+    background-image: url("../media/hero-background.jpg");
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 14px;
+}
+
+#store-hero h2 {
+    letter-spacing: 15px;
+}
+
+#store-hero p {
+    letter-spacing: 5px;
+    font-size: 12px;
+}
+
+#store-hero p a:hover {
+    color: #0357b7;
+}
+
+#store-hero h2,
+#store-hero p {
+    color: #fff;
+    margin-bottom: 30px;
+}

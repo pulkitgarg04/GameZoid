@@ -1,0 +1,304 @@
+.text-container {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.text-container h1 {
+    margin-top: 10px;
+    color: #ffffff;
+    border-bottom: 3px solid transparent;
+    transition: ease-in-out 0.3s;
+}
+
+.text-container h1:hover {
+    border-bottom: 3px solid #ffbb00;
+
+}
+
+.text-container h3 {
+    color: #ffbb00;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+    transition: ease-in-out 0.1s;
+}
+
+.text-container h3:hover {
+    text-shadow: 0 0 5px #ffbb00, 0 0 10px #ffbb00, 0 0 20px #ffbb00, 0 0 40px #ffbb00;
+}
+
+.tournament-boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    gap: 10px;
+}
+
+@media (max-width:768px) {
+    .tournament-boxes {
+        padding: 40px;
+    }
+
+}
+
+.box {
+    margin: 10px;
+    background-color: #1b1f23;
+    /* margin-bottom: 10px; */
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.box:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.upper-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upper-part h2 {
+    margin: 0;
+    background-color: #ffbb00;
+    height: 50px;
+    width: 150px;
+    color: #000000;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    position: relative;
+}
+
+.upper-part h2::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -38px;
+    width: 0;
+    height: 0;
+    border-top: 50px solid #ffbb00;
+    border-left: 40px solid #ffbb00;
+    border-bottom: 0px solid transparent;
+    clip-path: polygon(0 0, 100% 0, 10% 100%, 0 100%);
+}
+
+.upper-part .fa-solid {
+    color: #000000;
+    margin-right: 5px;
+}
+
+.timer {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.prize-info {
+    margin-bottom: 30px;
+    text-align: center;
+    /* padding:5px; */
+}
+
+.prize-info h1 {
+    color: #ffbb00;
+    text-transform: uppercase;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.prize-info p {
+    background-color: rgb(0, 0, 0, 0.3);
+    width: fit-content;
+    margin: 0 auto;
+    height: 40px;
+    width: 180px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.prize-info p:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.prizes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.prizes li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    border-bottom: 1px solid #333;
+}
+
+.prizes li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.prizes li:last-child {
+    border-bottom: none;
+}
+
+.prizes li .name {
+    margin-left: 10px;
+    flex-grow: 1;
+}
+
+.prizes .amount {
+    color: #ffbb00;
+    font-weight: 500;
+}
+
+.prizes .fa-solid {
+    margin-left: 5px;
+    color: #ffbb00
+}
+
+
+.main2-header {
+    margin: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.main2-header h5 {
+    color: goldenrod;
+    margin-top: 80px;
+    margin-bottom: 10px;
+}
+
+.container {
+    width: 100%;
+    border-radius: 20px 0 0 20px;
+}
+
+.box1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #1b1f23;
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    margin: 40px;
+    height: fit-content;
+    border-radius: 10%;
+    transition: ease-in-out0.2s;
+}
+
+.box1:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width:768px) {
+    .box1 {
+        gap: 10px;
+        justify-content: space-around;
+    }
+
+    .box1 .title,
+    .box1 .prize,
+    .box1 .time {
+        display: none;
+    }
+}
+
+.box1 .icon {
+    width: 40px;
+    margin-right: 20px;
+}
+
+.tournament-info {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 2px solid rgb(225, 188, 2);
+    padding-left: 20px;
+}
+
+.title-status {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.status {
+    color: #00ff00;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.details {
+
+    margin: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.details p {
+    margin: 5px;
+    padding: 10px;
+    border-right: 1px solid goldenrod;
+    font-size: 16px;
+    color: #00ff00;
+}
+
+.details i {
+    margin-right: 5px;
+}
+
+.live-now {
+    color: white;
+    padding: 10px 20px;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.live-now i {
+    margin-left: 5px;
+}
+
+.live-now:hover {
+    background-color: #ededed;
+}

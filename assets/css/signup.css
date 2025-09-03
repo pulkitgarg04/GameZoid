@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --color: #ffbb00;
+    --hover: #ffea00;
+    --footer-color: #ffbb00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Spartan", sans-serif;
+    color: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #000;
+    height: 100vh;
+    background-position: relative;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.section-p1 {
+    padding: 40px 80px;
+}
+
+button.normal {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 30px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+}
+
+.signup-container {
+    margin: 150px auto;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(21, 21, 21);
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.signup-container h1 {
+    font-family: 'Barlow', sans-serif;
+    text-transform: uppercase;
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.signup-container .signup-tagline {
+    font-family: 'Barlow', sans-serif;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 80%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 450px;
+}
+
+form div label {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 20px;
+    font-family: 'Barlow', sans-serif;
+}
+
+form div input {
+    font-size: 15px;
+    font-family: 'Barlow', sans-serif;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    outline: none;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+form div input:focus {
+    border: 2px solid var(--color);
+}
+
+.submit-btn {
+    font-family: 'Barlow', sans-serif;
+    font-size: 18px;
+    padding: 8px;
+    font-weight: 600;
+    border-radius: 5px;
+    outline: none;
+    color: #000;
+    background-color: var(--color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #fff;
+}
+
+.login {
+    margin-top: 15px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+}
+
+.login-link {
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    color: var(--color);
+    text-decoration: underline;
+}
+
+.password-field {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0px;
+}
+
+.password-field input {
+    width: 100%;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.password-toggle-icon {
+    background-color: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password-toggle-icon i {
+    color: #000;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+}

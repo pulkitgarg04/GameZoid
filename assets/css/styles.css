@@ -1,0 +1,531 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+@font-face {
+  font-family: 'Refault';
+  src: url('../font/REFAULT.ttf');
+}
+
+:root {
+  --color: #ffbb00;
+  --hover: #ffea00;
+  --footer-color: #ffbb00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Spartan", sans-serif;
+  color: #fff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #000;
+  height: 100vh;
+  background-position: relative;
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+}
+
+#logo {
+  margin: 0 auto;
+  height: 25px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.section-p1 {
+  padding: 40px 80px;
+}
+
+button.normal {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 15px 30px;
+  color: #000;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: 0.2s;
+}
+
+.container {
+  padding-inline: 15px;
+}
+
+/* Hero Section */
+.hero {
+  background: url("../media/hero-bg-home.webp") no-repeat;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  margin-top: 90px;
+  padding: 60px 0;
+  height: 100vh;
+  max-height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-subtitle {
+  color: hsl(0, 0%, 100%);
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+  text-shadow: 0 7px hsla(0, 0%, 0%, 0.3);
+  margin-bottom: 15px;
+}
+
+.hero-title {
+  margin-bottom: 10px;
+  color: hsl(0, 0%, 100%);
+  font-family: "Refault", Georgia;
+  font-size: 80px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-container .btn {
+  color: hsl(0, 0%, 100%);
+  background-color: #e8aa00;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 13px 34px;
+  clip-path: polygon(90% 0, 100% 34%, 100% 100%, 10% 100%, 0 66%, 0 0);
+  transition: 0.15s ease-in-out;
+}
+
+.hero .btn i {
+  font-size: 20px;
+}
+
+/* Section Common CSS */
+.new-section {
+  text-align: center;
+  margin-top: 90px;
+}
+
+.new-section .section-heading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-section .section-heading-text p {
+  width: 50vw;
+  margin-top: 20px;
+}
+
+/* Tournament Section */
+.tournament {
+  padding: 60px 0;
+  color: hsl(0, 0%, 100%);
+  text-align: center;
+  margin-top: 100px;
+}
+
+.tournament .container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tournament-content,
+.tournament-prize {
+  margin-bottom: 0;
+}
+
+.tournament-content {
+  max-width: 310px;
+}
+
+.tournament-subtitle {
+  color: var(--color);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.tournament-title {
+  margin-bottom: 20px;
+}
+
+.tournament .h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 34px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.tournament-text {
+  color: hsl(0, 0%, 80%);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.tournament .btn {
+  color: hsl(0, 0%, 100%);
+  background-color: #e8aa00;
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  width: max-content;
+  margin-inline: auto;
+  padding: 13px 34px;
+  clip-path: polygon(90% 0, 100% 34%, 100% 100%, 10% 100%, 0 66%, 0 0);
+  transition: 0.15s ease-in-out;
+}
+
+.tournament-prize-title {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.tournament-prize data {
+  background: var(--color);
+  color: hsl(234, 14%, 14%);
+  font-family: 'Oswald', sans-serif;
+  font-size: 26px;
+  padding: 8px 42px;
+  border-radius: 50px;
+}
+
+.tournament-prize img {
+  margin-inline: auto;
+}
+
+.tournament-winners {
+  background: hsl(234, 14%, 14%);
+  padding: 40px 30px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px hsla(0, 0%, 0%, 0.2);
+}
+
+.tournament-winners-title {
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.tournament-winners-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.winner-card .card-banner {
+  max-width: 90px;
+  margin-inline: auto;
+  margin-bottom: 15px;
+}
+
+.winner-card img {
+  width: 100%;
+}
+
+.winner-card .card-title {
+  background: var(--color);
+  width: max-content;
+  margin-inline: auto;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+
+/* Store Section */
+#store {
+  margin: auto 150px;
+}
+
+#store h2 {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Gaming Products Display */
+#gaming-products .product-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#gaming-products .product {
+  width: 23%;
+  min-width: 250px;
+  padding: 20px 20px;
+  border: 1px solid #313131;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+  margin: 15px 0;
+  transition: 0.2s ease;
+  position: relative;
+}
+
+#gaming-products .product:hover {
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+}
+
+#gaming-products .product img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+#gaming-products .product .product-description {
+  text-align: start;
+  padding: 10px 0;
+}
+
+#gaming-products .product .product-description .product-category {
+  text-align: center;
+}
+
+#gaming-products .product .product-description h6 {
+  display: inline-block;
+  background-color: var(--color);
+  color: black;
+  padding: 8px;
+  font-weight: 750;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+#gaming-products .product .product-description h5 {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+#gaming-products .product .product-description i {
+  font-size: 12px;
+  color: rgb(243, 181, 25);
+}
+
+#gaming-products .product .product-description h4 {
+  padding-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color);
+}
+
+#gaming-products .product .cart {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #e8f6ea;
+  color: black;
+  border: 1px solid #cce7d0;
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}
+
+/* Latest News Section */
+.latest-news-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.latest-news-container .news-box {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  height: 380px;
+  width: 350px;
+  padding: 20px;
+  margin: 20px;
+  margin-top: 50px;
+}
+
+.latest-news-container .news-box img {
+  width: 100%;
+}
+
+.latest-news-container .news-box h4 {
+  margin-top: 10px;
+  font-weight: 600;
+  line-height: 25px;
+}
+
+.latest-news-container .news-box p {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  line-height: 20px;
+}
+
+.see-more-btn {
+  color: black;
+  background-color: var(--color);
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Follow Us Section */
+.social-media-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-media-icons .icon-box {
+  height: 150px;
+  width: 150px;
+  background-color: #313131;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  margin: 30px;
+  cursor: pointer;
+  border-radius: 10px;
+  opacity: 60%;
+  transition: all 0.2s ease;
+}
+
+.social-media-icons .icon-box:hover {
+  opacity: 100%;
+}
+
+.social-media-icons .icon-box:hover i,
+.social-media-icons .icon-box:hover p {
+  color: rgb(238, 221, 144);
+}
+
+.social-media-icons .icon-box i {
+  font-size: 2.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-media-icons .icon-box p {
+  margin-top: 25px;
+}
+
+#our-partners {
+  text-align: center;
+  margin: 4rem auto;
+}
+
+#our-partners h2 {
+  font-size: 40px;
+}
+
+#brand-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.single-logo {
+  margin: 3rem;
+}
+
+.single-logo img {
+  opacity: 50%;
+  transition: 0.2s ease;
+}
+
+.single-logo img:hover {
+  opacity: 100%;
+}
+
+.location {
+  margin: 3rem auto;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 100px;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.location-name {
+  text-align: center;
+}
+
+.location-name .text {
+  margin: 0 0;
+  font-size: 60px;
+  text-transform: capitalize;
+  color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #fff;
+  font-weight: 800;
+  display: inline-block;
+  opacity: 50%;
+  transition: 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .location-name .text {
+    margin-top: 20px;
+  }
+}
+
+.location-name .text:hover {
+  opacity: 100%;
+}

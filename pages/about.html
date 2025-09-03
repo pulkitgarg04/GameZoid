@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - GameZoid</title>
+  <link rel="icon" type="image/x-icon" href="../assets/media/favicon.png">
+  <link rel="stylesheet" href="../assets/css/about.css">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+  <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
+
+  <style>
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("../assets/media/background.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="sticky">
+    <div id="logo"><img src="../assets/media/logo.webp" alt="logo" id="logo"></div>
+    <nav>
+      <ul id="navbar">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="./store.html">Store</a></li>
+        <li><a href="./tournament.html">Tournaments</a></li>
+        <li><a href="./community.html">Community</a></li>
+        <li><a href="./news.html">News</a></li>
+        <li><a class="active" href="./about.html">About</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        <li><a href="./login.html"><i class="fa-regular fa-circle-user"></i></a></li>
+        <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
+      </ul>
+    </nav>
+    <div id="mobile">
+      <span><i class="fa fa-bars"></i></span>
+    </div>
+  </header>
+
+  <section id="about-hero">
+    <h2>KNOW <span style="color: var(--color);">US</span></h2>
+    <p><a href="/">HOME</a> <i class="fa-solid fa-angles-right" style="font-weight: 600;"></i> ABOUT</p>
+  </section>
+
+  <section id="about-head" class="section-p2">
+    <div class="about-head-logo">
+      <a href="../index.html" class="about-head-center">
+        <img src="../assets/media/logo.webp" alt="logo">
+      </a>
+      <h5 class="about-head-subtitle">
+        GameZoid is the ultimate destination for playing, discussing, and creating games.
+      </h5>
+      <a href="./store.html" class="about-head-center">
+        <button class="explore-btn">Explore Store<i class="fa-solid fa-arrow-up-right-from-square"
+            style="margin-left: 10px; color: #000;"></i></button>
+      </a>
+    </div>
+    <div class="img-container">
+      <img src="../assets/media/about/tv-frame.png" alt="Gameplay frame" class="frame-img" />
+      <div class="frame-video-container">
+        <video autoplay="" loop="" muted="" class="frame-video">
+          <source src="../assets/media/about/video.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="about-features" class="section-p2">
+      <h2>Features</h2>
+      <p class="tagline">We are constantly working to bring new updates and features to our platform, such as:</p>
+      <div class="features-grid">
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-steamchat.svg">
+          </div>
+          <h6>Steam Chat</h6>
+          <p>Talk with friends or groups via text or voice without leaving GameZoid. Videos, Tweets, GIFs and more are
+            supported; use wisely.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-gamehubs.svg">
+          </div>
+          <h6>Game Hubs</h6>
+          <p>Everything about your game, all in one place. Join discussions, upload content, and be the first to know
+            about new updates.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-payment.svg">
+          </div>
+          <h6>Purchases Made Easy</h6>
+          <p>Our storefront supports 100+ payment methods across over 35 currencies, giving you the flexibility to pay
+            how
+            you want.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-controllers.svg">
+          </div>
+          <h6>Controller Support</h6>
+          <p>GameZoid encourages developers to include controller support in their games including PlayStation, Xbox,
+            and
+            Nintendo controllers.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-earlyaccess.svg">
+          </div>
+          <h6>Early Access to Games</h6>
+          <p>Discover, play, and get involved with games as they evolve. Be the first to see what's coming and become
+            part
+            of the process.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-steammobile.svg">
+          </div>
+          <h6>Available on Mobile</h6>
+          <p>Access GameZoid anywhere from your iOS or Android device with the GameZoid mobile app.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-broadcasts.svg">
+          </div>
+          <h6>Watch Tournaments</h6>
+          <p>Watch online tournaments live with the click of a button, and share your game with friends or the rest of
+            the community.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-steamworkshop.svg">
+          </div>
+          <h6>Seemless Playing</h6>
+          <p>Create, discover, and download player-created mods and cosmetics for nearly 1,000 supported games.</p>
+        </div>
+        <div class="fe-box">
+          <div class="img-container">
+            <img src="../assets/media/about/features/icon-languages.svg">
+          </div>
+          <h6>Multilingual</h6>
+          <p>Creating a global community is important to us, that's why our client supports 28 languages and counting.
+          </p>
+        </div>
+      </div>
+      <div class="feature-end">
+        <div class="col">
+          <h3>And so much more...</h3>
+          <h5>Earn achievements, read reviews, explore custom recommendations, and more.</h5>
+        </div>
+        <div class="col">
+          <img src="../assets/media/logo.webp">
+          <p>Available on: <i class="fa fa-apple" style="font-size: 1.2rem;"></i><i class="fa fa-play"></i><i
+              class="fa fa-chrome"></i></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section-p1">
+    <div class="col logo-col">
+      <img src="../assets/media/logo.webp" class="logo">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
+        qui id.</p>
+      <div class="follow">
+        <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
+        <div class="icon">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-pinterest"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col">
+      <h4>My Account</h4>
+      <a href="#">Sign In</a>
+      <a href="#">View Cart</a>
+      <a href="#">My Wishlist</a>
+      <a href="#">Track My Order</a>
+      <a href="#">Help</a>
+    </div>
+
+    <div class="col install">
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <div class="row">
+        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/play.jpg" alt="">
+      </div>
+      <p>Secured Payment Gateways</p>
+      <img src="../assets/media/pay/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+    </div>
+  </footer>
+</body>
+
+</html>

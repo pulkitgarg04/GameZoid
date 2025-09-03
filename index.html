@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameZoid - Epic Games made for True Gamers!</title>
+  <link rel="icon" type="image/x-icon" href="./assets/media/favicon.png">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/header.css">
+  <link rel="stylesheet" href="./assets/css/footer.css">
+  <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
+
+  <style>
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("assets/media/background.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header class="sticky">
+      <div id="logo"><img src="../assets/media/logo.webp" alt="logo" id="logo"></div>
+      <nav>
+        <ul id="navbar">
+          <li><a class="active" href="/index.html">Home</a></li>
+          <li><a href="./pages/store.html">Store</a></li>
+          <li><a href="./pages/tournament.html">Tournaments</a></li>
+          <li><a href="./pages/community.html">Community</a></li>
+          <li><a href="./pages/news.html">News</a></li>
+          <li><a href="./pages/about.html">About</a></li>
+          <li><a href="./pages/contact.html">Contact</a></li>
+          <li><a href="./pages/cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+          <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
+          <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
+        </ul>
+      </nav>
+      <div id="mobile">
+        <span><i class="fa fa-bars"></i></span>
+    </div>
+    </header>
+
+    <section class="hero" id="hero">
+      <div class="container">
+        <p class="hero-subtitle">The Season 8</p>
+        <h1 class="h1 hero-title">WarZone</h1>
+        <a href="https://www.youtube.com/watch?v=VEEkW7y_tZU" target="_blank">
+          <div class="btn-container">
+            <button class="btn">
+              <span>Watch live</span>
+              <i class="fa-regular fa-circle-play"></i>
+            </button>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="tournament" id="tournament">
+      <div class="container">
+        <div class="tournament-content">
+          <p class="tournament-subtitle">Check out our next</p>
+          <h2 class="h3 tournament-title">Gaming Tournament!</h2>
+          <p class="tournament-text">
+            Lpsum dolor sit amet, consectetur adipiscing elit, sed labore et dolore magna aliqua.
+          </p>
+          <a href="./pages/tournament.html">
+            <button class="btn">Join with us</button>
+          </a>
+        </div>
+        <div class="tournament-prize">
+          <h2 class="h3 tournament-prize-title">Prize pool</h2>
+          <!-- We have used data tag here as data can be constly changing! -->
+          <data value="80000">$80000</data>
+          <figure>
+            <img src="./assets/media/tournament/prize-img.png" alt="Prize image">
+          </figure>
+        </div>
+        <div class="tournament-winners">
+          <h2 class="h3 tournament-winners-title">Last winners</h2>
+          <ul class="tournament-winners-list">
+            <li>
+              <div class="winner-card">
+                <figure class="card-banner">
+                  <img src="./assets/media/tournament/winner-img-1.png" alt="Winner image">
+                </figure>
+                <h3 class="card-title">1st place</h3>
+              </div>
+            </li>
+            <li>
+              <div class="winner-card">
+                <figure class="card-banner">
+                  <img src="./assets/media/tournament/winner-img-2.png" alt="Winner image">
+                </figure>
+                <h3 class="card-title">2nd place</h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="gaming-products" class="section-p1 new-section">
+      <h2>NEW GAMES <span style="color: var(--color);">RELEASED</span></h2>
+      <div class="section-heading-text">
+        <p>Unleash the Latest: Discover New Adventures Every Week!</p>
+      </div>
+      <div class="product-container">
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/apex-legends.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Battle Royale</h6>
+            </div>
+            <h5>Apex Legends</h5>
+            <h4>$72.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/gta-v.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Open World</h6>
+            </div>
+            <h5>Grand Theft Auto V</h5>
+            <h4>$95.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/pubg.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Battle Royale</h6>
+            </div>
+            <h5>PUBG (BGMI) - India</h5>
+            <h4>$15.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/valorant.webp">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Tactical Shooter</h6>
+            </div>
+            <h5>Valorant</h5>
+            <h4>$26.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/call-of-duty.webp">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Action</h6>
+            </div>
+            <h5>Call Of Duty</h5>
+            <h4>$45.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/clash-of-clans.webp">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Base-Building</h6>
+            </div>
+            <h5>Clash Of Clans</h5>
+            <h4>$30.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/devil-may-cry.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Hack and Slash</h6>
+            </div>
+            <h5>Devil May Cry</h5>
+            <h4>$55.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/community/price-of-persia.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>Platformer</h6>
+            </div>
+            <h5>Prince Of Persia</h5>
+            <h4>$74.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="gaming-products" class="section-p1 new-section">
+      <h2>Gaming Product <span style="color: var(--color);">Corner</span></h2>
+      <div class="section-heading-text">
+        <p>Compete with 100 players on a remote island for winner takes showdown known issue where certain skin
+          strategic
+        </p>
+      </div>
+      <div class="product-container">
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/gaming-products/1.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>VR BOX</h6>
+            </div>
+            <h5>Virtual Reality Smiled</h5>
+            <h4>$159.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/gaming-products/2.png">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>HEADPHONES</h6>
+            </div>
+            <h5>GameZoid Gaming Headphones</h5>
+            <h4>$39.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/gaming-products/3.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>X-BOX</h6>
+            </div>
+            <h5>Gears 5 Xbox Controller</h5>
+            <h4>$99.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+        <div class="product" onclick="window.location.href='#'">
+          <img src="./assets/gaming-products/4.jpg">
+          <div class="product-description">
+            <div class="product-category">
+              <h6>GRAPHICS</h6>
+            </div>
+            <h5>GeForce RTX 2070</h5>
+            <h4>$529.00</h4>
+          </div>
+          <a href="#">
+            <i class="fas fa-shopping-cart cart"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="latest-news" class="section-p1 new-section">
+      <h2>Latest News & <span style="color: var(--color);">Articles</span></h2>
+      <div class="section-heading-text">
+        <p>Compete with 100 players on a remote island for winner takes showdown known issue where certain skin
+          strategic</p>
+      </div>
+      <div class="latest-news-container">
+        <div class="news-box">
+          <div class="news-img">
+            <img src="../assets/news/news-1.webp">
+          </div>
+          <div class="news-details">
+            <h4>GTA 6 Could Feature Random Events</h4>
+            <p>GTA 6 is one of the most highly-anticipated games in the upcoming games category. The game is set to
+              release in the fall of 2025 for PlayStation 5..</p>
+          </div>
+        </div>
+        <div class="news-box">
+          <div class="news-img">
+            <img src="../assets/news/news-2.webp">
+          </div>
+          <div class="news-details">
+            <h4>EA Sports FC 25 has added something we've been wanting for years</h4>
+            <p>Look, EA, let's be clear. No matter how much you insist on calling your franchise 'EA Sports FC', it will
+              always be 'FIFA'...</p>
+          </div>
+        </div>
+        <div class="news-box">
+          <div class="news-img">
+            <img src="../assets/news/news-3.webp">
+          </div>
+          <div class="news-details">
+            <h4>GTA 3 Move from 2D to 3D was Rejected by Microsoft - PS2 Won the Game</h4>
+            <p>The shift was proposed to Microsoft for a release on Xbox gaming consoles, but Microsoft thought that
+              the...</p>
+          </div>
+        </div>
+        <div class="news-box">
+          <div class="news-img">
+            <img src="../assets/news/news-4.webp">
+          </div>
+          <div class="news-details">
+            <h4>Diablo IV's Spiritborn Class Revealed for Vessel of Hatred!</h4>
+            <p>The Nahantu territory and this new class are in the upcoming 8 October Vessel of Hatred expansion.
+              Pre-purchase offers instant access to...</p>
+          </div>
+        </div>
+      </div>
+      <a href="./pages/news.html">
+        <button class="see-more-btn">See More&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"
+            style="color: #000;"></i></button>
+      </a>
+    </section>
+
+    <section id="social-media" class="section-p1 new-section">
+      <h2>Stay <span style="color: var(--color);">Connected</span></h2>
+      <div class="section-heading-text">
+        <p>Connect with us on social media platforms!</p>
+      </div>
+      <div class="social-media-icons">
+        <div class="icon-box facebook">
+          <i class="fa-brands fa-facebook"></i>
+          <p>Facebook</p>
+        </div>
+        <div class="icon-box">
+          <i class="fa-brands fa-instagram"></i>
+          <p>Instagram</p>
+        </div>
+        <div class="icon-box">
+          <i class="fa-brands fa-square-x-twitter"></i>
+          <p>X</p>
+        </div>
+        <div class="icon-box">
+          <i class="fa-brands fa-youtube"></i>
+          <p>YouTube</p>
+        </div>
+        <div class="icon-box">
+          <i class="fa-brands fa-discord"></i>
+          <p>Discord</p>
+        </div>
+        <div class="icon-box">
+          <i class="fa-brands fa-twitch"></i>
+          <p>Twitch</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="our-partners">
+    <h2>THEY TRUST US</h2>
+    <div id="brand-logos">
+      <div class="single-logo"><img src="./assets/media/client-logos/1.png"></div>
+      <div class="single-logo"><img src="./assets/media/client-logos/2.png"></div>
+      <div class="single-logo"><img src="./assets/media/client-logos/3.png"></div>
+      <div class="single-logo"><img src="./assets/media/client-logos/4.png"></div>
+      <div class="single-logo"><img src="./assets/media/client-logos/5.png"></div>
+      <div class="single-logo"><img src="./assets/media/client-logos/6.png"></div>
+      <div class="single-logo"><img src="./assets/media/client-logos/7.png"></div>
+    </div>
+  </div>
+
+  <div class="location">
+    <div class="row">
+      <div class="location-name">
+        <h2 class="text">India</h2>
+      </div>
+      <div class="location-name">
+        <h2 class="text">USA</h2>
+      </div>
+    </div>
+  </div>
+
+  <footer class="section-p1">
+    <div class="col logo-col">
+      <img src="./assets/media/logo.webp" class="logo">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
+        qui id.</p>
+      <div class="follow">
+        <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
+        <div class="icon">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-pinterest"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col">
+      <h4>My Account</h4>
+      <a href="#">Sign In</a>
+      <a href="#">View Cart</a>
+      <a href="#">My Wishlist</a>
+      <a href="#">Track My Order</a>
+      <a href="#">Help</a>
+    </div>
+
+    <div class="col install">
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <div class="row">
+        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/play.jpg" alt="">
+      </div>
+      <p>Secured Payment Gateways</p>
+      <img src="../assets/media/pay/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+    </div>
+  </footer>
+
+  <script>
+    function accountRoute() {
+        const currentUser = localStorage.getItem('currentUser');
+        
+        if (currentUser) {
+            window.location.href = './pages/account.html';
+        } else {
+            window.location.href = './pages/login.html';
+        }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+}
+
+:root {
+    --color: #ffbb00;
+    --hover: #ffea00;
+    --footer-color: #ffbb00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Spartan", sans-serif;
+    color: #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #000;
+    height: 100vh;
+    background-position: relative;
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+}
+
+#store-hero {
+    margin-top: 90px;
+    background-image: url("../media/hero-background.jpg");
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 14px;
+}
+
+#store-hero h2 {
+    letter-spacing: 15px;
+}
+
+#store-hero p {
+    letter-spacing: 5px;
+    font-size: 12px;
+}
+
+#store-hero p a:hover {
+    color: #0357b7;
+}
+
+#store-hero h2,
+#store-hero p {
+    color: #fff;
+    margin-bottom: 30px;
+}
+.cards{
+    width: 25%;
+    margin-bottom: 20px;
+    background-color: #000;
+    border-radius: 5px;
+    margin:10px;
+    border: 0.5px solid rgb(70, 12, 56);
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.image img{
+    width: 100%;
+    height: 350px;
+    object-fit:fill;
+    border-radius: 5px;
+}
+.title{
+    text-align: center ;
+    padding:5px;
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px;
+}
+.des{
+    text-align: center;
+    padding: 6px;
+}
+button{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;}
+button:hover{
+    background-color: #000;
+    color: #fff;
+    transition: 0.5s;
+   
+
+}
+
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+
+
+
+#menu-toggle:checked ~ nav #navbar {
+    display: flex;
+    left: 0;
+}
+
+#burger-button {
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+#burger-button .bar {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.3s;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+#menu-toggle:checked + #burger-button .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+#menu-toggle:checked + #burger-button .bar:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked + #burger-button .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+
+@media only screen and (min-width: 1024px) {
+    .main {
+        justify-content: space-between;
+        padding: 40px;
+    }
+    
+    .cards {
+        width: 30%;
+        margin-bottom: 20px;
+    }
+    #burger-button {
+        display: none;
+    }
+
+    #navbar {
+        display: none;
+        position: static;
+        width: auto;
+        background-color: transparent;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 970px) {
+    
+    .main {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 10px;
+    }
+    
+    .cards {
+        width: 40%;
+        margin-bottom: 20px;
+    }
+    #logo img {
+        max-height: 40px;
+      }
+    #navbar{
+        margin-left: 0px;
+        
+    }
+    #latest-games{
+        text-align: center;
+    }
+    #burger-button {
+        display: none;
+    }
+}
+@media (min-width:768px) and (max-width:970px){
+    
+    #navbar li {
+        line-height: 2;
+        list-style: none;
+    }
+
+    #navbar li + li {
+        margin-top: 10px;
+    }
+    #latest-games{
+        text-align: center;
+    }
+    .main {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 10px;
+    }
+    
+    .cards {
+        width: 40%;
+        margin-bottom: 20px;
+       
+    }
+
+    #burger-button {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    #menu-toggle:checked ~ nav {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #latest-games{
+        text-align: center;
+    }
+    #navbar li {
+        line-height: 2;
+        list-style: none;
+    }
+
+    #navbar{
+        display: flex;
+        flex-direction: column;
+        width:30vw;
+        background-color: #000;
+        }
+    
+    #navbar li + li {
+        margin-top: 10px;
+    }
+    .main {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding: 10px;
+    }
+    
+    .cards {
+        width: 40%;
+        margin-bottom: 20px;
+    }
+
+    #burger-button {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    #menu-toggle:checked ~ nav {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #navbar li {
+        line-height: 2;
+        list-style: none;
+    }
+    
+    #navbar li + li {
+        margin-top: 10px;
+    }
+    #latest-games{
+        text-align: center;
+    }#store-hero {
+        height: 30vh;
+    }
+    
+    #store-hero h2 {
+        font-size: 1.2em;
+        letter-spacing: 3px;
+    }
+    
+    #store-hero p {
+        font-size: 0.7em;
+        letter-spacing: 1px;
+    }
+    
+    .cards {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .image img {
+        height: 200px;
+    }
+    
+    button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+}
