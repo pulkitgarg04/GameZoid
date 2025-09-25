@@ -1,3 +1,35 @@
+// Admin Authentication Check
+document.addEventListener('DOMContentLoaded', () => {
+  // Check sessionStorage first, then localStorage for backward compatibility
+  let currentUser = sessionStorage.getItem('currentUser');
+  if (!currentUser) {
+    currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      // Migrate to sessionStorage
+      sessionStorage.setItem('currentUser', currentUser);
+      localStorage.removeItem('currentUser');
+    }
+  }
+
+  const user = JSON.parse(currentUser || 'null');
+  if (!user || !user.isAdmin) {
+    alert('Access Denied: Admin privileges required!');
+    window.location.href = './login.html';
+  }
+});
+
+// Account routing function
+function accountRoute() {
+  // Check sessionStorage first, then localStorage
+  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  
+  if (currentUser) {
+    window.location.href = './account.html';
+  } else {
+    window.location.href = './login.html';
+  }
+}
+
 class GameDatabase {
   constructor() {
     this.dbName = 'GameZoidDB';
@@ -268,15 +300,63 @@ function displayProducts(products) {
 function showAddGameModal() {
   document.getElementById('addGameModal').style.display = 'block';
   document.getElementById('addGameForm').reset();
+  
+  setTimeout(() => {
+    checkScrollIndicator(document.querySelector('#addGameModal .modal-form-content'));
+  }, 100);
 }
 
 function showAddProductModal() {
   document.getElementById('addProductModal').style.display = 'block';
   document.getElementById('addProductForm').reset();
+  
+  setTimeout(() => {
+    checkScrollIndicator(document.querySelector('#addProductModal .modal-form-content'));
+  }, 100);
 }
 
 function closeModal(modalId) {
   document.getElementById(modalId).style.display = 'none';
+}
+
+function checkScrollIndicator(element) {
+  if (!element) return;
+  
+  const hasVerticalScrollbar = element.scrollHeight > element.clientHeight;
+  
+  if (hasVerticalScrollbar) {
+    element.classList.add('has-scroll');
+  } else {
+    element.classList.remove('has-scroll');
+  }
+  
+  element.addEventListener('scroll', () => {
+    const scrollTop = element.scrollTop;
+    const scrollHeight = element.scrollHeight - element.clientHeight;
+    
+    if (scrollTop >= scrollHeight - 10) {
+      element.classList.remove('has-scroll');
+    } else {
+      element.classList.add('has-scroll');
+    }
+  });
+}
+
+// Function to show/hide game-specific fields in the edit modal
+function showGameFields(isGame) {
+  const gameOnlyFields = [
+    'editTagline', 'editDeveloper', 'editPublisher', 'editReleaseDate',
+    'editPlatforms', 'editRating', 'editFeatures', 'editReqMin', 
+    'editReqRec', 'editScreenshots'
+  ];
+  
+  gameOnlyFields.forEach(fieldId => {
+    const field = document.getElementById(fieldId);
+    const formGroup = field ? field.closest('.form-group') : null;
+    if (formGroup) {
+      formGroup.style.display = isGame ? 'block' : 'none';
+    }
+  });
 }
 
 document.getElementById('addGameForm').addEventListener('submit', async (e) => {
@@ -383,6 +463,13 @@ async function editGame(id) {
       categorySelect.value = game.category;
       
       document.getElementById('editModal').style.display = 'block';
+      
+      // Show only game-relevant fields
+      showGameFields(true);
+      
+      setTimeout(() => {
+        checkScrollIndicator(document.querySelector('#editModal .modal-form-content'));
+      }, 100);
     }
   } catch (error) {
     console.error('Error loading game for edit:', error);
@@ -419,6 +506,13 @@ async function editProduct(id) {
       categorySelect.value = product.category;
       
       document.getElementById('editModal').style.display = 'block';
+      
+      // Show only product-relevant fields
+      showGameFields(false);
+      
+      setTimeout(() => {
+        checkScrollIndicator(document.querySelector('#editModal .modal-form-content'));
+      }, 100);
     }
   } catch (error) {
     console.error('Error loading product for edit:', error);
@@ -614,12 +708,12 @@ async function populateDefaultData() {
             description: 'A free-to-play battle royale game where legends battle for glory, fame, and fortune.',
             platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch'],
             rating: 8.7,
-            features: ['Hero shooter gameplay', 'Team-based tactics', 'Unique abilities'],
+            features: ['Hero shooter gameplay', 'Team-based tactics', 'Unique legend abilities', '60-player battle royale'],
             requirements: {
               minimum: { CPU: 'Intel Core i3-6300', RAM: '6 GB', GPU: 'NVIDIA GeForce GT 640', Storage: '56 GB', OS: 'Windows 10' },
               recommended: { CPU: 'Intel i5 3570K', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 970', Storage: '56 GB', OS: 'Windows 10' }
             },
-            screenshots: []
+            screenshots: ['../assets/community/apex-legends.jpg']
           },
           {
             name: 'Grand Theft Auto V',
@@ -633,12 +727,12 @@ async function populateDefaultData() {
             description: 'An action-adventure game set in the fictional state of San Andreas.',
             platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S'],
             rating: 9.2,
-            features: ['Open-world exploration', 'Multiple protagonists', 'Online mode'],
+            features: ['Open-world exploration', 'Multiple protagonists', 'Online mode', 'Heist missions'],
             requirements: {
               minimum: { CPU: 'Intel Core 2 Quad Q6600', RAM: '4 GB', GPU: 'NVIDIA 9800 GT', Storage: '110 GB', OS: 'Windows 10' },
               recommended: { CPU: 'Intel Core i5 3470', RAM: '8 GB', GPU: 'NVIDIA GTX 660', Storage: '110 GB', OS: 'Windows 10' }
             },
-            screenshots: []
+            screenshots: ['../assets/community/gta-v.jpg']
           },
           {
             name: 'PUBG (BGMI) - India',
@@ -650,11 +744,14 @@ async function populateDefaultData() {
             price: 15.00,
             image: '../assets/community/pubg.jpg',
             description: 'PlayerUnknown\'s Battlegrounds - Battle royale game for mobile devices.',
-            platforms: ['Mobile'],
+            platforms: ['Mobile', 'PC'],
             rating: 7.9,
-            features: ['Realistic ballistics', 'Large maps', 'Team play'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['Realistic ballistics', 'Large maps', 'Team play', '100-player battle royale'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i5-4430', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 960', Storage: '30 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i5-6600K', RAM: '16 GB', GPU: 'NVIDIA GeForce GTX 1060', Storage: '30 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['../assets/community/pubg.jpg']
           },
           {
             name: 'Valorant',
@@ -668,12 +765,12 @@ async function populateDefaultData() {
             description: 'A free-to-play first-person tactical hero shooter developed by Riot Games.',
             platforms: ['PC'],
             rating: 8.5,
-            features: ['5v5 tactical gameplay', 'Agent abilities', 'Competitive modes'],
+            features: ['5v5 tactical gameplay', 'Agent abilities', 'Competitive modes', 'Anti-cheat system'],
             requirements: {
               minimum: { CPU: 'Intel i3-370M', RAM: '4 GB', GPU: 'Intel HD 3000', Storage: '10 GB', OS: 'Windows 10' },
               recommended: { CPU: 'Intel i3-4150', RAM: '4 GB', GPU: 'NVIDIA GT 730', Storage: '10 GB', OS: 'Windows 10' }
             },
-            screenshots: []
+            screenshots: ['../assets/community/valorant.webp']
           },
           {
             name: 'Call Of Duty',
@@ -685,11 +782,14 @@ async function populateDefaultData() {
             price: 45.00,
             image: '../assets/community/call-of-duty.webp',
             description: 'A first-person shooter video game franchise published by Activision.',
-            platforms: ['PC', 'PS4', 'Xbox One'],
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S'],
             rating: 8.1,
-            features: ['Cinematic campaign', 'Multiplayer', 'Co-op'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['Cinematic campaign', 'Multiplayer', 'Co-op modes', 'Battle royale'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i3-4340', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 670', Storage: '175 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i5-2500K', RAM: '12 GB', GPU: 'NVIDIA GeForce GTX 970', Storage: '175 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['../assets/community/call-of-duty.webp']
           },
           {
             name: 'Clash Of Clans',
@@ -701,11 +801,14 @@ async function populateDefaultData() {
             price: 30.00,
             image: '../assets/community/clash-of-clans.webp',
             description: 'A freemium mobile strategy video game developed and published by Supercell.',
-            platforms: ['Mobile'],
+            platforms: ['Mobile', 'iOS', 'Android'],
             rating: 8.0,
-            features: ['Clan wars', 'Base building', 'PvP'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['Clan wars', 'Base building', 'PvP battles', 'Resource management'],
+            requirements: {
+              minimum: { CPU: 'ARM Cortex-A9', RAM: '1 GB', GPU: 'Adreno 225', Storage: '2 GB', OS: 'iOS 9.0 / Android 4.1' },
+              recommended: { CPU: 'ARM Cortex-A72', RAM: '3 GB', GPU: 'Adreno 530', Storage: '2 GB', OS: 'iOS 12.0 / Android 7.0' }
+            },
+            screenshots: ['../assets/community/clash-of-clans.webp']
           },
           {
             name: 'Devil May Cry',
@@ -716,12 +819,15 @@ async function populateDefaultData() {
             releaseDate: '2019-03-08',
             price: 55.00,
             image: '../assets/community/devil-may-cry.jpg',
-            description: 'A series of action-adventure games created by Hideki Kamiya.',
-            platforms: ['PC', 'PS4', 'Xbox One'],
+            description: 'A series of action-adventure games created by Hideki Kamiya featuring stylish combat.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S'],
             rating: 8.6,
-            features: ['Combo-heavy combat', 'Multiple characters', 'High replayability'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['Combo-heavy combat', 'Multiple characters', 'High replayability', 'Style ranking system'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i5-4460', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 760', Storage: '35 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i7-3770', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 1060', Storage: '35 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['../assets/community/devil-may-cry.jpg']
           },
           {
             name: 'Prince Of Persia',
@@ -732,12 +838,15 @@ async function populateDefaultData() {
             releaseDate: '2010-05-18',
             price: 74.00,
             image: '../assets/community/price-of-persia.jpg',
-            description: 'A video game franchise created by Jordan Mechner, originally developed by Broderbund.',
-            platforms: ['PC', 'PS3', 'Xbox 360'],
+            description: 'A video game franchise created by Jordan Mechner, originally developed by Broderbund featuring parkour and time manipulation.',
+            platforms: ['PC', 'PS3', 'PS4', 'Xbox 360', 'Xbox One'],
             rating: 8.0,
-            features: ['Acrobatic platforming', 'Time manipulation', 'Adventure'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['Acrobatic platforming', 'Time manipulation', 'Adventure gameplay', 'Prince and Elika partnership'],
+            requirements: {
+              minimum: { CPU: 'Intel Core 2 Duo E4400', RAM: '2 GB', GPU: 'NVIDIA GeForce 8600 GT', Storage: '9 GB', OS: 'Windows 7' },
+              recommended: { CPU: 'Intel Core 2 Quad Q6600', RAM: '3 GB', GPU: 'NVIDIA GeForce 9800 GTX', Storage: '9 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['../assets/community/price-of-persia.jpg']
           },
           {
             name: 'Fortnite',
@@ -748,12 +857,15 @@ async function populateDefaultData() {
             releaseDate: '2017-07-21',
             price: 0.00,
             image: '../assets/community/fortnite.jpg',
-            description: 'A free-to-play battle royale game developed and published by Epic Games.',
+            description: 'A free-to-play battle royale game developed and published by Epic Games featuring building mechanics.',
             platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch', 'Mobile'],
             rating: 8.3,
-            features: ['Building mechanics', 'Cross-platform', 'Seasonal content'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['Building mechanics', 'Cross-platform play', 'Seasonal content', '100-player battle royale'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i3-3225', RAM: '8 GB', GPU: 'Intel HD 4000', Storage: '26 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i5-7300U', RAM: '8 GB', GPU: 'NVIDIA GTX 960', Storage: '26 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['../assets/community/fortnite.jpg']
           },
           {
             name: 'League of Legends',
@@ -764,12 +876,110 @@ async function populateDefaultData() {
             releaseDate: '2009-10-27',
             price: 0.00,
             image: '../assets/community/league-of-legends.jpg',
-            description: 'A multiplayer online battle arena video game developed and published by Riot Games.',
-            platforms: ['PC'],
+            description: 'A multiplayer online battle arena video game developed and published by Riot Games featuring strategic team-based gameplay.',
+            platforms: ['PC', 'Mac'],
             rating: 8.8,
-            features: ['5v5 MOBA', 'Esports', 'Large roster'],
-            requirements: { minimum: {}, recommended: {} },
-            screenshots: []
+            features: ['5v5 MOBA gameplay', 'Esports tournaments', 'Large champion roster', 'Ranked competitive mode'],
+            requirements: {
+              minimum: { CPU: '3 GHz processor', RAM: '2 GB', GPU: 'DirectX 9.0c compatible', Storage: '16 GB', OS: 'Windows 7' },
+              recommended: { CPU: '3 GHz dual-core processor', RAM: '4 GB', GPU: 'NVIDIA GeForce 560', Storage: '16 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['../assets/community/league-of-legends.jpg']
+          },
+          {
+            name: 'Minecraft',
+            tagline: 'Build. Craft. Survive.',
+            category: 'Adventure',
+            developer: 'Mojang Studios',
+            publisher: 'Microsoft Studios',
+            releaseDate: '2011-11-18',
+            price: 26.95,
+            image: 'https://wallpapers.com/images/featured/minecraft-s2kxfahyg30sob8q.jpg',
+            description: 'A sandbox game where players can build, explore, and survive in procedurally generated worlds.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch', 'Mobile'],
+            rating: 9.0,
+            features: ['Creative mode', 'Survival mode', 'Multiplayer', 'Mod support'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i3-3210', RAM: '4 GB', GPU: 'Intel HD Graphics 4000', Storage: '4 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i5-4690', RAM: '8 GB', GPU: 'NVIDIA GeForce 700 Series', Storage: '4 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['https://wallpapers.com/images/featured/minecraft-s2kxfahyg30sob8q.jpg']
+          },
+          {
+            name: 'Counter-Strike 2',
+            tagline: 'The next chapter in Counter-Strike',
+            category: 'Tactical Shooter',
+            developer: 'Valve Corporation',
+            publisher: 'Valve Corporation',
+            releaseDate: '2023-09-27',
+            price: 0.00,
+            image: 'https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg',
+            description: 'The premier competitive FPS experience with tactical gameplay and precise shooting mechanics.',
+            platforms: ['PC', 'Steam Deck'],
+            rating: 8.9,
+            features: ['5v5 competitive matches', 'Matchmaking', 'Workshop support', 'Anti-cheat system'],
+            requirements: {
+              minimum: { CPU: 'Intel Core 2 Duo E6600', RAM: '2 GB', GPU: 'DirectX 9.0c compatible', Storage: '15 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i3-4160', RAM: '4 GB', GPU: 'NVIDIA GTX 1060', Storage: '15 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg']
+          },
+          {
+            name: 'The Witcher 3: Wild Hunt',
+            tagline: 'Welcome to the world of The Witcher',
+            category: 'RPG',
+            developer: 'CD Projekt Red',
+            publisher: 'CD Projekt',
+            releaseDate: '2015-05-19',
+            price: 39.99,
+            image: 'https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg',
+            description: 'An open-world RPG following Geralt of Rivia in his quest to find Ciri and confront the Wild Hunt.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch'],
+            rating: 9.3,
+            features: ['Open world exploration', 'Branching storylines', 'Character progression', 'Side quests'],
+            requirements: {
+              minimum: { CPU: 'Intel CPU Core i5-2500K', RAM: '6 GB', GPU: 'NVIDIA GeForce GTX 660', Storage: '50 GB', OS: 'Windows 7' },
+              recommended: { CPU: 'Intel CPU Core i7-3770', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 1060', Storage: '50 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg']
+          },
+          {
+            name: 'Cyberpunk 2077',
+            tagline: 'Welcome to the future',
+            category: 'RPG',
+            developer: 'CD Projekt Red',
+            publisher: 'CD Projekt',
+            releaseDate: '2020-12-10',
+            price: 59.99,
+            image: 'https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg',
+            description: 'An open-world action-adventure story set in Night City, a megalopolis obsessed with power, glamour, and body modification.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Stadia'],
+            rating: 8.2,
+            features: ['Open world', 'Character customization', 'Cybernetic enhancements', 'Multiple story paths'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i5-3570K', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 780', Storage: '70 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i7-4790', RAM: '12 GB', GPU: 'NVIDIA GeForce GTX 1060', Storage: '70 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg']
+          },
+          {
+            name: 'FIFA 24',
+            tagline: 'Feel the game',
+            category: 'Sports',
+            developer: 'EA Sports',
+            publisher: 'Electronic Arts',
+            releaseDate: '2023-09-29',
+            price: 69.99,
+            image: 'https://i.gadgets360cdn.com/large/ea_sportf_fc_24_cover_1689079417754.jpg',
+            description: 'The world\'s most popular football simulation game with realistic gameplay and updated rosters.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch'],
+            rating: 8.0,
+            features: ['Ultimate Team', 'Career Mode', 'Volta Football', 'Online seasons'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i5-6600K', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 1050 Ti', Storage: '100 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i7-9700K', RAM: '12 GB', GPU: 'NVIDIA GeForce GTX 1660', Storage: '100 GB', OS: 'Windows 10' }
+            },
+            screenshots: ['https://i.gadgets360cdn.com/large/ea_sportf_fc_24_cover_1689079417754.jpg']
           }
         ];
 
@@ -779,37 +989,63 @@ async function populateDefaultData() {
             category: 'VR BOX',
             price: 159.00,
             image: '../assets/gaming-products/1.jpg',
-            description: 'High-quality VR headset for immersive gaming experiences.'
+            description: 'High-quality VR headset for immersive gaming experiences with 110° field of view and adjustable straps.'
           },
           {
             name: 'GameZoid Gaming Headphones',
             category: 'HEADPHONES',
             price: 39.00,
             image: '../assets/gaming-products/2.png',
-            description: 'Professional gaming headphones with superior sound quality.'
+            description: 'Professional gaming headphones with superior sound quality, noise cancellation, and comfortable padding.'
           },
           {
             name: 'Gears 5 Xbox Controller',
             category: 'X-BOX',
             price: 99.00,
             image: '../assets/gaming-products/3.jpg',
-            description: 'Official Xbox controller with enhanced features for gaming.'
+            description: 'Official Xbox controller with enhanced features for gaming, wireless connectivity, and custom button mapping.'
           },
           {
             name: 'GeForce RTX 2070',
             category: 'GRAPHICS',
             price: 529.00,
             image: '../assets/gaming-products/4.jpg',
-            description: 'High-performance graphics card for gaming and content creation.'
+            description: 'High-performance graphics card for gaming and content creation with ray tracing and DLSS technology.'
+          },
+          {
+            name: 'Mechanical Gaming Keyboard RGB',
+            category: 'KEYBOARD',
+            price: 89.99,
+            image: '../assets/gaming-products/1.jpg',
+            description: 'RGB mechanical gaming keyboard with Cherry MX switches, programmable keys, and anti-ghosting technology.'
+          },
+          {
+            name: 'Pro Gaming Mouse 12000 DPI',
+            category: 'MOUSE',
+            price: 65.00,
+            image: '../assets/gaming-products/2.png',
+            description: 'High-precision gaming mouse with 12000 DPI sensor, customizable buttons, and ergonomic design.'
+          },
+          {
+            name: '27" Gaming Monitor 144Hz',
+            category: 'MONITOR',
+            price: 299.99,
+            image: '../assets/gaming-products/3.jpg',
+            description: '27-inch gaming monitor with 144Hz refresh rate, 1ms response time, and AMD FreeSync technology.'
+          },
+          {
+            name: 'Wireless Pro Controller',
+            category: 'CONTROLLER',
+            price: 75.00,
+            image: '../assets/gaming-products/4.jpg',
+            description: 'Wireless pro controller with hall effect joysticks, customizable buttons, and 40-hour battery life.'
           }
         ];
 
-        // Add games
         for (const game of defaultGames) {
           await gameDB.addGame(game);
         }
 
-        // Add products
         for (const product of defaultProducts) {
           await gameDB.addProduct(product);
         }

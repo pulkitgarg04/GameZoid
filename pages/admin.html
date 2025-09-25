@@ -9,16 +9,8 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="stylesheet" href="../assets/css/header.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
   <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
-      if (!user || !user.isAdmin) {
-        window.location.href = './login.html';
-      }
-    });
-  </script>
 </head>
 
 <body>
@@ -143,83 +135,85 @@
           <span class="close" onclick="closeModal('addGameModal')">&times;</span>
         </div>
         <form id="addGameForm">
-          <div class="form-group">
-            <label for="gameName">Game Name</label>
-            <input type="text" id="gameName" required>
-          </div>
-          <div class="form-group">
-            <label for="gameTagline">Tagline</label>
-            <input type="text" id="gameTagline">
-          </div>
-          <div class="form-group">
-            <label for="gameCategory">Category</label>
-            <select id="gameCategory" required>
-              <option value="">Select Category</option>
-              <option value="Battle Royale">Battle Royale</option>
-              <option value="Action">Action</option>
-              <option value="Adventure">Adventure</option>
-              <option value="RPG">RPG</option>
-              <option value="Strategy">Strategy</option>
-              <option value="Sports">Sports</option>
-              <option value="Racing">Racing</option>
-              <option value="Fighting">Fighting</option>
-              <option value="Puzzle">Puzzle</option>
-              <option value="Simulation">Simulation</option>
-              <option value="Horror">Horror</option>
-              <option value="Platformer">Platformer</option>
-              <option value="Tactical Shooter">Tactical Shooter</option>
-              <option value="Open World">Open World</option>
-              <option value="Base-Building">Base-Building</option>
-              <option value="Hack and Slash">Hack and Slash</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="gameDeveloper">Developer</label>
-            <input type="text" id="gameDeveloper">
-          </div>
-          <div class="form-group">
-            <label for="gamePublisher">Publisher</label>
-            <input type="text" id="gamePublisher">
-          </div>
-          <div class="form-group">
-            <label for="gameReleaseDate">Release Date</label>
-            <input type="date" id="gameReleaseDate">
-          </div>
-          <div class="form-group">
-            <label for="gamePrice">Price ($)</label>
-            <input type="number" id="gamePrice" step="0.01" required>
-          </div>
-          <div class="form-group">
-            <label for="gameImage">Image URL</label>
-            <input type="url" id="gameImage" required>
-          </div>
-          <div class="form-group">
-            <label for="gameDescription">Description</label>
-            <textarea id="gameDescription" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="gamePlatforms">Platforms (comma separated)</label>
-            <input type="text" id="gamePlatforms" placeholder="PC, PS5, Xbox">
-          </div>
-          <div class="form-group">
-            <label for="gameRating">Rating (0-10)</label>
-            <input type="number" id="gameRating" step="0.1" min="0" max="10">
-          </div>
-          <div class="form-group">
-            <label for="gameFeatures">Features (one per line)</label>
-            <textarea id="gameFeatures" rows="4" placeholder="Feature 1\nFeature 2"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="gameReqMin">Requirements Minimum (Key: Value per line)</label>
-            <textarea id="gameReqMin" rows="4" placeholder="CPU: Intel i5\nRAM: 8 GB\nGPU: GTX 960\nStorage: 50 GB\nOS: Windows 10"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="gameReqRec">Requirements Recommended (Key: Value per line)</label>
-            <textarea id="gameReqRec" rows="4" placeholder="CPU: Intel i7\nRAM: 16 GB\nGPU: RTX 2060\nStorage: 50 GB\nOS: Windows 11"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="gameScreenshots">Screenshot URLs (one per line)</label>
-            <textarea id="gameScreenshots" rows="4" placeholder="https://...\nhttps://..."></textarea>
+          <div class="modal-form-content">
+            <div class="form-group">
+              <label for="gameName">Game Name</label>
+              <input type="text" id="gameName" required>
+            </div>
+            <div class="form-group">
+              <label for="gameTagline">Tagline</label>
+              <input type="text" id="gameTagline">
+            </div>
+            <div class="form-group">
+              <label for="gameCategory">Category</label>
+              <select id="gameCategory" required>
+                <option value="">Select Category</option>
+                <option value="Battle Royale">Battle Royale</option>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="RPG">RPG</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Sports">Sports</option>
+                <option value="Racing">Racing</option>
+                <option value="Fighting">Fighting</option>
+                <option value="Puzzle">Puzzle</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Horror">Horror</option>
+                <option value="Platformer">Platformer</option>
+                <option value="Tactical Shooter">Tactical Shooter</option>
+                <option value="Open World">Open World</option>
+                <option value="Base-Building">Base-Building</option>
+                <option value="Hack and Slash">Hack and Slash</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="gameDeveloper">Developer</label>
+              <input type="text" id="gameDeveloper">
+            </div>
+            <div class="form-group">
+              <label for="gamePublisher">Publisher</label>
+              <input type="text" id="gamePublisher">
+            </div>
+            <div class="form-group">
+              <label for="gameReleaseDate">Release Date</label>
+              <input type="date" id="gameReleaseDate">
+            </div>
+            <div class="form-group">
+              <label for="gamePrice">Price ($)</label>
+              <input type="number" id="gamePrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="gameImage">Image URL</label>
+              <input type="url" id="gameImage" required>
+            </div>
+            <div class="form-group">
+              <label for="gameDescription">Description</label>
+              <textarea id="gameDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gamePlatforms">Platforms (comma separated)</label>
+              <input type="text" id="gamePlatforms" placeholder="PC, PS5, Xbox">
+            </div>
+            <div class="form-group">
+              <label for="gameRating">Rating (0-10)</label>
+              <input type="number" id="gameRating" step="0.1" min="0" max="10">
+            </div>
+            <div class="form-group">
+              <label for="gameFeatures">Features (one per line)</label>
+              <textarea id="gameFeatures" rows="4" placeholder="Feature ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gameReqMin">Requirements Minimum (Key: Value per line)</label>
+              <textarea id="gameReqMin" rows="4" placeholder="CPU: ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gameReqRec">Requirements Recommended (Key: Value per line)</label>
+              <textarea id="gameReqRec" rows="4" placeholder="CPU: ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gameScreenshots">Screenshot URLs (one per line)</label>
+              <textarea id="gameScreenshots" rows="4" placeholder="https://..."></textarea>
+            </div>
           </div>
           <div class="form-actions">
             <button type="button" class="btn-secondary" onclick="closeModal('addGameModal')">Cancel</button>
@@ -236,36 +230,38 @@
           <span class="close" onclick="closeModal('addProductModal')">&times;</span>
         </div>
         <form id="addProductForm">
-          <div class="form-group">
-            <label for="productName">Product Name</label>
-            <input type="text" id="productName" required>
-          </div>
-          <div class="form-group">
-            <label for="productCategory">Category</label>
-            <select id="productCategory" required>
-              <option value="">Select Category</option>
-              <option value="VR BOX">VR BOX</option>
-              <option value="HEADPHONES">HEADPHONES</option>
-              <option value="X-BOX">X-BOX</option>
-              <option value="GRAPHICS">GRAPHICS</option>
-              <option value="KEYBOARD">KEYBOARD</option>
-              <option value="MOUSE">MOUSE</option>
-              <option value="MONITOR">MONITOR</option>
-              <option value="CONTROLLER">CONTROLLER</option>
-              <option value="ACCESSORIES">ACCESSORIES</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="productPrice">Price ($)</label>
-            <input type="number" id="productPrice" step="0.01" required>
-          </div>
-          <div class="form-group">
-            <label for="productImage">Image URL</label>
-            <input type="url" id="productImage" required>
-          </div>
-          <div class="form-group">
-            <label for="productDescription">Description</label>
-            <textarea id="productDescription" rows="3"></textarea>
+          <div class="modal-form-content">
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <select id="productCategory" required>
+                <option value="">Select Category</option>
+                <option value="VR BOX">VR BOX</option>
+                <option value="HEADPHONES">HEADPHONES</option>
+                <option value="X-BOX">X-BOX</option>
+                <option value="GRAPHICS">GRAPHICS</option>
+                <option value="KEYBOARD">KEYBOARD</option>
+                <option value="MOUSE">MOUSE</option>
+                <option value="MONITOR">MONITOR</option>
+                <option value="CONTROLLER">CONTROLLER</option>
+                <option value="ACCESSORIES">ACCESSORIES</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="productPrice">Price ($)</label>
+              <input type="number" id="productPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="productImage">Image URL</label>
+              <input type="url" id="productImage" required>
+            </div>
+            <div class="form-group">
+              <label for="productDescription">Description</label>
+              <textarea id="productDescription" rows="3"></textarea>
+            </div>
           </div>
           <div class="form-actions">
             <button type="button" class="btn-secondary" onclick="closeModal('addProductModal')">Cancel</button>
@@ -282,68 +278,70 @@
           <span class="close" onclick="closeModal('editModal')">&times;</span>
         </div>
         <form id="editForm">
-          <input type="hidden" id="editId">
-          <input type="hidden" id="editType">
-          <div class="form-group">
-            <label for="editName">Name</label>
-            <input type="text" id="editName" required>
-          </div>
-          <div class="form-group">
-            <label for="editTagline">Tagline</label>
-            <input type="text" id="editTagline">
-          </div>
-          <div class="form-group">
-            <label for="editCategory">Category</label>
-            <select id="editCategory" required>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="editPrice">Price ($)</label>
-            <input type="number" id="editPrice" step="0.01" required>
-          </div>
-          <div class="form-group">
-            <label for="editImage">Image URL</label>
-            <input type="url" id="editImage" required>
-          </div>
-          <div class="form-group">
-            <label for="editDescription">Description</label>
-            <textarea id="editDescription" rows="3"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="editDeveloper">Developer</label>
-            <input type="text" id="editDeveloper">
-          </div>
-          <div class="form-group">
-            <label for="editPublisher">Publisher</label>
-            <input type="text" id="editPublisher">
-          </div>
-          <div class="form-group">
-            <label for="editReleaseDate">Release Date</label>
-            <input type="date" id="editReleaseDate">
-          </div>
-          <div class="form-group">
-            <label for="editPlatforms">Platforms (comma separated)</label>
-            <input type="text" id="editPlatforms">
-          </div>
-          <div class="form-group">
-            <label for="editRating">Rating (0-10)</label>
-            <input type="number" id="editRating" step="0.1" min="0" max="10">
-          </div>
-          <div class="form-group">
-            <label for="editFeatures">Features (one per line)</label>
-            <textarea id="editFeatures" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="editReqMin">Requirements Minimum (Key: Value per line)</label>
-            <textarea id="editReqMin" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="editReqRec">Requirements Recommended (Key: Value per line)</label>
-            <textarea id="editReqRec" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="editScreenshots">Screenshot URLs (one per line)</label>
-            <textarea id="editScreenshots" rows="4"></textarea>
+          <div class="modal-form-content">
+            <input type="hidden" id="editId">
+            <input type="hidden" id="editType">
+            <div class="form-group">
+              <label for="editName">Name</label>
+              <input type="text" id="editName" required>
+            </div>
+            <div class="form-group">
+              <label for="editTagline">Tagline</label>
+              <input type="text" id="editTagline">
+            </div>
+            <div class="form-group">
+              <label for="editCategory">Category</label>
+              <select id="editCategory" required>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editPrice">Price ($)</label>
+              <input type="number" id="editPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="editImage">Image URL</label>
+              <input type="url" id="editImage" required>
+            </div>
+            <div class="form-group">
+              <label for="editDescription">Description</label>
+              <textarea id="editDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editDeveloper">Developer</label>
+              <input type="text" id="editDeveloper">
+            </div>
+            <div class="form-group">
+              <label for="editPublisher">Publisher</label>
+              <input type="text" id="editPublisher">
+            </div>
+            <div class="form-group">
+              <label for="editReleaseDate">Release Date</label>
+              <input type="date" id="editReleaseDate">
+            </div>
+            <div class="form-group">
+              <label for="editPlatforms">Platforms (comma separated)</label>
+              <input type="text" id="editPlatforms">
+            </div>
+            <div class="form-group">
+              <label for="editRating">Rating (0-10)</label>
+              <input type="number" id="editRating" step="0.1" min="0" max="10">
+            </div>
+            <div class="form-group">
+              <label for="editFeatures">Features (one per line)</label>
+              <textarea id="editFeatures" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editReqMin">Requirements Minimum (Key: Value per line)</label>
+              <textarea id="editReqMin" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editReqRec">Requirements Recommended (Key: Value per line)</label>
+              <textarea id="editReqRec" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editScreenshots">Screenshot URLs (one per line)</label>
+              <textarea id="editScreenshots" rows="4"></textarea>
+            </div>
           </div>
           <div class="form-actions">
             <button type="button" class="btn-secondary" onclick="closeModal('editModal')">Cancel</button>
@@ -422,17 +420,6 @@
   </footer>
 
   <script src="../assets/js/admin.js"></script>
-  <script>
-    function accountRoute() {
-      const currentUser = localStorage.getItem('currentUser');
-      
-      if (currentUser) {
-        window.location.href = './account.html';
-      } else {
-        window.location.href = './login.html';
-      }
-    };
-  </script>
 </body>
 
 </html>

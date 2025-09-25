@@ -1,3 +1,13 @@
+function accountRoute() {
+  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  
+  if (currentUser) {
+    window.location.href = './account.html';
+  } else {
+    window.location.href = './login.html';
+  }
+}
+
 let checkoutData = null;
 let paymentTimer = null;
 let timeLeft = 300;

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../assets/css/header.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
   <link rel="stylesheet" href="../assets/css/game.css">
+  <link rel="stylesheet" href="../assets/css/newletter.css">
   <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -22,8 +23,9 @@
         <li><a href="./news.html">News</a></li>
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
-        <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
-        <li><a href="./login.html"><i class="fa-regular fa-circle-user"></i></a></li>
+                <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
+        <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
       </ul>
     </nav>
     <div id="mobile">
@@ -50,24 +52,24 @@
     <div class="layout">
       <main class="main">
         <section class="about">
-          <h2>About the game</h2>
+          <h2 class="section-title">About the game</h2>
           <p id="game-description"></p>
         </section>
 
         <section class="features">
-          <h2>Key Points</h2>
+          <h2 class="section-title">Key Points</h2>
           <ul id="game-features" class="features-list"></ul>
         </section>
 
         <section class="system">
-          <h2>System Requirements</h2>
+          <h2 class="section-title">System Requirements</h2>
           <div class="requirements">
             <div>
-              <h3>Minimum</h3>
+              <h3 class="section-title-2">Minimum</h3>
               <ul id="req-min" class="requirements-list"></ul>
             </div>
             <div>
-              <h3>Recommended</h3>
+              <h3 class="section-title-2">Recommended</h3>
               <ul id="req-rec" class="requirements-list"></ul>
             </div>
           </div>
@@ -77,7 +79,7 @@
       </main>
       <aside class="sidebar">
         <div class="meta">
-          <h3>Game Info</h3>
+          <h3 class="section-title-2">Game Info</h3>
           <ul class="meta-list">
             <li><span>Developer</span><span id="developer">-</span></li>
             <li><span>Publisher</span><span id="publisher">-</span></li>
@@ -92,7 +94,6 @@
             <span>Price</span>
             <span id="price">$0.00</span>
           </div>
-          <button id="sidebar-buy" class="btn-primary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
         </div>
       </aside>
     </div>

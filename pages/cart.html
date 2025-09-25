@@ -25,8 +25,9 @@
         <li><a href="./news.html">News</a></li>
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
-        <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
-        <li><a href="./login.html"><i class="fa-regular fa-circle-user"></i></a></li>
+                <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
+        <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
       </ul>
     </nav>
     <div id="mobile">
@@ -66,7 +67,7 @@
         <h3>Your cart is empty</h3>
         <p>Add some games or products to get started!</p>
         <button class="btn-primary" onclick="continueShopping()">
-          <i class="fas fa-store"></i> Browse Store
+          Browse Store <i class="fas fa-arrow-right"></i>
         </button>
       </div>
 

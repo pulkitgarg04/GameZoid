@@ -24,8 +24,9 @@
         <li><a class="active" href="./news.html">News</a></li>
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
-        <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
-        <li><a href="./login.html"><i class="fa-regular fa-circle-user"></i></a></li>
+                <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
+        <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
       </ul>
     </nav>
     <div id="mobile">
@@ -184,6 +185,20 @@
       <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
+  
+  <script>
+    // Account routing function
+    function accountRoute() {
+      // Check sessionStorage first, then localStorage for backward compatibility
+      const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+      
+      if (currentUser) {
+        window.location.href = './account.html';
+      } else {
+        window.location.href = './login.html';
+      }
+    }
+  </script>
 </body>
 
 </html>

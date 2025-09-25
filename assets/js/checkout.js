@@ -1,3 +1,13 @@
+function accountRoute() {
+  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  
+  if (currentUser) {
+    window.location.href = './account.html';
+  } else {
+    window.location.href = './login.html';
+  }
+}
+
 class CheckoutDatabase {
   constructor() {
     this.dbName = 'GameZoidDB';
