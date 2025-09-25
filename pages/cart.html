@@ -35,9 +35,58 @@
   </div>
   </header>
 
-  <section class="coming-soon">
-    <h1>COMING SOON!</h1>
-    <p>Our website is under construction. We`ll be here soon with our new awesome site.</p>
+  <section id="cart-hero">
+    <h2>SHOPPING <span style="color: var(--color)">CART</span></h2>
+    <p>
+      <a href="/">HOME</a>
+      <i class="fa-solid fa-angles-right" style="font-weight: 600"></i> CART
+    </p>
+  </section>
+
+  <section id="cart-content" class="section-p1">
+    <div class="cart-container">
+      <div class="cart-header">
+        <h1>Your Cart</h1>
+        <div class="cart-actions">
+          <button class="btn-secondary" onclick="clearCart()">
+            <i class="fas fa-trash"></i> Clear Cart
+          </button>
+          <button class="btn-primary" onclick="continueShopping()">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </button>
+        </div>
+      </div>
+
+      <div id="cart-items" class="cart-items">
+        <!-- Cart items will be loaded here -->
+      </div>
+
+      <div id="empty-cart" class="empty-cart" style="display: none;">
+        <i class="fas fa-shopping-cart"></i>
+        <h3>Your cart is empty</h3>
+        <p>Add some games or products to get started!</p>
+        <button class="btn-primary" onclick="continueShopping()">
+          <i class="fas fa-store"></i> Browse Store
+        </button>
+      </div>
+
+      <div id="cart-summary" class="cart-summary">
+        <div class="summary-card">
+          <h3>Order Summary</h3>
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span id="total">$0.00</span>
+          </div>
+          <button class="checkout-btn" onclick="proceedToCheckout()">
+            <i class="fas fa-credit-card"></i> Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="newsletter" class="section-p1">
@@ -101,6 +150,8 @@
       <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
+
+  <script src="../assets/js/cart.js"></script>
 </body>
 
 </html>

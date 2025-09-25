@@ -57,80 +57,23 @@
   </section>
 
   <section id="latest-games" class="section-p1">
-    <h1>LATEST GAMES</h1>
+    <div class="store-header">
+      <h1>LATEST GAMES</h1>
+      <div class="store-controls">
+        <div class="search-bar">
+          <input type="text" id="storeSearch" placeholder="Search games..." onkeyup="searchStore()">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn active" onclick="filterByCategory('all')">All</button>
+          <button class="filter-btn" onclick="filterByCategory('battle royale')">Battle Royale</button>
+          <button class="filter-btn" onclick="filterByCategory('action')">Action</button>
+          <button class="filter-btn" onclick="filterByCategory('adventure')">Adventure</button>
+        </div>
+      </div>
+    </div>
     <div class="main">
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/1.jpeg" />
-        </div>
-        <div class="title">
-          <h3>LEAGUE OF LEGENDS</h3>
-        </div>
-        <div class="des">
-          <p>Price: $20.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/2.jpeg" />
-        </div>
-        <div class="title">
-          <h3>VALHEIM</h3>
-        </div>
-        <div class="des">
-          <p>Price: $14.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/3.jpeg" />
-        </div>
-        <div class="title">
-          <h3>RAINBOW SIX:SEIGE</h3>
-        </div>
-        <div class="des">
-          <p>Price: $10.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/4.jpeg" />
-        </div>
-        <div class="title">
-          <h3>MONSTER HUNTER WORLD</h3>
-        </div>
-        <div class="des">
-          <p>Price: $12.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/5.jpeg" />
-        </div>
-        <div class="title">
-          <h3>DEAD BY DAYLIGHT</h3>
-        </div>
-        <div class="des">
-          <p>Price: $20.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/1.jpeg" />
-        </div>
-        <div class="title">
-          <h3>HALO INFINITE</h3>
-        </div>
-        <div class="des">
-          <p>Price: $8.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
+      <!-- Games will be loaded dynamically from IndexedDB -->
     </div>
   </section>
 
@@ -204,6 +147,8 @@
       </p>
     </div>
   </footer>
+
+  <script src="../assets/js/store.js"></script>
 </body>
 
 </html>
