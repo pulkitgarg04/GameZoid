@@ -284,10 +284,22 @@ document.getElementById('addGameForm').addEventListener('submit', async (e) => {
   
   const game = {
     name: document.getElementById('gameName').value,
+    tagline: document.getElementById('gameTagline').value,
     category: document.getElementById('gameCategory').value,
+    developer: document.getElementById('gameDeveloper').value,
+    publisher: document.getElementById('gamePublisher').value,
+    releaseDate: document.getElementById('gameReleaseDate').value,
     price: parseFloat(document.getElementById('gamePrice').value),
     image: document.getElementById('gameImage').value,
-    description: document.getElementById('gameDescription').value
+    description: document.getElementById('gameDescription').value,
+    platforms: (document.getElementById('gamePlatforms').value || '').split(',').map(s => s.trim()).filter(Boolean),
+    rating: parseFloat(document.getElementById('gameRating').value || '0'),
+    features: (document.getElementById('gameFeatures').value || '').split('\n').map(s => s.trim()).filter(Boolean),
+    requirements: {
+      minimum: parseKeyValueText(document.getElementById('gameReqMin').value || ''),
+      recommended: parseKeyValueText(document.getElementById('gameReqRec').value || '')
+    },
+    screenshots: (document.getElementById('gameScreenshots').value || '').split('\n').map(s => s.trim()).filter(Boolean)
   };
 
   try {
@@ -335,9 +347,19 @@ async function editGame(id) {
       document.getElementById('editId').value = id;
       document.getElementById('editType').value = 'game';
       document.getElementById('editName').value = game.name;
+      document.getElementById('editTagline').value = game.tagline || '';
       document.getElementById('editPrice').value = game.price;
       document.getElementById('editImage').value = game.image;
       document.getElementById('editDescription').value = game.description || '';
+      document.getElementById('editDeveloper').value = game.developer || '';
+      document.getElementById('editPublisher').value = game.publisher || '';
+      document.getElementById('editReleaseDate').value = game.releaseDate || '';
+      document.getElementById('editPlatforms').value = Array.isArray(game.platforms) ? game.platforms.join(', ') : (game.platforms || '');
+      document.getElementById('editRating').value = game.rating || '';
+      document.getElementById('editFeatures').value = Array.isArray(game.features) ? game.features.join('\n') : '';
+      document.getElementById('editReqMin').value = stringifyKeyValue(game.requirements?.minimum || {});
+      document.getElementById('editReqRec').value = stringifyKeyValue(game.requirements?.recommended || {});
+      document.getElementById('editScreenshots').value = Array.isArray(game.screenshots) ? game.screenshots.join('\n') : '';
       
       const categorySelect = document.getElementById('editCategory');
       categorySelect.innerHTML = `
@@ -415,7 +437,19 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
     category: document.getElementById('editCategory').value,
     price: parseFloat(document.getElementById('editPrice').value),
     image: document.getElementById('editImage').value,
-    description: document.getElementById('editDescription').value
+    description: document.getElementById('editDescription').value,
+    tagline: document.getElementById('editTagline').value,
+    developer: document.getElementById('editDeveloper').value,
+    publisher: document.getElementById('editPublisher').value,
+    releaseDate: document.getElementById('editReleaseDate').value,
+    platforms: (document.getElementById('editPlatforms').value || '').split(',').map(s => s.trim()).filter(Boolean),
+    rating: parseFloat(document.getElementById('editRating').value || '0'),
+    features: (document.getElementById('editFeatures').value || '').split('\n').map(s => s.trim()).filter(Boolean),
+    requirements: {
+      minimum: parseKeyValueText(document.getElementById('editReqMin').value || ''),
+      recommended: parseKeyValueText(document.getElementById('editReqRec').value || '')
+    },
+    screenshots: (document.getElementById('editScreenshots').value || '').split('\n').map(s => s.trim()).filter(Boolean)
   };
 
   try {
@@ -570,73 +604,172 @@ async function populateDefaultData() {
         const defaultGames = [
           {
             name: 'Apex Legends',
+            tagline: 'Be legendary in the arena',
             category: 'Battle Royale',
+            developer: 'Respawn Entertainment',
+            publisher: 'Electronic Arts',
+            releaseDate: '2019-02-04',
             price: 72.00,
             image: '../assets/community/apex-legends.jpg',
-            description: 'A free-to-play battle royale game where legends battle for glory, fame, and fortune.'
+            description: 'A free-to-play battle royale game where legends battle for glory, fame, and fortune.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch'],
+            rating: 8.7,
+            features: ['Hero shooter gameplay', 'Team-based tactics', 'Unique abilities'],
+            requirements: {
+              minimum: { CPU: 'Intel Core i3-6300', RAM: '6 GB', GPU: 'NVIDIA GeForce GT 640', Storage: '56 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel i5 3570K', RAM: '8 GB', GPU: 'NVIDIA GeForce GTX 970', Storage: '56 GB', OS: 'Windows 10' }
+            },
+            screenshots: []
           },
           {
             name: 'Grand Theft Auto V',
+            tagline: 'Welcome to Los Santos',
             category: 'Open World',
+            developer: 'Rockstar North',
+            publisher: 'Rockstar Games',
+            releaseDate: '2013-09-17',
             price: 95.00,
             image: '../assets/community/gta-v.jpg',
-            description: 'An action-adventure game set in the fictional state of San Andreas.'
+            description: 'An action-adventure game set in the fictional state of San Andreas.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S'],
+            rating: 9.2,
+            features: ['Open-world exploration', 'Multiple protagonists', 'Online mode'],
+            requirements: {
+              minimum: { CPU: 'Intel Core 2 Quad Q6600', RAM: '4 GB', GPU: 'NVIDIA 9800 GT', Storage: '110 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel Core i5 3470', RAM: '8 GB', GPU: 'NVIDIA GTX 660', Storage: '110 GB', OS: 'Windows 10' }
+            },
+            screenshots: []
           },
           {
             name: 'PUBG (BGMI) - India',
+            tagline: 'Winner winner chicken dinner',
             category: 'Battle Royale',
+            developer: 'Krafton',
+            publisher: 'Krafton',
+            releaseDate: '2021-07-02',
             price: 15.00,
             image: '../assets/community/pubg.jpg',
-            description: 'PlayerUnknown\'s Battlegrounds - Battle royale game for mobile devices.'
+            description: 'PlayerUnknown\'s Battlegrounds - Battle royale game for mobile devices.',
+            platforms: ['Mobile'],
+            rating: 7.9,
+            features: ['Realistic ballistics', 'Large maps', 'Team play'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           },
           {
             name: 'Valorant',
+            tagline: 'Defy the limits',
             category: 'Tactical Shooter',
+            developer: 'Riot Games',
+            publisher: 'Riot Games',
+            releaseDate: '2020-06-02',
             price: 26.00,
             image: '../assets/community/valorant.webp',
-            description: 'A free-to-play first-person tactical hero shooter developed by Riot Games.'
+            description: 'A free-to-play first-person tactical hero shooter developed by Riot Games.',
+            platforms: ['PC'],
+            rating: 8.5,
+            features: ['5v5 tactical gameplay', 'Agent abilities', 'Competitive modes'],
+            requirements: {
+              minimum: { CPU: 'Intel i3-370M', RAM: '4 GB', GPU: 'Intel HD 3000', Storage: '10 GB', OS: 'Windows 10' },
+              recommended: { CPU: 'Intel i3-4150', RAM: '4 GB', GPU: 'NVIDIA GT 730', Storage: '10 GB', OS: 'Windows 10' }
+            },
+            screenshots: []
           },
           {
             name: 'Call Of Duty',
+            tagline: 'There is a soldier in all of us',
             category: 'Action',
+            developer: 'Infinity Ward',
+            publisher: 'Activision',
+            releaseDate: '2019-10-25',
             price: 45.00,
             image: '../assets/community/call-of-duty.webp',
-            description: 'A first-person shooter video game franchise published by Activision.'
+            description: 'A first-person shooter video game franchise published by Activision.',
+            platforms: ['PC', 'PS4', 'Xbox One'],
+            rating: 8.1,
+            features: ['Cinematic campaign', 'Multiplayer', 'Co-op'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           },
           {
             name: 'Clash Of Clans',
+            tagline: 'Lead your clan to victory',
             category: 'Base-Building',
+            developer: 'Supercell',
+            publisher: 'Supercell',
+            releaseDate: '2012-08-02',
             price: 30.00,
             image: '../assets/community/clash-of-clans.webp',
-            description: 'A freemium mobile strategy video game developed and published by Supercell.'
+            description: 'A freemium mobile strategy video game developed and published by Supercell.',
+            platforms: ['Mobile'],
+            rating: 8.0,
+            features: ['Clan wars', 'Base building', 'PvP'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           },
           {
             name: 'Devil May Cry',
+            tagline: 'Stylish action begins',
             category: 'Hack and Slash',
+            developer: 'Capcom',
+            publisher: 'Capcom',
+            releaseDate: '2019-03-08',
             price: 55.00,
             image: '../assets/community/devil-may-cry.jpg',
-            description: 'A series of action-adventure games created by Hideki Kamiya.'
+            description: 'A series of action-adventure games created by Hideki Kamiya.',
+            platforms: ['PC', 'PS4', 'Xbox One'],
+            rating: 8.6,
+            features: ['Combo-heavy combat', 'Multiple characters', 'High replayability'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           },
           {
             name: 'Prince Of Persia',
+            tagline: 'Rewrite your destiny',
             category: 'Platformer',
+            developer: 'Ubisoft',
+            publisher: 'Ubisoft',
+            releaseDate: '2010-05-18',
             price: 74.00,
             image: '../assets/community/price-of-persia.jpg',
-            description: 'A video game franchise created by Jordan Mechner, originally developed by Broderbund.'
+            description: 'A video game franchise created by Jordan Mechner, originally developed by Broderbund.',
+            platforms: ['PC', 'PS3', 'Xbox 360'],
+            rating: 8.0,
+            features: ['Acrobatic platforming', 'Time manipulation', 'Adventure'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           },
           {
             name: 'Fortnite',
+            tagline: 'Drop in. Squad up. Outlast all.',
             category: 'Battle Royale',
+            developer: 'Epic Games',
+            publisher: 'Epic Games',
+            releaseDate: '2017-07-21',
             price: 0.00,
             image: '../assets/community/fortnite.jpg',
-            description: 'A free-to-play battle royale game developed and published by Epic Games.'
+            description: 'A free-to-play battle royale game developed and published by Epic Games.',
+            platforms: ['PC', 'PS4', 'PS5', 'Xbox One', 'Xbox Series X|S', 'Switch', 'Mobile'],
+            rating: 8.3,
+            features: ['Building mechanics', 'Cross-platform', 'Seasonal content'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           },
           {
             name: 'League of Legends',
+            tagline: 'Become a legend',
             category: 'Strategy',
+            developer: 'Riot Games',
+            publisher: 'Riot Games',
+            releaseDate: '2009-10-27',
             price: 0.00,
             image: '../assets/community/league-of-legends.jpg',
-            description: 'A multiplayer online battle arena video game developed and published by Riot Games.'
+            description: 'A multiplayer online battle arena video game developed and published by Riot Games.',
+            platforms: ['PC'],
+            rating: 8.8,
+            features: ['5v5 MOBA', 'Esports', 'Large roster'],
+            requirements: { minimum: {}, recommended: {} },
+            screenshots: []
           }
         ];
 
@@ -710,6 +843,24 @@ function showMessage(message, type = 'info') {
   setTimeout(() => {
     messageDiv.remove();
   }, 5000);
+}
+
+function parseKeyValueText(text) {
+  const lines = (text || '').split('\n').map(l => l.trim()).filter(Boolean);
+  const out = {};
+  lines.forEach(line => {
+    const idx = line.indexOf(':');
+    if (idx > -1) {
+      const key = line.slice(0, idx).trim();
+      const val = line.slice(idx + 1).trim();
+      if (key) out[key] = val;
+    }
+  });
+  return out;
+}
+
+function stringifyKeyValue(obj) {
+  return Object.keys(obj || {}).map(k => `${k}: ${obj[k]}`).join('\n');
 }
 
 function showConfirmModal(title, message, onConfirm) {

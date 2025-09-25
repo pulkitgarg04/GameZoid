@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:root {
+  --color: #ffbb00;
+  --hover: #ffea00;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Spartan", sans-serif;
+  color: #fff;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: #000;
+}
+.section-p1 {
+  padding: 40px 80px;
+}
+#game-hero {
+  margin-top: 90px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 40px 80px;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(255, 187, 0, 0.08),
+    transparent 60%
+  );
+}
+#game-hero .hero-content h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: var(--color);
+}
+#game-hero .hero-content p {
+  color: rgba(255, 255, 255, 0.85);
+  margin: 10px 0 20px;
+  line-height: 1.7;
+}
+#game-hero .hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  border: 2px solid;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--color);
+  color: #000;
+  border-color: var(--color);
+}
+.btn-primary:hover {
+  background: var(--hover);
+  border-color: var(--hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 187, 0, 0.25);
+}
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  transform: translateY(-2px);
+}
+#game-hero .hero-media img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 187, 0, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+#game-content .layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+#game-content h2 {
+  color: var(--color);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+.about p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+}
+.features-list,
+.requirements-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.features-list li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: start;
+  gap: 10px;
+  background: rgba(255, 187, 0, 0.08);
+  border: 1px solid rgba(255, 187, 0, 0.2);
+  padding: 12px 14px;
+  border-radius: 10px;
+}
+.features-list li i {
+  color: var(--color);
+  margin-top: 2px;
+}
+.features-list li span {
+  color: #fff;
+}
+.requirements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+ 
+.sidebar .meta {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 187, 0, 0.25);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.meta-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+.meta-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-bottom: 6px;
+}
+.meta-list li span:first-child {
+  color: rgba(255, 255, 255, 0.7);
+}
+.price-card {
+  background: rgba(255, 187, 0, 0.08);
+  border: 1px solid rgba(255, 187, 0, 0.25);
+  border-radius: 12px;
+  padding: 16px;
+  position: sticky;
+  top: 120px;
+}
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--color);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+@media (max-width: 992px) {
+  #game-hero {
+    grid-template-columns: 1fr;
+    padding: 30px 40px;
+  }
+  #game-content .layout {
+    grid-template-columns: 1fr;
+  }
+  .requirements {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 576px) {
+  .section-p1 {
+    padding: 20px 24px;
+  }
+}

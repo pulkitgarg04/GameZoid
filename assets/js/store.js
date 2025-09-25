@@ -96,10 +96,10 @@ function displayGames(games) {
   gamesContainer.innerHTML = games.map(game => `
     <div class="cards" data-game-id="${game.id}">
       <div class="image">
-        <img src="${game.image}" alt="${game.name}" onerror="this.src='../assets/media/favicon.png'">
+        <a href="./game.html?id=${game.id}"><img src="${game.image}" alt="${game.name}" onerror="this.src='../assets/media/favicon.png'"></a>
       </div>
       <div class="title">
-        <h3>${game.name.toUpperCase()}</h3>
+        <h3><a href="./game.html?id=${game.id}">${game.name.toUpperCase()}</a></h3>
         <div class="category">${game.category}</div>
       </div>
       <div class="des">
@@ -151,6 +151,12 @@ function displayProducts(products) {
 }
 
 function addToCart(itemId, type) {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  if (!currentUser) {
+    alert('Please log in to add items to cart');
+    window.location.href = './login.html';
+    return;
+  }
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   
   const existingItem = cart.find(item => item.id === itemId && item.type === type);

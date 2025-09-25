@@ -121,49 +121,45 @@
   
   <script>
     let users = JSON.parse(localStorage.getItem('users')) || [];
-
     document.querySelectorAll('.password-toggle-icon').forEach(icon => {
         icon.addEventListener('click', function () {
             const passwordInput = this.previousElementSibling;
-            
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-
             } else {
                 passwordInput.type = 'password';
                 this.innerHTML = '<i class="fas fa-eye"></i>';
             }
         });
     });
-
     function loginUser(event) {
         event.preventDefault();
-
-        const email = document.getElementById('email').value;
+        const email = document.getElementById('email').value.trim().toLowerCase();
         const password = document.getElementById('password').value;
-
+        const adminEmail = 'admin@gamezoid.com';
+        const adminPass = 'admin123';
         const users = JSON.parse(localStorage.getItem('users')) || [];
-
-        const existingUser = users.find(user => user.email === email);
-
+        let existingUser = users.find(user => (user.email || '').toLowerCase() === email);
+        if (!existingUser && email === adminEmail) {
+            existingUser = { name: 'Administrator', email: adminEmail, password: adminPass, isAdmin: true };
+            users.push(existingUser);
+            localStorage.setItem('users', JSON.stringify(users));
+        }
         if (!existingUser) {
-            alert('No user found with this email!');
+            alert('No user found with this email');
             return;
         }
-
         if (existingUser.password !== password) {
-            alert('Incorrect password!');
+            alert('Incorrect password');
             return;
         }
-
-        alert(`Welcome back, ${existingUser.name}!`);
-
         localStorage.setItem('currentUser', JSON.stringify(existingUser));
-
-        setTimeout(() => {
+        if (existingUser.isAdmin) {
+            window.location.href = './admin.html';
+        } else {
             window.location.href = './account.html';
-        }, 1000);
+        }
     }
   </script>
 </body>
