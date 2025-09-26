@@ -62,7 +62,6 @@ class UserDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('User database opened successfully');
         resolve();
       };
 
@@ -111,7 +110,6 @@ class UserDatabase {
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     currentUser = getCurrentUser();
-    console.log("Current user:", currentUser);
     updateUserInterface();
   } catch (e) {
     console.error("Error loading user:", e);
@@ -123,8 +121,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     userDB = new UserDatabase();
     await userDB.init();
-    
-    console.log("Databases initialized successfully");
     await loadGame();
   } catch (e) {
     console.error("Failed to initialize databases or load game:", e);
@@ -161,13 +157,11 @@ function getCurrentUser() {
 
 function updateUserInterface() {
   if (currentUser) {
-    console.log(`Welcome ${currentUser.name}! User is logged in.`);
     const buyButton = document.getElementById("buy-now");
     if (buyButton) {
       buyButton.innerHTML = `<i class="fas fa-shopping-cart"></i> Add to Cart`;
     }
   } else {
-    console.log("No user logged in");
     const buyButton = document.getElementById("buy-now");
     if (buyButton) {
       buyButton.innerHTML = `<i class="fas fa-shopping-cart"></i> Login to Purchase`;
@@ -267,7 +261,6 @@ function bindActions(g) {
     cart.push(cartItem);
     localStorage.setItem("cart", JSON.stringify(cart));
     
-    console.log(`${g.name} added to cart for user: ${currentUser.name}`);
     alert(`${g.name} has been added to your cart!`);
     
     window.location.href = "./cart.html";
@@ -313,8 +306,6 @@ function bindActions(g) {
       }
     });
   }
-  
-  console.log("Game actions bound for:", g.name);
 }
 function fallback(msg) {
   document.getElementById("game-title").textContent = "Game";

@@ -26,7 +26,6 @@ class UserDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('User database opened successfully');
         resolve();
       };
 
@@ -74,7 +73,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     userDB = new UserDatabase();
     await userDB.init();
-    console.log('User database initialized for signup');
   } catch (error) {
     console.error('Failed to initialize user database:', error);
   }
@@ -133,8 +131,6 @@ async function signupUser(event) {
     };
     
     await userDB.addUser(newUser);
-    
-    console.log('New user registered:', email);
     alert('Account created successfully! Please log in.');
     window.location.href = './login.html';
     

@@ -27,7 +27,6 @@ class CheckoutDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('Checkout database opened successfully');
         resolve();
       };
 

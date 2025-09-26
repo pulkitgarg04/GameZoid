@@ -25,23 +25,32 @@ class HomeDatabase {
   }
   async getAllGames() {
     if (!this.db) return [];
-    const tx = this.db.transaction(['games'], 'readonly');
-    const store = tx.objectStore('games');
-    return new Promise((resolve, reject) => {
-      const req = store.getAll();
-      req.onsuccess = () => resolve(req.result || []);
-      req.onerror = () => reject(req.error);
-    });
+    try {
+      const tx = this.db.transaction(['games'], 'readonly');
+      const store = tx.objectStore('games');
+      return new Promise((resolve, reject) => {
+        const req = store.getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => resolve([]);
+      });
+    } catch (error) {
+      return [];
+    }
   }
+
   async getAllProducts() {
     if (!this.db) return [];
-    const tx = this.db.transaction(['products'], 'readonly');
-    const store = tx.objectStore('products');
-    return new Promise((resolve, reject) => {
-      const req = store.getAll();
-      req.onsuccess = () => resolve(req.result || []);
-      req.onerror = () => reject(req.error);
-    });
+    try {
+      const tx = this.db.transaction(['products'], 'readonly');
+      const store = tx.objectStore('products');
+      return new Promise((resolve, reject) => {
+        const req = store.getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => resolve([]);
+      });
+    } catch (error) {
+      return [];
+    }
   }
 }
 
@@ -51,9 +60,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     homeDB = new HomeDatabase();
     await homeDB.init();
     await loadHomeData();
-  } catch (e) {
+  } catch (error) {
+    showEmptyStates();
   }
 });
+
+function showEmptyStates() {
+  const sections = Array.from(document.querySelectorAll('section.new-section'));
+  const gamesSection = sections.find(sec => sec.querySelector('h2')?.textContent?.toLowerCase().includes('new games'));
+  const productsSection = sections.find(sec => sec.querySelector('h2')?.textContent?.toLowerCase().includes('gaming product'));
+
+  if (gamesSection) {
+    const container = gamesSection.querySelector('.product-container');
+    if (container) {
+      container.innerHTML = `<div class="product-empty">No games available - Visit the admin panel to add games</div>`;
+    }
+  }
+
+  if (productsSection) {
+    const container = productsSection.querySelector('.product-container');
+    if (container) {
+      container.innerHTML = `<div class="product-empty">No products available - Visit the admin panel to add products</div>`;
+    }
+  }
+}
 
 async function loadHomeData() {
   try {
@@ -68,7 +98,8 @@ async function loadHomeData() {
 
     if (gamesSection) renderGamesToSection(gamesSection, games);
     if (productsSection) renderProductsToSection(productsSection, products);
-  } catch (e) {
+  } catch (error) {
+    showEmptyStates();
   }
 }
 
@@ -76,7 +107,7 @@ function renderGamesToSection(section, games) {
   const container = section.querySelector('.product-container');
   if (!container) return;
   if (!Array.isArray(games) || games.length === 0) {
-    container.innerHTML = `<div class="product-empty" style="color: var(--color); font-weight:600;">No games available</div>`;
+    container.innerHTML = `<div class="product-empty">No games available - Visit the admin panel to add games</div>`;
     return;
   }
   container.innerHTML = games.slice(0, 8).map(game => `
@@ -100,7 +131,7 @@ function renderProductsToSection(section, products) {
   const container = section.querySelector('.product-container');
   if (!container) return;
   if (!Array.isArray(products) || products.length === 0) {
-    container.innerHTML = `<div class="product-empty" style="color: var(--color); font-weight:600;">No products available</div>`;
+    container.innerHTML = `<div class="product-empty">No products available - Visit the admin panel to add products</div>`;
     return;
   }
   container.innerHTML = products.slice(0, 8).map(p => `

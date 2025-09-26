@@ -44,7 +44,6 @@ class GameDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('Database opened successfully');
         resolve();
       };
 

@@ -62,7 +62,6 @@ class UserDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('User database opened successfully');
         resolve();
       };
 
@@ -111,7 +110,6 @@ class UserDatabase {
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     currentUser = getCurrentUser();
-    console.log("Current user:", currentUser);
     updateUserInterface();
   } catch (e) {
     console.error("Error loading user:", e);
@@ -123,8 +121,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     userDB = new UserDatabase();
     await userDB.init();
-    
-    console.log("Databases initialized successfully");
     await loadProduct();
   } catch (e) {
     console.error("Failed to initialize databases or load product:", e);
@@ -161,13 +157,11 @@ function getCurrentUser() {
 
 function updateUserInterface() {
   if (currentUser) {
-    console.log(`Welcome ${currentUser.name}! User is logged in.`);
     const buyButton = document.getElementById("buy-now");
     if (buyButton) {
       buyButton.innerHTML = `<i class="fas fa-shopping-cart"></i> Add to Cart`;
     }
   } else {
-    console.log("No user logged in");
     const buyButton = document.getElementById("buy-now");
     if (buyButton) {
       buyButton.innerHTML = `<i class="fas fa-shopping-cart"></i> Login to Purchase`;
@@ -279,7 +273,6 @@ function bindActions(p) {
     cart.push(cartItem);
     localStorage.setItem("cart", JSON.stringify(cart));
     
-    console.log(`${p.name} added to cart for user: ${currentUser.name}`);
     alert(`${p.name} has been added to your cart!`);
     
     window.location.href = "./cart.html";
@@ -325,8 +318,6 @@ function bindActions(p) {
       }
     });
   }
-  
-  console.log("Product actions bound for:", p.name);
 }
 
 function fallback(msg) {

@@ -27,7 +27,6 @@ class StoreDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('Store database opened successfully');
         resolve();
       };
 

@@ -27,7 +27,6 @@ class CartDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('Cart database opened successfully');
         resolve();
       };
 

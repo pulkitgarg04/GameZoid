@@ -26,7 +26,6 @@ class UserDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('User database opened successfully');
         resolve();
       };
 
@@ -128,7 +127,6 @@ async function initializeDatabase() {
   try {
     userDB = new UserDatabase();
     await userDB.init();
-    console.log('User database initialized');
   } catch (error) {
     console.error('Failed to initialize user database:', error);
   }
@@ -168,14 +166,12 @@ async function getUserInfo() {
   currentUser = getCurrentUser();
 
   if (currentUser) {
-    console.log('User is logged in:', currentUser.name);
     document.getElementById('name').innerHTML = currentUser.name;
     document.getElementById('email').innerHTML = currentUser.email;
     
 
     await loadWishlist();
   } else {
-    console.log('No user logged in, redirecting to login');
     alert('You need to login to access this page!');
     window.location.href = './login.html';
   }

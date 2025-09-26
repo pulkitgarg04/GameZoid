@@ -26,7 +26,6 @@ class UserDatabase {
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('User database opened successfully');
         resolve();
       };
 
@@ -73,9 +72,7 @@ let userDB;
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     userDB = new UserDatabase();
-    await userDB.init();
-    console.log('User database initialized for login');
-    
+    await userDB.init();    
     await migrateUsers();
   } catch (error) {
     console.error('Failed to initialize user database:', error);
@@ -95,16 +92,14 @@ async function migrateUsers() {
             email: user.email.toLowerCase(),
             createdAt: new Date().toISOString()
           });
-          console.log('Migrated user to IndexedDB:', user.email);
         }
       } catch (error) {
-        console.log('User already exists in IndexedDB:', user.email);
+        console.error('User already exists in IndexedDB:', user.email);
       }
     }
     
     if (existingUsers.length > 0) {
       localStorage.removeItem('users');
-      console.log('Cleared localStorage users after migration');
     }
   } catch (error) {
     console.error('Error migrating users:', error);
@@ -149,10 +144,9 @@ async function loginUser(event) {
         const existingAdmin = await userDB.getUserByEmail(adminEmail);
         if (!existingAdmin) {
           await userDB.addUser(user);
-          console.log('Admin user added to IndexedDB');
         }
       } catch (error) {
-        console.log('Admin user already exists in IndexedDB');
+        console.error('Admin user already exists in IndexedDB');
       }
     } else {
       user = await userDB.getUserByEmail(email);
@@ -172,7 +166,6 @@ async function loginUser(event) {
     
     localStorage.removeItem('currentUser');
 
-    console.log('User logged in successfully:', user.name);
     if (user.isAdmin) {
       window.location.href = './admin.html';
     } else {

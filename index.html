@@ -48,6 +48,23 @@
       border-radius: 10px;
       background-color: rgba(255, 255, 255, 0.05);
     }
+
+    .product-empty {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      text-align: center;
+      width: 100%;
+      padding: 40px 20px;
+      color: var(--color, #ff6b6b);
+      font-weight: 600;
+      font-size: 1.1rem;
+      background-color: rgba(255, 255, 255, 0.02);
+      border-radius: 10px;
+      border: 2px dashed var(--color, #ff6b6b);
+      margin: 20px 0;
+    }
   </style>
 </head>
 
@@ -154,7 +171,7 @@
       </div>
       <div class="product-container">
         <div class="loading-placeholder">
-          <p>Loading gaming products from database...</p>
+          <p>Loading games...</p>
         </div>
       </div>
     </section>
