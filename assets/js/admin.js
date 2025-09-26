@@ -1,11 +1,8 @@
-// Admin Authentication Check
 document.addEventListener('DOMContentLoaded', () => {
-  // Check sessionStorage first, then localStorage for backward compatibility
   let currentUser = sessionStorage.getItem('currentUser');
   if (!currentUser) {
     currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
-      // Migrate to sessionStorage
       sessionStorage.setItem('currentUser', currentUser);
       localStorage.removeItem('currentUser');
     }
@@ -18,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Account routing function
 function accountRoute() {
-  // Check sessionStorage first, then localStorage
   const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
   
   if (currentUser) {
@@ -342,7 +337,6 @@ function checkScrollIndicator(element) {
   });
 }
 
-// Function to show/hide game-specific fields in the edit modal
 function showGameFields(isGame) {
   const gameOnlyFields = [
     'editTagline', 'editDeveloper', 'editPublisher', 'editReleaseDate',
@@ -464,7 +458,6 @@ async function editGame(id) {
       
       document.getElementById('editModal').style.display = 'block';
       
-      // Show only game-relevant fields
       showGameFields(true);
       
       setTimeout(() => {
@@ -507,7 +500,6 @@ async function editProduct(id) {
       
       document.getElementById('editModal').style.display = 'block';
       
-      // Show only product-relevant fields
       showGameFields(false);
       
       setTimeout(() => {
@@ -989,56 +981,245 @@ async function populateDefaultData() {
             category: 'VR BOX',
             price: 159.00,
             image: '../assets/gaming-products/1.jpg',
-            description: 'High-quality VR headset for immersive gaming experiences with 110° field of view and adjustable straps.'
+            description: 'High-quality VR headset for immersive gaming experiences with crystal clear visuals and comfortable design. Features advanced tracking technology and wide field of view for the ultimate virtual reality experience.',
+            tagline: 'Step into another world',
+            brand: 'GameZoid VR',
+            model: 'VR-S2024',
+            releaseDate: '2024-03-15',
+            warranty: '2 Years Limited',
+            rating: 4.5,
+            features: [
+              'Adjustable interpupillary distance (IPD)',
+              'Anti-blue light lenses',
+              'Compatible with 4.7-6.0 inch smartphones',
+              'Comfortable padded headstrap',
+              'Universal smartphone compatibility'
+            ],
+            specifications: {
+              'Field of View': '110 degrees',
+              'Lens Type': 'Aspheric optical lens',
+              'Material': 'ABS + PC',
+              'Weight': '320g',
+              'Phone Compatibility': '4.7" - 6.0" smartphones',
+              'Adjustable IPD': '58-70mm',
+              'Focal Distance': 'Adjustable'
+            }
           },
           {
             name: 'GameZoid Gaming Headphones',
             category: 'HEADPHONES',
-            price: 39.00,
+            price: 89.99,
             image: '../assets/gaming-products/2.png',
-            description: 'Professional gaming headphones with superior sound quality, noise cancellation, and comfortable padding.'
+            description: 'Professional gaming headphones engineered for competitive gaming with superior sound quality, active noise cancellation, and ultra-comfortable memory foam padding for extended gaming sessions.',
+            tagline: 'Hear every detail, dominate every game',
+            brand: 'GameZoid Audio',
+            model: 'GZ-H7Pro',
+            releaseDate: '2024-01-20',
+            warranty: '3 Years Limited',
+            rating: 4.7,
+            features: [
+              '7.1 Surround Sound',
+              'Active Noise Cancellation',
+              'Memory foam ear cushions',
+              'Detachable microphone',
+              'RGB lighting effects',
+              'Multi-platform compatibility'
+            ],
+            specifications: {
+              'Driver Size': '50mm Dynamic',
+              'Frequency Response': '20Hz - 20kHz',
+              'Impedance': '32Ω',
+              'Sensitivity': '108dB',
+              'Cable Length': '2m braided cable',
+              'Microphone': 'Detachable boom mic',
+              'Weight': '280g',
+              'Connectivity': '3.5mm jack + USB'
+            }
           },
           {
             name: 'Gears 5 Xbox Controller',
-            category: 'X-BOX',
-            price: 99.00,
+            category: 'CONTROLLER',
+            price: 119.99,
             image: '../assets/gaming-products/3.jpg',
-            description: 'Official Xbox controller with enhanced features for gaming, wireless connectivity, and custom button mapping.'
+            description: 'Official Xbox Wireless Controller featuring the iconic Gears of War design with enhanced precision, customizable button mapping, and premium build quality for the ultimate gaming experience.',
+            tagline: 'Gear up for victory',
+            brand: 'Microsoft Xbox',
+            model: 'Gears5-Limited',
+            releaseDate: '2024-02-10',
+            warranty: '1 Year Microsoft Limited',
+            rating: 4.8,
+            features: [
+              'Textured grips',
+              'Customizable button mapping',
+              'Bluetooth wireless connectivity',
+              'Share button for screenshots',
+              'Hybrid D-pad',
+              '40-hour battery life'
+            ],
+            specifications: {
+              'Connectivity': 'Bluetooth 5.0 + 2.4GHz wireless',
+              'Battery': 'AA batteries (40+ hours)',
+              'Compatibility': 'Xbox Series X|S, Xbox One, PC, Mobile',
+              'Weight': '287g',
+              'Dimensions': '15.6 x 10.7 x 6.1 cm',
+              'D-pad': 'Hybrid directional pad',
+              'Triggers': 'Impulse triggers with haptic feedback'
+            }
           },
           {
-            name: 'GeForce RTX 2070',
-            category: 'GRAPHICS',
-            price: 529.00,
+            name: 'GeForce RTX 4070 Super',
+            category: 'GRAPHICS CARD',
+            price: 629.99,
             image: '../assets/gaming-products/4.jpg',
-            description: 'High-performance graphics card for gaming and content creation with ray tracing and DLSS technology.'
+            description: 'NVIDIA GeForce RTX 4070 Super graphics card delivers exceptional gaming performance with advanced ray tracing, DLSS 3, and AI-enhanced graphics for 1440p gaming and content creation.',
+            tagline: 'Beyond fast. Beyond beautiful.',
+            brand: 'NVIDIA GeForce',
+            model: 'RTX 4070 Super',
+            releaseDate: '2024-01-17',
+            warranty: '3 Years NVIDIA Limited',
+            rating: 4.9,
+            features: [
+              'Ada Lovelace Architecture',
+              'Ray Tracing Cores (3rd Gen)',
+              'DLSS 3 with Frame Generation',
+              '12GB GDDR6X Memory',
+              'AV1 Encoding',
+              'NVIDIA Broadcast'
+            ],
+            specifications: {
+              'GPU Memory': '12GB GDDR6X',
+              'Memory Interface': '192-bit',
+              'Base Clock': '1980 MHz',
+              'Boost Clock': '2475 MHz',
+              'CUDA Cores': '7168',
+              'Memory Bandwidth': '504.2 GB/s',
+              'Power Consumption': '220W',
+              'Display Outputs': '3x DP 1.4a, 1x HDMI 2.1'
+            }
           },
           {
             name: 'Mechanical Gaming Keyboard RGB',
             category: 'KEYBOARD',
-            price: 89.99,
+            price: 129.99,
             image: '../assets/gaming-products/1.jpg',
-            description: 'RGB mechanical gaming keyboard with Cherry MX switches, programmable keys, and anti-ghosting technology.'
+            description: 'Premium mechanical gaming keyboard featuring Cherry MX Blue switches, per-key RGB lighting, and aircraft-grade aluminum construction. Designed for competitive gaming with anti-ghosting and programmable macros.',
+            tagline: 'Type at the speed of thought',
+            brand: 'GameZoid Mechanical',
+            model: 'GZ-MK87Pro',
+            releaseDate: '2024-04-05',
+            warranty: '5 Years Mechanical Switch Warranty',
+            rating: 4.6,
+            features: [
+              'Cherry MX Blue mechanical switches',
+              'Per-key RGB backlighting',
+              'Aluminum top plate',
+              'Anti-ghosting (NKRO)',
+              'Programmable macros',
+              'Detachable USB-C cable'
+            ],
+            specifications: {
+              'Switch Type': 'Cherry MX Blue',
+              'Layout': '87-key (TKL)',
+              'Actuation Force': '50g',
+              'Key Travel': '4mm',
+              'Polling Rate': '1000Hz',
+              'Connection': 'USB-C to USB-A',
+              'Dimensions': '36 x 12.7 x 3.5 cm',
+              'Weight': '850g'
+            }
           },
           {
-            name: 'Pro Gaming Mouse 12000 DPI',
+            name: 'Pro Gaming Mouse 25000 DPI',
             category: 'MOUSE',
-            price: 65.00,
+            price: 89.99,
             image: '../assets/gaming-products/2.png',
-            description: 'High-precision gaming mouse with 12000 DPI sensor, customizable buttons, and ergonomic design.'
+            description: 'Ultra-precision gaming mouse with flagship PixArt sensor offering 25,000 DPI, 650 IPS tracking, and customizable weight system. Perfect for competitive FPS and MOBA gaming.',
+            tagline: 'Precision redefined',
+            brand: 'GameZoid Precision',
+            model: 'GZ-M25K',
+            releaseDate: '2024-03-28',
+            warranty: '2 Years Gaming Warranty',
+            rating: 4.8,
+            features: [
+              'PixArt PAW3395 sensor',
+              'Adjustable weight system',
+              'Omron switches (20M clicks)',
+              'RGB lighting zones',
+              '8 programmable buttons',
+              'Braided cable with paracord'
+            ],
+            specifications: {
+              'Sensor': 'PixArt PAW3395',
+              'DPI Range': '100-25,000 DPI',
+              'Max Speed': '650 IPS',
+              'Acceleration': '50G',
+              'Polling Rate': '1000Hz',
+              'Buttons': '8 programmable',
+              'Weight': '69g (without weights)',
+              'Cable': '2m paracord braided'
+            }
           },
           {
-            name: '27" Gaming Monitor 144Hz',
+            name: '27" Gaming Monitor 165Hz OLED',
             category: 'MONITOR',
-            price: 299.99,
+            price: 699.99,
             image: '../assets/gaming-products/3.jpg',
-            description: '27-inch gaming monitor with 144Hz refresh rate, 1ms response time, and AMD FreeSync technology.'
+            description: 'Premium 27-inch OLED gaming monitor with 165Hz refresh rate, 0.03ms response time, and HDR10 support. Features quantum dot technology and G-SYNC compatibility for tear-free gaming.',
+            tagline: 'See the difference, feel the speed',
+            brand: 'GameZoid Display',
+            model: 'GZ-OLED27-165',
+            releaseDate: '2024-05-12',
+            warranty: '3 Years Premium Display Warranty',
+            rating: 4.9,
+            features: [
+              'OLED Quantum Dot Display',
+              'G-SYNC Compatible',
+              'HDR10 & DisplayHDR 400',
+              'Ultra-wide color gamut',
+              'Blue light reduction',
+              'Height adjustable stand'
+            ],
+            specifications: {
+              'Panel Type': 'OLED Quantum Dot',
+              'Size': '27 inches',
+              'Resolution': '2560 x 1440 (QHD)',
+              'Refresh Rate': '165Hz',
+              'Response Time': '0.03ms GTG',
+              'Color Gamut': '99% sRGB, 95% DCI-P3',
+              'Brightness': '400 nits',
+              'Contrast Ratio': '1,000,000:1',
+              'Connectivity': '2x HDMI 2.1, 1x DP 1.4, USB-C'
+            }
           },
           {
-            name: 'Wireless Pro Controller',
+            name: 'Wireless Pro Controller Elite',
             category: 'CONTROLLER',
-            price: 75.00,
+            price: 179.99,
             image: '../assets/gaming-products/4.jpg',
-            description: 'Wireless pro controller with hall effect joysticks, customizable buttons, and 40-hour battery life.'
+            description: 'Premium wireless pro controller with Hall Effect magnetic joysticks, back paddles, trigger stops, and 40-hour battery life. Features customizable profiles and tournament-grade build quality.',
+            tagline: 'Elite performance, wireless freedom',
+            brand: 'GameZoid Pro',
+            model: 'GZ-Elite-Pro',
+            releaseDate: '2024-06-01',
+            warranty: '2 Years Pro Gaming Warranty',
+            rating: 4.7,
+            features: [
+              'Hall Effect magnetic joysticks',
+              'Hair trigger locks',
+              '4 back paddles',
+              'Customizable button profiles',
+              'Pro-grade D-pad',
+              'Wireless charging dock included'
+            ],
+            specifications: {
+              'Connectivity': 'Bluetooth 5.2 + 2.4GHz wireless',
+              'Battery Life': '40+ hours',
+              'Charging': 'USB-C + Wireless dock',
+              'Weight': '310g',
+              'Compatibility': 'PC, PlayStation, Xbox, Switch, Mobile',
+              'Latency': '<1ms (2.4GHz mode)',
+              'Customization': '256 profile combinations'
+            }
           }
         ];
 

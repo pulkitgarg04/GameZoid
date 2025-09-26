@@ -70,7 +70,7 @@ button.normal {
   padding-inline: 15px;
 }
 
-/* Hero Section */
+
 .hero {
   background: url("../media/hero-bg-home.webp") no-repeat;
   background-position: center center;
@@ -136,7 +136,7 @@ button.normal {
   font-size: 20px;
 }
 
-/* Section Common CSS */
+
 .new-section {
   text-align: center;
   margin-top: 90px;
@@ -153,7 +153,7 @@ button.normal {
   margin-top: 20px;
 }
 
-/* Tournament Section */
+
 .tournament {
   padding: 60px 0;
   color: hsl(0, 0%, 100%);
@@ -284,7 +284,7 @@ button.normal {
 }
 
 
-/* Store Section */
+
 #store {
   margin: auto 150px;
 }
@@ -295,7 +295,7 @@ button.normal {
   font-weight: 500;
 }
 
-/* Gaming Products Display */
+
 #gaming-products .product-container {
   display: flex;
   justify-content: space-between;
@@ -373,7 +373,7 @@ button.normal {
   right: 10px;
 }
 
-/* Latest News Section */
+
 .latest-news-container {
   display: flex;
   justify-content: center;
@@ -416,7 +416,7 @@ button.normal {
   cursor: pointer;
 }
 
-/* Follow Us Section */
+
 .social-media-icons {
   display: flex;
   justify-content: center;

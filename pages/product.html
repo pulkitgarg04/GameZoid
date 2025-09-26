@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Details - GameZoid</title>
+  <title>Product Details - GameZoid</title>
   <link rel="icon" type="image/x-icon" href="../assets/media/favicon.png">
   <link rel="stylesheet" href="../assets/css/header.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
@@ -23,7 +23,7 @@
         <li><a href="./news.html">News</a></li>
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
-                <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
         <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
         <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
       </ul>
@@ -36,15 +36,15 @@
 
   <section id="game-hero">
     <div class="hero-content">
-      <h1 id="game-title">Loading...</h1>
-      <p id="game-tagline"></p>
+      <h1 id="product-title">Loading...</h1>
+      <p id="product-tagline"></p>
       <div class="hero-actions">
         <button id="buy-now" class="btn-primary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
         <button id="wishlist" class="btn-secondary"><i class="fas fa-heart"></i> Add to Wishlist</button>
       </div>
     </div>
     <div class="hero-media">
-      <img id="game-cover" src="" alt="Game Cover" onerror="this.src='../assets/media/favicon.png'">
+      <img id="product-cover" src="" alt="Product Cover" onerror="this.src='../assets/media/favicon.png'">
     </div>
   </section>
 
@@ -52,40 +52,39 @@
     <div class="layout">
       <main class="main">
         <section class="about">
-          <h2 class="section-title">About the game</h2>
-          <p id="game-description"></p>
+          <h2 class="section-title">About this product</h2>
+          <p id="product-description"></p>
         </section>
 
         <section class="features">
-          <h2 class="section-title">Key Points</h2>
-          <ul id="game-features" class="features-list"></ul>
+          <h2 class="section-title">Key Features</h2>
+          <ul id="product-features" class="features-list"></ul>
         </section>
 
-        <section class="system">
-          <h2 class="section-title">System Requirements</h2>
+        <section class="specifications">
+          <h2 class="section-title">Specifications</h2>
           <div class="requirements">
             <div>
-              <h3 class="section-title-2">Minimum</h3>
-              <ul id="req-min" class="requirements-list"></ul>
+              <h3 class="section-title-2">Product Details</h3>
+              <ul id="product-specs" class="requirements-list"></ul>
             </div>
             <div>
-              <h3 class="section-title-2">Recommended</h3>
-              <ul id="req-rec" class="requirements-list"></ul>
+              <h3 class="section-title-2">Compatibility</h3>
+              <ul id="product-compatibility" class="requirements-list"></ul>
             </div>
           </div>
         </section>
-
-        
       </main>
+      
       <aside class="sidebar">
         <div class="meta">
-          <h3 class="section-title-2">Game Info</h3>
+          <h3 class="section-title-2">Product Info</h3>
           <ul class="meta-list">
-            <li><span>Developer</span><span id="developer">-</span></li>
-            <li><span>Publisher</span><span id="publisher">-</span></li>
+            <li><span>Brand</span><span id="brand">-</span></li>
+            <li><span>Model</span><span id="model">-</span></li>
             <li><span>Release Date</span><span id="releaseDate">-</span></li>
-            <li><span>Genre</span><span id="genre">-</span></li>
-            <li><span>Platforms</span><span id="platforms">-</span></li>
+            <li><span>Category</span><span id="category">-</span></li>
+            <li><span>Warranty</span><span id="warranty">-</span></li>
             <li><span>Rating</span><span id="rating">-</span></li>
           </ul>
         </div>
@@ -102,7 +101,7 @@
   <section id="newsletter" class="section-p1">
     <div class="newstext">
       <h4>Sign Up for Newsletters</h4>
-      <p>Get E-mail updates about our latest games and <span>special offers.</span></p>
+      <p>Get E-mail updates about our latest products and <span>special offers.</span></p>
     </div>
     <div class="form">
       <input type="text" placeholder="Your email address">
@@ -156,10 +155,9 @@
     </div>
   </footer>
 
-  <script src="../assets/js/game.js"></script>
+  <script src="../assets/js/product.js"></script>
   <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-

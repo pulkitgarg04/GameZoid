@@ -140,7 +140,7 @@ function displayProducts(products) {
 
   const productsContainer = productsSection.querySelector('.main');
   productsContainer.innerHTML = products.map(product => `
-    <div class="cards" data-product-id="${product.id}">
+    <div class="cards" data-product-id="${product.id}" onclick="window.location.href='./product.html?id=${product.id}'" style="cursor: pointer;">
       <div class="image">
         <img src="${product.image}" alt="${product.name}" onerror="this.src='../assets/media/favicon.png'">
       </div>
@@ -151,7 +151,7 @@ function displayProducts(products) {
       <div class="des">
         <p class="price">$${product.price}</p>
         ${product.description ? `<p class="description">${product.description}</p>` : ''}
-        <button class="buy-btn" onclick="addToCart(${product.id}, 'product')">
+        <button class="buy-btn" onclick="event.stopPropagation(); addToCart(${product.id}, 'product')">
           <i class="fas fa-shopping-cart"></i>
           Add to Cart
         </button>
@@ -161,7 +161,9 @@ function displayProducts(products) {
 }
 
 function addToCart(itemId, type) {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  const currentUserStr = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  const currentUser = JSON.parse(currentUserStr || 'null');
+  
   if (!currentUser) {
     alert('Please log in to add items to cart');
     window.location.href = './login.html';

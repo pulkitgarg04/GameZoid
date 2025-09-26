@@ -71,8 +71,7 @@
   <footer class="section-p1">
     <div class="col logo-col">
       <img src="../assets/media/logo.webp" class="logo">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
-        qui id.</p>
+      <p>GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.</p>
       <div class="follow">
         <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
         <div class="icon">
@@ -107,7 +106,7 @@
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
       <div class="row">
-        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/app.jpg" alt="" style="margin-right: 10px;">
         <img src="../assets/media/pay/play.jpg" alt="">
       </div>
       <p>Secured Payment Gateways</p>
@@ -115,18 +114,21 @@
     </div>
 
         <div class="copyright">
-      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+      <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
-  
+
   <script src="../assets/js/login.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 
 </html>
   </footer>
   
   <script>
-    // IndexedDB Database Class for Users
+    
     class UserDatabase {
       constructor() {
         this.dbName = 'GameZoidUserDB';
@@ -152,13 +154,13 @@
           request.onupgradeneeded = (event) => {
             const db = event.target.result;
 
-            // Users store
+            
             if (!db.objectStoreNames.contains('users')) {
               const usersStore = db.createObjectStore('users', { keyPath: 'email' });
               usersStore.createIndex('name', 'name', { unique: false });
             }
 
-            // Wishlist store
+            
             if (!db.objectStoreNames.contains('wishlist')) {
               const wishlistStore = db.createObjectStore('wishlist', { keyPath: 'id', autoIncrement: true });
               wishlistStore.createIndex('userEmail', 'userEmail', { unique: false });
@@ -191,21 +193,21 @@
 
     let userDB;
 
-    // Initialize database when page loads
+    
     document.addEventListener('DOMContentLoaded', async () => {
       try {
         userDB = new UserDatabase();
         await userDB.init();
         console.log('User database initialized for login');
         
-        // Migrate existing localStorage users to IndexedDB
+        
         await migrateUsers();
       } catch (error) {
         console.error('Failed to initialize user database:', error);
       }
     });
 
-    // Migrate existing users from localStorage to IndexedDB
+    
     async function migrateUsers() {
       try {
         const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
@@ -222,12 +224,12 @@
               console.log('Migrated user to IndexedDB:', user.email);
             }
           } catch (error) {
-            // User might already exist, skip
+            
             console.log('User already exists in IndexedDB:', user.email);
           }
         }
         
-        // Clear localStorage users after migration
+        
         if (existingUsers.length > 0) {
           localStorage.removeItem('users');
           console.log('Cleared localStorage users after migration');
@@ -237,7 +239,7 @@
       }
     }
 
-    // Password toggle functionality
+    
     document.querySelectorAll('.password-toggle-icon').forEach(icon => {
       icon.addEventListener('click', function () {
         const passwordInput = this.previousElementSibling;
@@ -257,14 +259,14 @@
       const email = document.getElementById('email').value.trim().toLowerCase();
       const password = document.getElementById('password').value;
       
-      // Admin credentials
+      
       const adminEmail = 'admin@gamezoid.com';
       const adminPass = 'admin123';
       
       try {
         let user = null;
         
-        // Check if it's admin login
+        
         if (email === adminEmail && password === adminPass) {
           user = { 
             name: 'Administrator', 
@@ -274,7 +276,7 @@
             createdAt: new Date().toISOString()
           };
           
-          // Add admin to IndexedDB if not exists
+          
           try {
             const existingAdmin = await userDB.getUserByEmail(adminEmail);
             if (!existingAdmin) {
@@ -285,7 +287,7 @@
             console.log('Admin user already exists in IndexedDB');
           }
         } else {
-          // Check regular user in IndexedDB
+          
           user = await userDB.getUserByEmail(email);
         }
         
@@ -299,15 +301,15 @@
           return;
         }
         
-        // Store user in sessionStorage (current login session)
+        
         sessionStorage.setItem('currentUser', JSON.stringify(user));
         
-        // Clear any old localStorage currentUser for clean migration
+        
         localStorage.removeItem('currentUser');
         
         console.log('User logged in successfully:', user.name);
         
-        // Redirect based on user type
+        
         if (user.isAdmin) {
           window.location.href = './admin.html';
         } else {

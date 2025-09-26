@@ -104,7 +104,7 @@ function renderProductsToSection(section, products) {
     return;
   }
   container.innerHTML = products.slice(0, 8).map(p => `
-    <div class="product" onclick="window.location.href='./pages/store.html'">
+    <div class="product" onclick="window.location.href='./pages/product.html?id=${p.id}'">
       <img src="${p.image}" onerror="this.src='./assets/media/favicon.png'">
       <div class="product-description">
         <div class="product-category">
@@ -121,15 +121,31 @@ function renderProductsToSection(section, products) {
 }
 
 function homeAddToCart(id, type) {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  const currentUserStr = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  const currentUser = JSON.parse(currentUserStr || 'null');
+  
   if (!currentUser) {
+    alert('Please log in to add items to cart');
     window.location.href = './pages/login.html';
     return;
   }
+  
   let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  if (cart.find(i => i.id === id && i.type === type)) return;
-  cart.push({ id, type, addedAt: new Date().toISOString() });
+  
+  if (cart.find(i => i.id === id && i.type === type)) {
+    alert('This item is already in your cart!');
+    return;
+  }
+  
+  cart.push({ 
+    id, 
+    type, 
+    addedAt: new Date().toISOString(),
+    addedBy: currentUser.email
+  });
+  
   localStorage.setItem('cart', JSON.stringify(cart));
+  alert('Item added to cart!');
 }
 
 

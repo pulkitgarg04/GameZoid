@@ -30,6 +30,24 @@
       opacity: 0.5;
       z-index: -1;
     }
+
+    .loading-placeholder {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+      color: var(--color, #ff6b6b);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .loading-placeholder p {
+      margin: 0;
+      padding: 20px;
+      border: 2px dashed var(--color, #ff6b6b);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
   </style>
 </head>
 
@@ -85,7 +103,7 @@
         </div>
         <div class="tournament-prize">
           <h2 class="h3 tournament-prize-title">Prize pool</h2>
-          <!-- We have used data tag here as data can be constly changing! -->
+          
           <data value="80000">$80000</data>
           <figure>
             <img src="./assets/media/tournament/prize-img.png" alt="Prize image">
@@ -121,109 +139,8 @@
         <p>Unleash the Latest: Discover New Adventures Every Week!</p>
       </div>
       <div class="product-container">
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/apex-legends.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Battle Royale</h6>
-            </div>
-            <h5>Apex Legends</h5>
-            <h4>$72.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/gta-v.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Open World</h6>
-            </div>
-            <h5>Grand Theft Auto V</h5>
-            <h4>$95.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/pubg.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Battle Royale</h6>
-            </div>
-            <h5>PUBG (BGMI) - India</h5>
-            <h4>$15.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/valorant.webp">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Tactical Shooter</h6>
-            </div>
-            <h5>Valorant</h5>
-            <h4>$26.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/call-of-duty.webp">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Action</h6>
-            </div>
-            <h5>Call Of Duty</h5>
-            <h4>$45.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/clash-of-clans.webp">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Base-Building</h6>
-            </div>
-            <h5>Clash Of Clans</h5>
-            <h4>$30.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/devil-may-cry.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Hack and Slash</h6>
-            </div>
-            <h5>Devil May Cry</h5>
-            <h4>$55.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/community/price-of-persia.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>Platformer</h6>
-            </div>
-            <h5>Prince Of Persia</h5>
-            <h4>$74.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
+        <div class="loading-placeholder">
+          <p>Loading games from database...</p>
         </div>
       </div>
     </section>
@@ -236,57 +153,8 @@
         </p>
       </div>
       <div class="product-container">
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/gaming-products/1.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>VR BOX</h6>
-            </div>
-            <h5>Virtual Reality Smiled</h5>
-            <h4>$159.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/gaming-products/2.png">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>HEADPHONES</h6>
-            </div>
-            <h5>GameZoid Gaming Headphones</h5>
-            <h4>$39.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/gaming-products/3.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>X-BOX</h6>
-            </div>
-            <h5>Gears 5 Xbox Controller</h5>
-            <h4>$99.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
-        </div>
-        <div class="product" onclick="window.location.href='#'">
-          <img src="./assets/gaming-products/4.jpg">
-          <div class="product-description">
-            <div class="product-category">
-              <h6>GRAPHICS</h6>
-            </div>
-            <h5>GeForce RTX 2070</h5>
-            <h4>$529.00</h4>
-          </div>
-          <a href="#">
-            <i class="fas fa-shopping-cart cart"></i>
-          </a>
+        <div class="loading-placeholder">
+          <p>Loading gaming products from database...</p>
         </div>
       </div>
     </section>
@@ -336,6 +204,26 @@
             <h4>Diablo IV's Spiritborn Class Revealed for Vessel of Hatred!</h4>
             <p>The Nahantu territory and this new class are in the upcoming 8 October Vessel of Hatred expansion.
               Pre-purchase offers instant access to...</p>
+          </div>
+        </div>
+        <div class="news-box">
+          <div class="news-img">
+            <img src="../assets/news/news-5.webp">
+          </div>
+          <div class="news-details">
+            <h4>Valorant Championship 2024: Teams Qualification and details</h4>
+            <p>Sixteen teams from around the globe have earned their spots at the Valorant World Championships through
+              rigorous competition in international leagues...</p>
+          </div>
+        </div>
+        <div class="news-box">
+          <div class="news-img">
+            <img src="../assets/news/news-6.webp">
+          </div>
+          <div class="news-details">
+            <h4>Free Fire MAX x Naruto- Release Date and Gameplay</h4>
+            <p>Though some of the events launched in Free Fire MAX are region specific, the upcoming Free Fire MAX x Naruto
+              collaboration will be available for all servers...</p>
           </div>
         </div>
       </div>
@@ -388,7 +276,6 @@
       <div class="single-logo"><img src="./assets/media/client-logos/4.png"></div>
       <div class="single-logo"><img src="./assets/media/client-logos/5.png"></div>
       <div class="single-logo"><img src="./assets/media/client-logos/6.png"></div>
-      <div class="single-logo"><img src="./assets/media/client-logos/7.png"></div>
     </div>
   </div>
 
@@ -398,7 +285,7 @@
         <h2 class="text">India</h2>
       </div>
       <div class="location-name">
-        <h2 class="text">USA</h2>
+        <h2 class="text">Canada</h2>
       </div>
     </div>
   </div>
@@ -406,8 +293,7 @@
   <footer class="section-p1">
     <div class="col logo-col">
       <img src="./assets/media/logo.webp" class="logo">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
-        qui id.</p>
+      <p>GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.</p>
       <div class="follow">
         <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
         <div class="icon">
@@ -442,7 +328,7 @@
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
       <div class="row">
-        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/app.jpg" alt="" style="margin-right: 10px;">
         <img src="../assets/media/pay/play.jpg" alt="">
       </div>
       <p>Secured Payment Gateways</p>
@@ -450,11 +336,14 @@
     </div>
 
     <div class="copyright">
-      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+      <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
 
   <script src="./assets/js/home.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 
 </html>

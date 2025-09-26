@@ -1,6 +1,4 @@
-// Account routing function
 function accountRoute() {
-  // Check sessionStorage first, then localStorage for backward compatibility
   const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
   
   if (currentUser) {
@@ -10,7 +8,6 @@ function accountRoute() {
   }
 }
 
-// IndexedDB Database Class for Users and Wishlist
 class UserDatabase {
   constructor() {
     this.dbName = 'GameZoidUserDB';
@@ -36,13 +33,11 @@ class UserDatabase {
       request.onupgradeneeded = (event) => {
         const db = event.target.result;
 
-        // Users store
         if (!db.objectStoreNames.contains('users')) {
           const usersStore = db.createObjectStore('users', { keyPath: 'email' });
           usersStore.createIndex('name', 'name', { unique: false });
         }
 
-        // Wishlist store
         if (!db.objectStoreNames.contains('wishlist')) {
           const wishlistStore = db.createObjectStore('wishlist', { keyPath: 'id', autoIncrement: true });
           wishlistStore.createIndex('userEmail', 'userEmail', { unique: false });
@@ -140,7 +135,7 @@ async function initializeDatabase() {
 }
 
 function getCurrentUser() {
-  // Check sessionStorage first (current login session)
+
   let user = sessionStorage.getItem('currentUser');
   if (user) {
     try {
@@ -151,12 +146,12 @@ function getCurrentUser() {
     }
   }
 
-  // Fallback to localStorage for backward compatibility
+
   user = localStorage.getItem('currentUser');
   if (user) {
     try {
       const parsedUser = JSON.parse(user);
-      // Migrate to sessionStorage
+
       sessionStorage.setItem('currentUser', user);
       localStorage.removeItem('currentUser');
       return parsedUser;
@@ -177,7 +172,7 @@ async function getUserInfo() {
     document.getElementById('name').innerHTML = currentUser.name;
     document.getElementById('email').innerHTML = currentUser.email;
     
-    // Load wishlist after user info is loaded
+
     await loadWishlist();
   } else {
     console.log('No user logged in, redirecting to login');
@@ -230,13 +225,13 @@ async function moveToCart(gameId, gameName, gamePrice, wishlistId) {
 
   let cart = JSON.parse(localStorage.getItem('cart') || '[]');
   
-  // Check if already in cart
+
   if (cart.find(item => item.id === gameId && item.type === 'game')) {
     alert(`${gameName} is already in your cart!`);
     return;
   }
   
-  // Add to cart
+
   const cartItem = {
     id: gameId,
     type: 'game',
@@ -249,11 +244,11 @@ async function moveToCart(gameId, gameName, gamePrice, wishlistId) {
   cart.push(cartItem);
   localStorage.setItem('cart', JSON.stringify(cart));
   
-  // Remove from wishlist database
+
   try {
     await userDB.removeFromWishlist(wishlistId);
     alert(`${gameName} has been moved to your cart!`);
-    await loadWishlist(); // Reload wishlist display
+    await loadWishlist(); 
   } catch (error) {
     console.error('Error removing from wishlist:', error);
     alert('Error moving item to cart. Please try again.');
@@ -264,7 +259,7 @@ async function removeFromWishlist(wishlistId, gameName) {
   try {
     await userDB.removeFromWishlist(wishlistId);
     alert(`${gameName} has been removed from your wishlist.`);
-    await loadWishlist(); // Reload wishlist display
+    await loadWishlist(); 
   } catch (error) {
     console.error('Error removing from wishlist:', error);
     alert('Error removing item from wishlist. Please try again.');
@@ -272,15 +267,15 @@ async function removeFromWishlist(wishlistId, gameName) {
 }
 
 function logout() {
-  // Clear both sessionStorage and localStorage
+
   sessionStorage.removeItem('currentUser');
   localStorage.removeItem('currentUser');
-  localStorage.removeItem('cart'); // Also clear cart on logout
+  localStorage.removeItem('cart'); 
   alert('You have been logged out!');
   window.location.href = './login.html';
 }
 
-// Initialize page
+
 document.addEventListener('DOMContentLoaded', async () => {
   await initializeDatabase();
   await getUserInfo();

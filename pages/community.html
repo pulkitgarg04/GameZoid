@@ -58,208 +58,476 @@
   </header>
 
   <section id="community-hero">
-    <h2>OUR <span style="color: var(--color)">COMMUNITY</span></h2>
-    <p><a href="/">HOME</a> <i class="fa-solid fa-angles-right" style="font-weight: 600;"></i> COMMUNITY</p>
+    <div class="hero-content">
+      <h1>Join Our <span class="gradient-text">Gaming Community</span></h1>
+      <p class="hero-description">Connect with millions of gamers worldwide. Share strategies, find teammates, and build lasting friendships.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">2.4M+</span>
+          <span class="stat-label">Active Players</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">150+</span>
+          <span class="stat-label">Game Communities</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Online Support</span>
+        </div>
+      </div>
+      <div class="breadcrumb">
+        <a href="/">HOME</a> <i class="fa-solid fa-chevron-right"></i> COMMUNITY
+      </div>
+    </div>
+    <div class="hero-decoration">
+      <div class="floating-card card-1"></div>
+      <div class="floating-card card-2"></div>
+      <div class="floating-card card-3"></div>
+    </div>
   </section>
 
   <main>
-    <section id="community-form" class="section-p1">
-      <h2>Explore Communities</h2>
-      <p class="tagline">Find a Community You Might Be Interested In.</p>
-      <div class="community-box-container">
-        <div class="community-box">
-          <img src="../assets/community/gta-v.jpg">
-          <div class="col-1">
-            <h3>Grand Theft Auto V</h3>
-            <div class="community-stats">
-              <p>235 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">639K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 50M+ Gamers</p>
+    <section id="community-explore" class="section-p1">
+      <div class="section-header">
+        <h2>Discover Gaming Communities</h2>
+        <p class="tagline">Join vibrant communities and connect with fellow gamers who share your passion.</p>
+      </div>
+      
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All Games</button>
+        <button class="filter-tab" data-filter="fps">FPS</button>
+        <button class="filter-tab" data-filter="rpg">RPG</button>
+        <button class="filter-tab" data-filter="moba">MOBA</button>
+        <button class="filter-tab" data-filter="battle-royale">Battle Royale</button>
+      </div>
+
+      <div class="community-grid">
+        <div class="community-card" data-category="action">
+          <div class="card-image">
+            <img src="../assets/community/gta-v.jpg" alt="Grand Theft Auto V">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>127K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-arrow-circle-o-right"></i> Joined</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Grand Theft Auto V</h3>
+              <div class="game-tags">
+                <span class="tag">Action</span>
+                <span class="tag">Open World</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>639K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>235 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+50M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn joined">
+              <i class="fa-solid fa-check"></i>
+              <span>Joined</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/pubg.jpg">
-          <div class="col-1">
-            <h3>PUBG (BGMI) - India</h3>
-            <div class="community-stats">
-              <p>1432 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">926K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 10M+ Gamers</p>
+
+        <div class="community-card" data-category="battle-royale">
+          <div class="card-image">
+            <img src="../assets/community/pubg.jpg" alt="PUBG">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>284K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-arrow-circle-o-right"></i> Joined</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>PUBG (BGMI) - India</h3>
+              <div class="game-tags">
+                <span class="tag">Battle Royale</span>
+                <span class="tag">Multiplayer</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>926K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>1.4K Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+10M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn joined">
+              <i class="fa-solid fa-check"></i>
+              <span>Joined</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/call-of-duty.webp">
-          <div class="col-1">
-            <h3>Call of Duty</h3>
-            <div class="community-stats">
-              <p>462 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">346K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 5M+ Gamers</p>
+
+        <div class="community-card" data-category="fps">
+          <div class="card-image">
+            <img src="../assets/community/call-of-duty.webp" alt="Call of Duty">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>92K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-plus-circle"></i> Join</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Call of Duty</h3>
+              <div class="game-tags">
+                <span class="tag">FPS</span>
+                <span class="tag">Competitive</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>346K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>462 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+5M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Join Community</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/devil-may-cry.jpg">
-          <div class="col-1">
-            <h3>Devil May Cry</h3>
-            <div class="community-stats">
-              <p>575 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">235K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 1M+ Gamers</p>
+
+        <div class="community-card" data-category="action">
+          <div class="card-image">
+            <img src="../assets/community/devil-may-cry.jpg" alt="Devil May Cry">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>18K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-plus-circle"></i> Join</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Devil May Cry</h3>
+              <div class="game-tags">
+                <span class="tag">Action</span>
+                <span class="tag">Hack & Slash</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>235K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>575 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+1M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Join Community</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/apex-legends.jpg">
-          <div class="col-1">
-            <h3>Apex Legends</h3>
-            <div class="community-stats">
-              <p>257 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">237K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 800K+ Gamers</p>
+
+        <div class="community-card" data-category="fps">
+          <div class="card-image">
+            <img src="../assets/community/apex-legends.jpg" alt="Apex Legends">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>156K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-plus-circle"></i> Join</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Apex Legends</h3>
+              <div class="game-tags">
+                <span class="tag">Battle Royale</span>
+                <span class="tag">Hero Shooter</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>237K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>257 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+800K</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Join Community</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/clash-of-clans.webp">
-          <div class="col-1">
-            <h3>Clash of Clans</h3>
-            <div class="community-stats">
-              <p>368 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">5M+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 1M+ Gamers</p>
+
+        <div class="community-card" data-category="strategy">
+          <div class="card-image">
+            <img src="../assets/community/clash-of-clans.webp" alt="Clash of Clans">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>445K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-arrow-circle-o-right"></i> Joined</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Clash of Clans</h3>
+              <div class="game-tags">
+                <span class="tag">Strategy</span>
+                <span class="tag">Mobile</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>5M Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>368 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+1M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn joined">
+              <i class="fa-solid fa-check"></i>
+              <span>Joined</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/fortnite.jpg">
-          <div class="col-1">
-            <h3>Fortnite</h3>
-            <div class="community-stats">
-              <p>575 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">842K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 2M+ Gamers</p>
+
+        <div class="community-card" data-category="battle-royale">
+          <div class="card-image">
+            <img src="../assets/community/fortnite.jpg" alt="Fortnite">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>312K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-plus-circle"></i> Join</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Fortnite</h3>
+              <div class="game-tags">
+                <span class="tag">Battle Royale</span>
+                <span class="tag">Building</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>842K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>575 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+2M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Join Community</span>
+            </button>
+          </div>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/price-of-persia.jpg">
-          <div class="col-1">
-            <h3>Prince of Persia</h3>
-            <div class="community-stats">
-              <p>247 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">235K+ Members</p>
-            </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 6M+ Gamers</p>
+
+        <div class="community-card" data-category="action">
+          <div class="card-image">
+            <img src="../assets/community/price-of-persia.jpg" alt="Prince of Persia">
+            <div class="card-overlay">
+              <div class="online-indicator">
+                <div class="pulse-dot"></div>
+                <span>8.2K Online</span>
+              </div>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-plus-circle"></i> Join</button>
+          <div class="card-content">
+            <div class="game-info">
+              <h3>Prince of Persia</h3>
+              <div class="game-tags">
+                <span class="tag">Action</span>
+                <span class="tag">Adventure</span>
+              </div>
+            </div>
+            <div class="community-stats">
+              <div class="stat">
+                <i class="fa-solid fa-users"></i>
+                <span>235K Members</span>
+              </div>
+              <div class="stat">
+                <i class="fa-solid fa-message"></i>
+                <span>247 Posts Today</span>
+              </div>
+            </div>
+            <div class="member-preview">
+              <div class="avatar-stack">
+                <img src="../assets/media/people/male.png" alt="Member">
+                <img src="../assets/media/people/female.png" alt="Member">
+                <span class="more-count">+6M</span>
+              </div>
+              <span class="member-text">Active Players</span>
+            </div>
+            <button class="join-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Join Community</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="community-form" class="section-p1">
-      <h2>Your Communities</h2>
-      <p class="tagline">Explore the communties you have joined.</p>
-      <div class="community-box-container">
-        <div class="community-box">
-          <img src="../assets/community/gta-v.jpg">
-          <div class="col-1">
-            <h3>Grand Theft Auto V</h3>
-            <div class="community-stats">
-              <p>235 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">639K+ Members</p>
+    <section id="my-communities" class="section-p1">
+      <div class="section-header">
+        <h2>Your Gaming Hub</h2>
+        <p class="tagline">Quick access to your joined communities and latest updates.</p>
+      </div>
+      
+      <div class="my-communities-grid">
+        <div class="joined-community-card">
+          <div class="card-header">
+            <img src="../assets/community/gta-v.jpg" alt="Grand Theft Auto V">
+            <div class="community-info">
+              <h3>Grand Theft Auto V</h3>
+              <p>Last active: 2 hours ago</p>
             </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 50M+ Gamers</p>
+            <div class="notification-badge">12</div>
+          </div>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <span class="stat-number">639K</span>
+              <span class="stat-label">Members</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">235</span>
+              <span class="stat-label">New Posts</span>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-arrow-circle-o-right"></i> Explore</button>
+          <button class="explore-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Explore Community</span>
+          </button>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/pubg.jpg">
-          <div class="col-1">
-            <h3>PUBG (BGMI) - India</h3>
-            <div class="community-stats">
-              <p>1432 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">926K+ Members</p>
+
+        <div class="joined-community-card">
+          <div class="card-header">
+            <img src="../assets/community/pubg.jpg" alt="PUBG">
+            <div class="community-info">
+              <h3>PUBG (BGMI) - India</h3>
+              <p>Last active: 5 minutes ago</p>
             </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 10M+ Gamers</p>
+            <div class="notification-badge">47</div>
+          </div>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <span class="stat-number">926K</span>
+              <span class="stat-label">Members</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">1.4K</span>
+              <span class="stat-label">New Posts</span>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-arrow-circle-o-right"></i> Explore</button>
+          <button class="explore-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Explore Community</span>
+          </button>
         </div>
-        <div class="community-box">
-          <img src="../assets/community/clash-of-clans.webp">
-          <div class="col-1">
-            <h3>Clash of Clans</h3>
-            <div class="community-stats">
-              <p>368 Posts</p>
-              <p style="margin-left: 8px;">•</p>
-              <p style="margin-left: 8px;">5M+ Members</p>
+
+        <div class="joined-community-card">
+          <div class="card-header">
+            <img src="../assets/community/clash-of-clans.webp" alt="Clash of Clans">
+            <div class="community-info">
+              <h3>Clash of Clans</h3>
+              <p>Last active: 1 day ago</p>
             </div>
-            <div class="played-by">
-              <img src="../assets/media/people/male.png">
-              <img src="../assets/media/people/female.png">
-              <p class="played-by-text">Played by 1M+ Gamers</p>
+            <div class="notification-badge">8</div>
+          </div>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <span class="stat-number">5M</span>
+              <span class="stat-label">Members</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">368</span>
+              <span class="stat-label">New Posts</span>
             </div>
           </div>
-          <button class="join-btn"><i class="fa fa-arrow-circle-o-right"></i> Explore</button>
+          <button class="explore-btn">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>Explore Community</span>
+          </button>
         </div>
       </div>
     </section>
@@ -279,8 +547,7 @@
   <footer class="section-p1">
     <div class="col logo-col">
       <img src="../assets/media/logo.webp" class="logo">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
-        qui id.</p>
+      <p>GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.</p>
       <div class="follow">
         <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
         <div class="icon">
@@ -315,22 +582,26 @@
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
       <div class="row">
-        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/app.jpg" alt="" style="margin-right: 10px;">
         <img src="../assets/media/pay/play.jpg" alt="">
       </div>
       <p>Secured Payment Gateways</p>
       <img src="../assets/media/pay/pay.png" alt="">
     </div>
 
-    <div class="copyright">
-      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+        <div class="copyright">
+      <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
     </div>
+  </footer>
+
+  <script src="../assets/js/navbar.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
   </footer>
   
   <script>
-    // Account routing function
     function accountRoute() {
-      // Check sessionStorage first, then localStorage for backward compatibility
       const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
       
       if (currentUser) {
@@ -339,7 +610,75 @@
         window.location.href = './login.html';
       }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterTabs = document.querySelectorAll('.filter-tab');
+      const communityCards = document.querySelectorAll('.community-card');
+
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const filter = this.getAttribute('data-filter');
+          
+          filterTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+
+          communityCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            
+            if (filter === 'all' || category === filter) {
+              card.style.display = 'block';
+              card.style.animation = 'fadeInUp 0.5s ease forwards';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      const joinBtns = document.querySelectorAll('.join-btn:not(.joined)');
+      joinBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          this.classList.add('joined');
+          this.innerHTML = '<i class="fa-solid fa-check"></i><span>Joined</span>';
+          
+          const card = this.closest('.community-card');
+          card.style.animation = 'celebrateJoin 0.8s ease forwards';
+        });
+      });
+    });
   </script>
+
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes celebrateJoin {
+      0% { transform: translateY(-8px) scale(1); }
+      50% { transform: translateY(-8px) scale(1.02); }
+      100% { transform: translateY(-8px) scale(1); }
+    }
+
+    .community-card {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .community-card:nth-child(even) {
+      animation-delay: 0.1s;
+    }
+
+    .community-card:nth-child(3n) {
+      animation-delay: 0.2s;
+    }
+  </style>
 </body>
 
 </html>
