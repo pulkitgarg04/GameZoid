@@ -19,13 +19,11 @@ git clone https://github.com/pulkitgarg04/GameZoid.git
 cd GameZoid
 ```
 
-2. For development with a local server:
+2. Run a local server:
 ```bash
-# Using Python
-python3 -m http.server 8080
+npm install
 
-# Using Node.js
-npx http-server -p 8080
+npm run start
 ```
 
 3. Open your browser and navigate to:

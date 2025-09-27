@@ -1,0 +1,30 @@
+{
+  "name": "gamezoid",
+  "version": "1.0.0",
+  "description": "A online gaming e-commerce platform for discovering, purchasing, and managing games and gaming products.",
+  "keywords": [
+    "html",
+    "css",
+    "javascript",
+    "ecommerce",
+    "aws"
+  ],
+  "homepage": "https://github.com/pulkitgarg04/gamezoid#readme",
+  "bugs": {
+    "url": "https://github.com/pulkitgarg04/gamezoid/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pulkitgarg04/gamezoid.git"
+  },
+  "license": "MIT",
+  "author": "Pulkit Garg",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
