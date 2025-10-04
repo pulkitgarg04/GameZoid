@@ -1,0 +1,180 @@
+{
+  "games": [
+    {
+      "name": "Apex Legends",
+      "tagline": "Be legendary in the arena",
+      "category": "Battle Royale",
+      "developer": "Respawn Entertainment",
+      "publisher": "Electronic Arts",
+      "releaseDate": "2019-02-04",
+      "price": 72.0,
+      "image": "../assets/community/apex-legends.jpg",
+      "description": "A free-to-play battle royale game where legends battle for glory, fame, and fortune.",
+      "platforms": ["PC", "PS4", "PS5", "Xbox One", "Xbox Series X|S", "Switch"],
+      "rating": 8.7,
+      "features": ["Hero shooter gameplay", "Team-based tactics", "Unique legend abilities", "60-player battle royale"],
+      "requirements": {
+        "minimum": { "CPU": "Intel Core i3-6300", "RAM": "6 GB", "GPU": "NVIDIA GeForce GT 640", "Storage": "56 GB", "OS": "Windows 10" },
+        "recommended": { "CPU": "Intel i5 3570K", "RAM": "8 GB", "GPU": "NVIDIA GeForce GTX 970", "Storage": "56 GB", "OS": "Windows 10" }
+      },
+      "screenshots": ["../assets/community/apex-legends.jpg"]
+    },
+    {
+      "name": "Grand Theft Auto V",
+      "tagline": "Welcome to Los Santos",
+      "category": "Open World",
+      "developer": "Rockstar North",
+      "publisher": "Rockstar Games",
+      "releaseDate": "2013-09-17",
+      "price": 95.0,
+      "image": "../assets/community/gta-v.jpg",
+      "description": "An action-adventure game set in the fictional state of San Andreas.",
+      "platforms": ["PC", "PS4", "PS5", "Xbox One", "Xbox Series X|S"],
+      "rating": 9.2,
+      "features": ["Open-world exploration", "Multiple protagonists", "Online mode", "Heist missions"],
+      "requirements": {
+        "minimum": { "CPU": "Intel Core 2 Quad Q6600", "RAM": "4 GB", "GPU": "NVIDIA 9800 GT", "Storage": "110 GB", "OS": "Windows 10" },
+        "recommended": { "CPU": "Intel Core i5 3470", "RAM": "8 GB", "GPU": "NVIDIA GTX 660", "Storage": "110 GB", "OS": "Windows 10" }
+      },
+      "screenshots": ["../assets/community/gta-v.jpg"]
+    },
+    {
+      "name": "PUBG (BGMI) - India",
+      "tagline": "Winner winner chicken dinner",
+      "category": "Battle Royale",
+      "developer": "Krafton",
+      "publisher": "Krafton",
+      "releaseDate": "2021-07-02",
+      "price": 15.0,
+      "image": "../assets/community/pubg.jpg",
+      "description": "PlayerUnknown's Battlegrounds - Battle royale game for mobile devices.",
+      "platforms": ["Mobile", "PC"],
+      "rating": 7.9,
+      "features": ["Realistic ballistics", "Large maps", "Team play", "100-player battle royale"],
+      "requirements": {
+        "minimum": { "CPU": "Intel Core i5-4430", "RAM": "8 GB", "GPU": "NVIDIA GeForce GTX 960", "Storage": "30 GB", "OS": "Windows 10" },
+        "recommended": { "CPU": "Intel Core i5-6600K", "RAM": "16 GB", "GPU": "NVIDIA GeForce GTX 1060", "Storage": "30 GB", "OS": "Windows 10" }
+      },
+      "screenshots": ["../assets/community/pubg.jpg"]
+    },
+    {
+      "name": "Valorant",
+      "tagline": "Defy the limits",
+      "category": "Tactical Shooter",
+      "developer": "Riot Games",
+      "publisher": "Riot Games",
+      "releaseDate": "2020-06-02",
+      "price": 26.0,
+      "image": "../assets/community/valorant.webp",
+      "description": "A free-to-play first-person tactical hero shooter developed by Riot Games.",
+      "platforms": ["PC"],
+      "rating": 8.5,
+      "features": ["5v5 tactical gameplay", "Agent abilities", "Competitive modes", "Anti-cheat system"],
+      "requirements": {
+        "minimum": { "CPU": "Intel i3-370M", "RAM": "4 GB", "GPU": "Intel HD 3000", "Storage": "10 GB", "OS": "Windows 10" },
+        "recommended": { "CPU": "Intel i3-4150", "RAM": "4 GB", "GPU": "NVIDIA GT 730", "Storage": "10 GB", "OS": "Windows 10" }
+      },
+      "screenshots": ["../assets/community/valorant.webp"]
+    },
+    {
+      "name": "Fortnite",
+      "tagline": "Drop in. Squad up. Outlast all.",
+      "category": "Battle Royale",
+      "developer": "Epic Games",
+      "publisher": "Epic Games",
+      "releaseDate": "2017-07-21",
+      "price": 0.0,
+      "image": "../assets/community/fortnite.jpg",
+      "description": "A free-to-play battle royale game developed and published by Epic Games featuring building mechanics.",
+      "platforms": ["PC", "PS4", "PS5", "Xbox One", "Xbox Series X|S", "Switch", "Mobile"],
+      "rating": 8.3,
+      "features": ["Building mechanics", "Cross-platform play", "Seasonal content", "100-player battle royale"],
+      "requirements": {
+        "minimum": { "CPU": "Intel Core i3-3225", "RAM": "8 GB", "GPU": "Intel HD 4000", "Storage": "26 GB", "OS": "Windows 10" },
+        "recommended": { "CPU": "Intel Core i5-7300U", "RAM": "8 GB", "GPU": "NVIDIA GTX 960", "Storage": "26 GB", "OS": "Windows 10" }
+      },
+      "screenshots": ["../assets/community/fortnite.jpg"]
+    },
+    {
+      "name": "League of Legends",
+      "tagline": "Become a legend",
+      "category": "Strategy",
+      "developer": "Riot Games",
+      "publisher": "Riot Games",
+      "releaseDate": "2009-10-27",
+      "price": 0.0,
+      "image": "../assets/community/league-of-legends.jpg",
+      "description": "A multiplayer online battle arena video game developed and published by Riot Games featuring strategic team-based gameplay.",
+      "platforms": ["PC", "Mac"],
+      "rating": 8.8,
+      "features": ["5v5 MOBA gameplay", "Esports tournaments", "Large champion roster", "Ranked competitive mode"],
+      "requirements": {
+        "minimum": { "CPU": "3 GHz processor", "RAM": "2 GB", "GPU": "DirectX 9.0c compatible", "Storage": "16 GB", "OS": "Windows 7" },
+        "recommended": { "CPU": "3 GHz dual-core processor", "RAM": "4 GB", "GPU": "NVIDIA GeForce 560", "Storage": "16 GB", "OS": "Windows 10" }
+      },
+      "screenshots": ["../assets/community/league-of-legends.jpg"]
+    }
+  ],
+  "products": [
+    {
+      "name": "Virtual Reality Smiled",
+      "category": "VR BOX",
+      "price": 159.0,
+      "image": "../assets/gaming-products/1.jpg",
+      "description": "High-quality VR headset for immersive gaming experiences with crystal clear visuals and comfortable design.",
+      "tagline": "Step into another world",
+      "brand": "GameZoid VR",
+      "model": "VR-S2024",
+      "releaseDate": "2024-03-15",
+      "warranty": "2 Years Limited",
+      "rating": 4.5,
+      "features": ["Adjustable interpupillary distance (IPD)", "Anti-blue light lenses", "Compatible with 4.7-6.0 inch smartphones", "Comfortable padded headstrap", "Universal smartphone compatibility"],
+      "specifications": { "Field of View": "110 degrees", "Lens Type": "Aspheric optical lens", "Material": "ABS + PC", "Weight": "320g", "Phone Compatibility": "4.7\" - 6.0\" smartphones", "Adjustable IPD": "58-70mm", "Focal Distance": "Adjustable" }
+    },
+    {
+      "name": "GameZoid Gaming Headphones",
+      "category": "HEADPHONES",
+      "price": 89.99,
+      "image": "../assets/gaming-products/2.png",
+      "description": "Professional gaming headphones engineered for competitive gaming with superior sound quality.",
+      "tagline": "Hear every detail, dominate every game",
+      "brand": "GameZoid Audio",
+      "model": "GZ-H7Pro",
+      "releaseDate": "2024-01-20",
+      "warranty": "3 Years Limited",
+      "rating": 4.7,
+      "features": ["7.1 Surround Sound", "Active Noise Cancellation", "Memory foam ear cushions", "Detachable microphone", "RGB lighting effects", "Multi-platform compatibility"],
+      "specifications": { "Driver Size": "50mm Dynamic", "Frequency Response": "20Hz - 20kHz", "Impedance": "32Ω", "Sensitivity": "108dB", "Cable Length": "2m braided cable", "Microphone": "Detachable boom mic", "Weight": "280g", "Connectivity": "3.5mm jack + USB" }
+    },
+    {
+      "name": "Gears 5 Xbox Controller",
+      "category": "CONTROLLER",
+      "price": 119.99,
+      "image": "../assets/gaming-products/3.jpg",
+      "description": "Official Xbox Wireless Controller featuring the iconic Gears of War design with enhanced precision.",
+      "tagline": "Gear up for victory",
+      "brand": "Microsoft Xbox",
+      "model": "Gears5-Limited",
+      "releaseDate": "2024-02-10",
+      "warranty": "1 Year Microsoft Limited",
+      "rating": 4.8,
+      "features": ["Textured grips", "Customizable button mapping", "Bluetooth wireless connectivity", "Share button for screenshots", "Hybrid D-pad", "40-hour battery life"],
+      "specifications": { "Connectivity": "Bluetooth 5.0 + 2.4GHz wireless", "Battery": "AA batteries (40+ hours)", "Compatibility": "Xbox Series X|S, Xbox One, PC, Mobile", "Weight": "287g", "Dimensions": "15.6 x 10.7 x 6.1 cm", "D-pad": "Hybrid directional pad", "Triggers": "Impulse triggers with haptic feedback" }
+    },
+    {
+      "name": "GeForce RTX 4070 Super",
+      "category": "GRAPHICS CARD",
+      "price": 629.99,
+      "image": "../assets/gaming-products/4.jpg",
+      "description": "NVIDIA GeForce RTX 4070 Super graphics card delivers exceptional gaming performance.",
+      "tagline": "Beyond fast. Beyond beautiful.",
+      "brand": "NVIDIA GeForce",
+      "model": "RTX 4070 Super",
+      "releaseDate": "2024-01-17",
+      "warranty": "3 Years NVIDIA Limited",
+      "rating": 4.9,
+      "features": ["Ada Lovelace Architecture", "Ray Tracing Cores (3rd Gen)", "DLSS 3 with Frame Generation", "12GB GDDR6X Memory", "AV1 Encoding", "NVIDIA Broadcast"],
+      "specifications": { "GPU Memory": "12GB GDDR6X", "Memory Interface": "192-bit", "Base Clock": "1980 MHz", "Boost Clock": "2475 MHz", "CUDA Cores": "7168", "Memory Bandwidth": "504.2 GB/s", "Power Consumption": "220W", "Display Outputs": "3x DP 1.4a, 1x HDMI 2.1" }
+    }
+  ]
+}
