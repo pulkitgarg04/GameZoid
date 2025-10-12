@@ -786,7 +786,6 @@ function accountRoute() {
   else window.location.href = "./login.html";
 }
 
-// Expose functions used by inline HTML
 window.showTab = showTab;
 window.showAddGameModal = showAddGameModal;
 window.showAddProductModal = showAddProductModal;
