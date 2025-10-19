@@ -8,63 +8,12 @@ function accountRoute() {
   }
 }
 
-class StoreDatabase {
-  constructor() {
-    this.dbName = 'GameZoidDB';
-    this.dbVersion = 1;
-    this.db = null;
-    this.init();
-  }
-
-  async init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.dbVersion);
-
-      request.onerror = () => {
-        console.error('Database failed to open');
-        reject(request.error);
-      };
-
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
-
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-      };
-    });
-  }
-
-  async getAllGames() {
-    if (!this.db) return [];
-    const transaction = this.db.transaction(['games'], 'readonly');
-    const store = transaction.objectStore('games');
-    return new Promise((resolve, reject) => {
-      const request = store.getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async getAllProducts() {
-    if (!this.db) return [];
-    const transaction = this.db.transaction(['products'], 'readonly');
-    const store = transaction.objectStore('products');
-    return new Promise((resolve, reject) => {
-      const request = store.getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-}
-
-let storeDB;
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    storeDB = new StoreDatabase();
-    await storeDB.init();
+    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
+      await window.storageAPI.init();
+    }
+    
     await loadStoreData();
   } catch (error) {
     console.error('Failed to initialize store database:', error);
@@ -74,8 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadStoreData() {
   try {
-    const games = await storeDB.getAllGames();
-    const products = await storeDB.getAllProducts();
+    const games = await window.storageAPI.getAll('games');
+    const products = await window.storageAPI.getAll('products');
     
     displayGames(games);
     

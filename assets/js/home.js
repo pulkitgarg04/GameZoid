@@ -8,57 +8,11 @@ function accountRoute() {
   }
 }
 
-class HomeDatabase {
-  constructor() {
-    this.dbName = 'GameZoidDB';
-    this.dbVersion = 1;
-    this.db = null;
-    this.init();
-  }
-  async init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.dbVersion);
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => { this.db = request.result; resolve(); };
-      request.onupgradeneeded = (event) => { };
-    });
-  }
-  async getAllGames() {
-    if (!this.db) return [];
-    try {
-      const tx = this.db.transaction(['games'], 'readonly');
-      const store = tx.objectStore('games');
-      return new Promise((resolve, reject) => {
-        const req = store.getAll();
-        req.onsuccess = () => resolve(req.result || []);
-        req.onerror = () => resolve([]);
-      });
-    } catch (error) {
-      return [];
-    }
-  }
-
-  async getAllProducts() {
-    if (!this.db) return [];
-    try {
-      const tx = this.db.transaction(['products'], 'readonly');
-      const store = tx.objectStore('products');
-      return new Promise((resolve, reject) => {
-        const req = store.getAll();
-        req.onsuccess = () => resolve(req.result || []);
-        req.onerror = () => resolve([]);
-      });
-    } catch (error) {
-      return [];
-    }
-  }
-}
-
-let homeDB;
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    homeDB = new HomeDatabase();
-    await homeDB.init();
+    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
+      await window.storageAPI.init();
+    }
     await loadHomeData();
   } catch (error) {
     showEmptyStates();
@@ -88,8 +42,8 @@ function showEmptyStates() {
 async function loadHomeData() {
   try {
     const [games, products] = await Promise.all([
-      homeDB.getAllGames(),
-      homeDB.getAllProducts()
+      window.storageAPI.getAll('games'),
+      window.storageAPI.getAll('products')
     ]);
 
     const sections = Array.from(document.querySelectorAll('section.new-section'));

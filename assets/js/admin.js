@@ -1,145 +1,11 @@
-class GameDatabase {
-  constructor() {
-    this.dbName = "GameZoidDB";
-    this.dbVersion = 1;
-    this.db = null;
-  }
-
-  async init() {
-    return new Promise((resolve, reject) => {
-      const req = indexedDB.open(this.dbName, this.dbVersion);
-
-      req.onupgradeneeded = (e) => {
-        const db = e.target.result;
-
-        if (!db.objectStoreNames.contains("games")) {
-          const s = db.createObjectStore("games", {
-            keyPath: "id",
-            autoIncrement: true,
-          });
-          s.createIndex("name", "name", { unique: false });
-          s.createIndex("category", "category", { unique: false });
-        }
-
-        if (!db.objectStoreNames.contains("products")) {
-          const s = db.createObjectStore("products", {
-            keyPath: "id",
-            autoIncrement: true,
-          });
-          s.createIndex("name", "name", { unique: false });
-          s.createIndex("category", "category", { unique: false });
-        }
-      };
-
-      req.onsuccess = async () => {
-        this.db = req.result;
-
-        const missing = [];
-        if (!this.db.objectStoreNames.contains("games")) missing.push("games");
-        if (!this.db.objectStoreNames.contains("products"))
-          missing.push("products");
-
-        if (missing.length > 0) {
-          const newVersion = this.db.version + 1;
-          this.db.close();
-          const upgradeReq = indexedDB.open(this.dbName, newVersion);
-          upgradeReq.onupgradeneeded = (ev) => {
-            const db2 = ev.target.result;
-            if (!db2.objectStoreNames.contains("games")) {
-              const s = db2.createObjectStore("games", {
-                keyPath: "id",
-                autoIncrement: true,
-              });
-              s.createIndex("name", "name", { unique: false });
-              s.createIndex("category", "category", { unique: false });
-            }
-
-            if (!db2.objectStoreNames.contains("products")) {
-              const s = db2.createObjectStore("products", {
-                keyPath: "id",
-                autoIncrement: true,
-              });
-
-              s.createIndex("name", "name", { unique: false });
-              s.createIndex("category", "category", { unique: false });
-            }
-          };
-
-          upgradeReq.onsuccess = () => {
-            this.db = upgradeReq.result;
-            resolve();
-          };
-          upgradeReq.onerror = () => reject(upgradeReq.error);
-        } else {
-          resolve();
-        }
-      };
-
-      req.onerror = () => reject(req.error);
-    });
-  }
-
-  add(storeName, item) {
-    return new Promise((resolve, reject) => {
-      try {
-        const tx = this.db.transaction([storeName], "readwrite");
-        const store = tx.objectStore(storeName);
-        const r = store.add(item);
-        r.onsuccess = () => resolve(r.result);
-        r.onerror = () => reject(r.error);
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-
-  put(storeName, item) {
-    return new Promise((resolve, reject) => {
-      try {
-        const tx = this.db.transaction([storeName], "readwrite");
-        const store = tx.objectStore(storeName);
-        const r = store.put(item);
-        r.onsuccess = () => resolve(r.result);
-        r.onerror = () => reject(r.error);
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-
-  getAll(storeName) {
-    return new Promise((resolve, reject) => {
-      try {
-        const tx = this.db.transaction([storeName], "readonly");
-        const store = tx.objectStore(storeName);
-        const r = store.getAll();
-        r.onsuccess = () => resolve(r.result);
-        r.onerror = () => reject(r.error);
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-
-  delete(storeName, key) {
-    return new Promise((resolve, reject) => {
-      try {
-        const tx = this.db.transaction([storeName], "readwrite");
-        const store = tx.objectStore(storeName);
-        const r = store.delete(key);
-        r.onsuccess = () => resolve();
-        r.onerror = () => reject(r.error);
-      } catch (err) {
-        reject(err);
-      }
-    });
-  }
-}
-
 async function ensureDbInitialized() {
-  if (!window.gameDB) {
-    window.gameDB = new GameDatabase();
-    await window.gameDB.init();
+  if (!window.gameDB || !window.gameDB.getAll) {
+    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
+      await window.storageAPI.init();
+      window.gameDB = window.storageAPI;
+    } else {
+      window.gameDB = window.gameDB || {};
+    }
   }
 }
 
@@ -746,25 +612,10 @@ async function populateDefaultData() {
     "This will add default games and products from data/default-data.json. Continue?",
     async () => {
       try {
-        await ensureDbInitialized();
-        const resp = await fetch("../assets/data/default-data.json");
-        if (!resp.ok) throw new Error("Failed to fetch default-data.json");
-        const data = await resp.json();
-        const games = Array.isArray(data.games) ? data.games : [];
-        const products = Array.isArray(data.products) ? data.products : [];
-        for (const g of games) {
-          try {
-            await window.gameDB.add("games", g);
-          } catch (err) {
-            console.warn("skip game", g.name, err);
-          }
-        }
-        for (const p of products) {
-          try {
-            await window.gameDB.add("products", p);
-          } catch (err) {
-            console.warn("skip product", p.name, err);
-          }
+        if (window.storageAPI && typeof window.storageAPI.populateDefaultData === 'function') {
+          await window.storageAPI.populateDefaultData();
+        } else {
+          throw new Error('Storage API not available');
         }
         showMessage("Default data populated", "success");
         await loadGames();
