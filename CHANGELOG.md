@@ -5,5 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ---
 
+## [1.1.0] - 2025-10-19
+- Changed the db from indexed db to localstorage
+
+---
+
 ## [1.0.0] - 2025-09-26
 - **Initial project release**

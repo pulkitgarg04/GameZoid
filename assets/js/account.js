@@ -8,125 +8,16 @@ function accountRoute() {
   }
 }
 
-class UserDatabase {
-  constructor() {
-    this.dbName = 'GameZoidUserDB';
-    this.dbVersion = 1;
-    this.db = null;
-  }
-
-  async init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.dbVersion);
-
-      request.onerror = () => {
-        console.error('User database failed to open');
-        reject(request.error);
-      };
-
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
-
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-
-        if (!db.objectStoreNames.contains('users')) {
-          const usersStore = db.createObjectStore('users', { keyPath: 'email' });
-          usersStore.createIndex('name', 'name', { unique: false });
-        }
-
-        if (!db.objectStoreNames.contains('wishlist')) {
-          const wishlistStore = db.createObjectStore('wishlist', { keyPath: 'id', autoIncrement: true });
-          wishlistStore.createIndex('userEmail', 'userEmail', { unique: false });
-          wishlistStore.createIndex('gameId', 'gameId', { unique: false });
-        }
-      };
-    });
-  }
-
-  async getUserByEmail(email) {
-    const transaction = this.db.transaction(['users'], 'readonly');
-    const store = transaction.objectStore('users');
-    return new Promise((resolve, reject) => {
-      const request = store.get(email);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async addUser(user) {
-    const transaction = this.db.transaction(['users'], 'readwrite');
-    const store = transaction.objectStore('users');
-    return new Promise((resolve, reject) => {
-      const request = store.add(user);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async getUserWishlist(userEmail) {
-    const transaction = this.db.transaction(['wishlist'], 'readonly');
-    const store = transaction.objectStore('wishlist');
-    const index = store.index('userEmail');
-    return new Promise((resolve, reject) => {
-      const request = index.getAll(userEmail);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async addToWishlist(wishlistItem) {
-    const transaction = this.db.transaction(['wishlist'], 'readwrite');
-    const store = transaction.objectStore('wishlist');
-    return new Promise((resolve, reject) => {
-      const request = store.add(wishlistItem);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async removeFromWishlist(wishlistId) {
-    const transaction = this.db.transaction(['wishlist'], 'readwrite');
-    const store = transaction.objectStore('wishlist');
-    return new Promise((resolve, reject) => {
-      const request = store.delete(wishlistId);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async removeFromWishlistByGameId(userEmail, gameId) {
-    const transaction = this.db.transaction(['wishlist'], 'readwrite');
-    const store = transaction.objectStore('wishlist');
-    const index = store.index('userEmail');
-    return new Promise((resolve, reject) => {
-      const request = index.getAll(userEmail);
-      request.onsuccess = () => {
-        const items = request.result.filter(item => item.gameId === gameId);
-        if (items.length > 0) {
-          const deleteTransaction = this.db.transaction(['wishlist'], 'readwrite');
-          const deleteStore = deleteTransaction.objectStore('wishlist');
-          const deleteRequest = deleteStore.delete(items[0].id);
-          deleteRequest.onsuccess = () => resolve(true);
-          deleteRequest.onerror = () => reject(deleteRequest.error);
-        } else {
-          resolve(false);
-        }
-      };
-      request.onerror = () => reject(request.error);
-    });
-  }
-}
-
 let userDB;
 let currentUser = null;
 
 async function initializeDatabase() {
   try {
-    userDB = new UserDatabase();
-    await userDB.init();
+    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
+      await window.storageAPI.init();
+    }
+    
+    userDB = window.storageAPI;
   } catch (error) {
     console.error('Failed to initialize user database:', error);
   }

@@ -8,104 +8,8 @@ function accountRoute() {
   }
 }
 
-class GamePageDB {
-  constructor() {
-    this.dbName = "GameZoidDB";
-    this.dbVersion = 1;
-    this.db = null;
-    this.init();
-  }
-  async init() {
-    return new Promise((resolve, reject) => {
-      const r = indexedDB.open(this.dbName, this.dbVersion);
-      r.onerror = () => {
-        reject(r.error);
-      };
-      r.onsuccess = () => {
-        this.db = r.result;
-        resolve();
-      };
-      r.onupgradeneeded = (e) => {};
-    });
-  }
-  async getGameById(id) {
-    if (!this.db) return null;
-    const t = this.db.transaction(["games"], "readonly");
-    const s = t.objectStore("games");
-    return new Promise((resolve, reject) => {
-      const req = s.get(Number(id));
-      req.onsuccess = () => resolve(req.result);
-      req.onerror = () => reject(req.error);
-    });
-  }
-}
-
-let gameDB;
 let currentUser = null;
 let userDB = null;
-
-class UserDatabase {
-  constructor() {
-    this.dbName = 'GameZoidUserDB';
-    this.dbVersion = 1;
-    this.db = null;
-  }
-
-  async init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.dbVersion);
-
-      request.onerror = () => {
-        console.error('User database failed to open');
-        reject(request.error);
-      };
-
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
-
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-
-        if (!db.objectStoreNames.contains('users')) {
-          const usersStore = db.createObjectStore('users', { keyPath: 'email' });
-          usersStore.createIndex('name', 'name', { unique: false });
-        }
-
-        if (!db.objectStoreNames.contains('wishlist')) {
-          const wishlistStore = db.createObjectStore('wishlist', { keyPath: 'id', autoIncrement: true });
-          wishlistStore.createIndex('userEmail', 'userEmail', { unique: false });
-          wishlistStore.createIndex('gameId', 'gameId', { unique: false });
-        }
-      };
-    });
-  }
-
-  async addToWishlist(wishlistItem) {
-    const transaction = this.db.transaction(['wishlist'], 'readwrite');
-    const store = transaction.objectStore('wishlist');
-    return new Promise((resolve, reject) => {
-      const request = store.add(wishlistItem);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async checkWishlistItem(userEmail, gameId) {
-    const transaction = this.db.transaction(['wishlist'], 'readonly');
-    const store = transaction.objectStore('wishlist');
-    const index = store.index('userEmail');
-    return new Promise((resolve, reject) => {
-      const request = index.getAll(userEmail);
-      request.onsuccess = () => {
-        const items = request.result.filter(item => item.gameId === gameId);
-        resolve(items.length > 0);
-      };
-      request.onerror = () => reject(request.error);
-    });
-  }
-}
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -116,14 +20,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    gameDB = new GamePageDB();
-    await gameDB.init();
-    
-    userDB = new UserDatabase();
-    await userDB.init();
+    if (window.storageAPI && typeof window.storageAPI.init === 'function') await window.storageAPI.init();
+    userDB = window.storageAPI;
     await loadGame();
   } catch (e) {
-    console.error("Failed to initialize databases or load game:", e);
+    console.error("Failed to initialize storage or load game:", e);
     fallback("Failed to load game - Database connection issue");
   }
 });
@@ -181,7 +82,7 @@ async function loadGame() {
   }
   let data = null;
   try {
-    data = await gameDB.getGameById(id);
+    data = await window.storageAPI.getById('games', id);
   } catch (e) {}
   if (!data) {
     const cache = JSON.parse(

@@ -8,63 +8,9 @@ function accountRoute() {
   }
 }
 
-class CartDatabase {
-  constructor() {
-    this.dbName = 'GameZoidDB';
-    this.dbVersion = 1;
-    this.db = null;
-    this.init();
-  }
-
-  async init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.dbVersion);
-
-      request.onerror = () => {
-        console.error('Database failed to open');
-        reject(request.error);
-      };
-
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
-
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-      };
-    });
-  }
-
-  async getGameById(id) {
-    if (!this.db) return null;
-    const transaction = this.db.transaction(['games'], 'readonly');
-    const store = transaction.objectStore('games');
-    return new Promise((resolve, reject) => {
-      const request = store.get(id);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-
-  async getProductById(id) {
-    if (!this.db) return null;
-    const transaction = this.db.transaction(['products'], 'readonly');
-    const store = transaction.objectStore('products');
-    return new Promise((resolve, reject) => {
-      const request = store.get(id);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
-}
-
-let cartDB;
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    cartDB = new CartDatabase();
-    await cartDB.init();
+    if (window.storageAPI && typeof window.storageAPI.init === 'function') await window.storageAPI.init();
     await loadCart();
   } catch (error) {
     console.error('Failed to initialize cart database:', error);
@@ -85,9 +31,9 @@ async function loadCart() {
     for (const cartItem of cart) {
       let item = null;
       if (cartItem.type === 'game') {
-        item = await cartDB.getGameById(cartItem.id);
+        item = await window.storageAPI.getById('games', cartItem.id);
       } else if (cartItem.type === 'product') {
-        item = await cartDB.getProductById(cartItem.id);
+        item = await window.storageAPI.getById('products', cartItem.id);
       }
       
       if (item) {
