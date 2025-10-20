@@ -185,11 +185,12 @@ function renderProduct(p) {
         }
 
         const wishlistItem = {
+          id: Date.now() + Math.floor(Math.random() * 1000),
           userEmail: currentUser.email,
           productId: p.id,
           productName: p.name,
           productPrice: p.price,
-          addedAt: new Date().toISOString(),
+          addedAt: new Date().toISOString()
         };
 
         wishlist.push(wishlistItem);

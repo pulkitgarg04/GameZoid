@@ -12,8 +12,8 @@ let currentUser = null;
 
 function getStore(name) {
   try {
-    const raw = localStorage.getItem(name);
-    return raw ? JSON.parse(raw) : [];
+    const item = localStorage.getItem(name);
+    return item ? JSON.parse(item) : [];
   } catch (e) {
     console.log(`Error parsing ${name} from localStorage`, e);
     return [];
@@ -176,6 +176,7 @@ function renderGame(g) {
         }
 
         const wishlistItem = {
+          id: Date.now() + Math.floor(Math.random() * 1000),
           userEmail: currentUser.email,
           gameId: g.id,
           gameName: g.name,

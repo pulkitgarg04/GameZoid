@@ -82,50 +82,6 @@ function showEmptyCart() {
   }
 }
 
-function displayCartItems(items) {
-  const cartItemsContainer = document.getElementById('cart-items');
-  const emptyCart = document.getElementById('empty-cart');
-  const cartSummary = document.getElementById('cart-summary');
-
-  if (!cartItemsContainer || !emptyCart || !cartSummary) {
-    return;
-  }
-
-  if (!items || items.length === 0) {
-    return showEmptyCart();
-  }
-
-  cartItemsContainer.style.display = 'block';
-  emptyCart.style.display = 'none';
-  cartSummary.style.display = 'block';
-
-  cartItemsContainer.innerHTML = items.map(item => `
-    <div class="cart-item" data-cart-id="${item.cartId}" data-type="${item.type}">
-      <img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='../assets/media/favicon.png'">
-      <div class="item-details">
-        <h3 class="item-name">${item.name}</h3>
-        <div class="item-category">${item.category}</div>
-        <div class="item-price">$${item.price}</div>
-      </div>
-      <div class="item-controls">
-        <div class="quantity-controls">
-          <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', '${item.type}', ${item.quantity - 1})">
-            <i class="fas fa-minus"></i>
-          </button>
-          <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99" 
-                 onchange="updateQuantity('${item.cartId}', '${item.type}', parseInt(this.value))">
-          <button class="quantity-btn" onclick="updateQuantity('${item.cartId}', '${item.type}', ${item.quantity + 1})">
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-        <button class="remove-btn" onclick="removeFromCart('${item.cartId}', '${item.type}')">
-          <i class="fas fa-trash"></i> Remove
-        </button>
-      </div>
-    </div>
-  `).join('');
-}
-
 function removeFromCart(cartId, type) {
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const item = cart.find(i => String(i.id) === String(cartId) && i.type === type);
@@ -190,7 +146,7 @@ function showCartMessage(message, type) {
   const messageDiv = document.createElement('div');
   messageDiv.className = `cart-message ${type}`;
   messageDiv.innerHTML = `
-    <i class="fas fa-${type === 'success' ? 'check-cartItemrcle' : type === 'error' ? 'exclamation-cartItemrcle' : 'info-cartItemrcle'}"></i>
+    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
     ${message}
   `;
 
@@ -217,7 +173,7 @@ const cartMessageStyles = `
     gap: 10px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacartItemng: 1px;
+    letter-spacing: 1px;
     z-index: 1000;
     animation: slideInRight 0.3s ease;
   }
@@ -239,11 +195,11 @@ const cartMessageStyles = `
 
   @keyframes slideInRight {
     from {
-      opacartItemty: 0;
+      opacity: 0;
       transform: translateX(100%);
     }
     to {
-      opacartItemty: 1;
+      opacity: 1;
       transform: translateX(0);
     }
   }
@@ -326,3 +282,4 @@ styleSheet.textContent = cartMessageStyles + `
   }
 `;
 document.head.appendChild(styleSheet);
+document.addEventListener('DOMContentLoaded', () => loadCart());

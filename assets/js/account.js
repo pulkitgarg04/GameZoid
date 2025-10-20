@@ -57,54 +57,73 @@ function getUserInfo() {
 }
 
 function loadWishlist() {
-  if (!currentUser) {
-    return;
-  }
+  if (!currentUser) return;
 
   try {
     const all = getWishlist();
     const wishlist = all.filter(
-      (i) =>
-        String(i.userEmail).toLowerCase() ===
-        String(currentUser.email).toLowerCase()
+      (i) => String(i.userEmail).toLowerCase() === String(currentUser.email).toLowerCase()
     );
 
     const wishlistEmpty = document.getElementById("wishlist-empty");
     const wishlistItems = document.getElementById("wishlist-items");
+    if (!wishlistItems) return;
 
-    if (wishlist.length === 0) {
-      wishlistEmpty.style.display = "block";
-      wishlistItems.innerHTML = "";
-    } else {
-      wishlistEmpty.style.display = "none";
-      wishlistItems.innerHTML = wishlist
-        .map(
-          (item) => `
-        <div class="wishlist-item" data-id="${item.id}">
-          <div class="wishlist-item-info">
-            <h3>${item.gameName}</h3>
-            <p class="price">$${Number(item.gamePrice || 0).toFixed(2)}</p>
-            <p class="added-date">Added: ${new Date(
-              item.addedAt
-            ).toLocaleDateString()}</p>
-          </div>
-          <div class="wishlist-item-actions">
-            <button class="move-to-cart-btn" onclick="moveToCart(${
-              item.gameId
-            }, '${escapeHtml(item.gameName)}', ${item.gamePrice}, ${item.id})">
-              <i class="fas fa-shopping-cart"></i> Move to Cart
-            </button>
-            <button class="remove-from-wishlist-btn" onclick="removeFromWishlist(${
-              item.id
-            }, '${escapeHtml(item.gameName)}')">
-              <i class="fas fa-trash"></i> Remove
-            </button>
-          </div>
-        </div>
-      `
-        )
-        .join("");
+    wishlistItems.innerHTML = "";
+
+    if (!wishlist || wishlist.length === 0) {
+      if (wishlistEmpty) wishlistEmpty.style.display = "block";
+      return;
     }
+
+    if (wishlistEmpty) wishlistEmpty.style.display = "none";
+
+    wishlist.forEach((item) => {
+      const name = item.gameName || item.productName || item.name || 'Item';
+      const price = Number((item.gamePrice ?? item.productPrice ?? item.price) || 0).toFixed(2);
+      const productId = item.gameId || item.productId || item.id;
+      const wishlistId = item.id;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'wishlist-item';
+      if (wishlistId !== undefined) wrapper.setAttribute('data-id', String(wishlistId));
+
+      const info = document.createElement('div');
+      info.className = 'wishlist-item-info';
+      const h3 = document.createElement('h3');
+      h3.textContent = name;
+      const pPrice = document.createElement('p');
+      pPrice.className = 'price';
+      pPrice.textContent = `$${price}`;
+      const pDate = document.createElement('p');
+      pDate.className = 'added-date';
+      pDate.textContent = `Added: ${item.addedAt ? new Date(item.addedAt).toLocaleDateString() : ''}`;
+
+      info.appendChild(h3);
+      info.appendChild(pPrice);
+      info.appendChild(pDate);
+
+      const actions = document.createElement('div');
+      actions.className = 'wishlist-item-actions';
+
+      const moveBtn = document.createElement('button');
+      moveBtn.className = 'move-to-cart-btn';
+      moveBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Move to Cart';
+      moveBtn.addEventListener('click', () => moveToCart(productId, name, Number((item.gamePrice ?? item.productPrice ?? item.price) || 0), wishlistId));
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-from-wishlist-btn';
+      removeBtn.innerHTML = '<i class="fas fa-trash"></i> Remove';
+      removeBtn.addEventListener('click', () => removeFromWishlist(wishlistId, name));
+
+      actions.appendChild(moveBtn);
+      actions.appendChild(removeBtn);
+
+      wrapper.appendChild(info);
+      wrapper.appendChild(actions);
+
+      wishlistItems.appendChild(wrapper);
+    });
   } catch (error) {
     console.error("Error loading wishlist:", error);
     const wishlistEmpty = document.getElementById("wishlist-empty");
@@ -113,6 +132,7 @@ function loadWishlist() {
     if (wishlistItems) wishlistItems.innerHTML = "";
   }
 }
+
 
 function moveToCart(gameId, gameName, gamePrice, wishlistId) {
   if (!currentUser) {
@@ -139,7 +159,7 @@ function moveToCart(gameId, gameName, gamePrice, wishlistId) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   try {
-    removeFromWishlist(wishlistId);
+    removeFromWishlist(wishlistId, gameName);
     
     alert(`${gameName} has been moved to your cart!`);
     
