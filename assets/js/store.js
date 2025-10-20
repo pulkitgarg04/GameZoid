@@ -1,5 +1,5 @@
 function accountRoute() {
-  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  const currentUser = sessionStorage.getItem('currentUser');
   
   if (currentUser) {
     window.location.href = './account.html';
@@ -8,33 +8,30 @@ function accountRoute() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+function getStore(name) {
   try {
-    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
-      await window.storageAPI.init();
-    }
-    
-    await loadStoreData();
-  } catch (error) {
-    console.error('Failed to initialize store database:', error);
-    showFallbackContent();
+    const raw = localStorage.getItem(name);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.error(`Error parsing ${name} from localStorage`, e);
+    return [];
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadStoreData();
 });
 
-async function loadStoreData() {
-  try {
-    const games = await window.storageAPI.getAll('games');
-    const products = await window.storageAPI.getAll('products');
-    
-    displayGames(games);
-    
-    if (products.length > 0) {
-      displayProducts(products);
-    }
-  } catch (error) {
-    console.error('Error loading store data:', error);
-    showFallbackContent();
+function loadStoreData() {
+  const games = getStore('games');
+  const products = getStore('products');
+
+  if ((!games || games.length === 0) && (!products || products.length === 0)) {
+    return showFallbackContent();
   }
+
+  displayGames(games || []);
+  if (products && products.length > 0) displayProducts(products);
 }
 
 function displayGames(games) {
@@ -117,9 +114,10 @@ function addToCart(itemId, type) {
     window.location.href = './login.html';
     return;
   }
+  
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   
-  const existingItem = cart.find(item => item.id === itemId && item.type === type);
+  const existingItem = cart.find(item => String(item.id) === String(itemId) && item.type === type);
   
   if (existingItem) {
     showCartMessage('This item is already in your cart!', 'error');

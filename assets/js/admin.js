@@ -1,17 +1,29 @@
-async function ensureDbInitialized() {
-  if (!window.gameDB || !window.gameDB.getAll) {
-    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
-      await window.storageAPI.init();
-      window.gameDB = window.storageAPI;
-    } else {
-      window.gameDB = window.gameDB || {};
-    }
+function getStore(name) {
+  try {
+    const item = localStorage.getItem(name);
+    return item ? JSON.parse(item) : [];
+  } catch (e) {
+    console.log(`Error reading ${name} from localStorage`, e);
+    return [];
   }
+}
+
+function saveStore(name, arr) {
+  try {
+    localStorage.setItem(name, JSON.stringify(arr || []));
+  } catch (e) {
+    console.log(`Error saving ${name} to localStorage`, e);
+  }
+}
+
+function generateId() {
+  return Date.now() + Math.floor(Math.random() * 1000);
 }
 
 function showMessage(message, type = "info") {
   const existing = document.querySelectorAll(".message");
   existing.forEach((e) => e.remove());
+  
   const d = document.createElement("div");
   d.className = "message " + type + " fade-in";
   d.innerHTML = `<i class="fas fa-${
@@ -21,23 +33,34 @@ function showMessage(message, type = "info") {
       ? "exclamation-circle"
       : "info-circle"
   }"></i> ${message}`;
+
   const container = document.querySelector(".admin-container") || document.body;
   container.insertBefore(d, container.firstChild);
+  
   setTimeout(() => d.remove(), 4500);
 }
 
 function openModal(id) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = "block";
+  const element = document.getElementById(id);
+ 
+  if (element) {
+    element.style.display = "block";
+  }
 }
 
 function closeModal(id) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = "none";
+  const element = document.getElementById(id);
+ 
+  if (element) {
+    element.style.display = "none";
+  }
 }
 
 function checkScrollIndicator(element) {
-  if (!element) return;
+  if (!element) {
+    return;
+  }
+
   const hasScroll = element.scrollHeight > element.clientHeight;
   element.classList.toggle("has-scroll", hasScroll);
   element.addEventListener("scroll", () => {
@@ -52,15 +75,20 @@ function parseKeyValueText(text) {
     .split("\n")
     .map((l) => l.trim())
     .filter(Boolean);
+
   const out = {};
+
   lines.forEach((line) => {
     const idx = line.indexOf(":");
     if (idx > -1) {
       const k = line.slice(0, idx).trim();
       const v = line.slice(idx + 1).trim();
-      if (k) out[k] = v;
+      if (k) {
+        out[k] = v;
+      }
     }
   });
+
   return out;
 }
 
@@ -77,17 +105,27 @@ function showTab(tabName) {
   document
     .querySelectorAll(".tab-btn")
     .forEach((b) => b.classList.remove("active"));
+
   const tab = document.getElementById(tabName + "-tab");
-  if (tab) tab.classList.add("active");
+  if (tab) {
+    tab.classList.add("active");
+  }
+
   const btn = Array.from(document.querySelectorAll(".tab-btn")).find((b) =>
     b.getAttribute("onclick")?.includes(`showTab('${tabName}')`)
   );
-  if (btn) btn.classList.add("active");
+
+  if (btn) {
+    btn.classList.add("active");
+  }
 }
 
 function showAddGameModal() {
-  const f = document.getElementById("addGameForm");
-  if (f) f.reset();
+  const form = document.getElementById("addGameForm");
+  if (form) {
+    form.reset();
+  }
+
   openModal("addGameModal");
   setTimeout(
     () =>
@@ -99,16 +137,16 @@ function showAddGameModal() {
 }
 
 function showAddProductModal() {
-  const f = document.getElementById("addProductForm");
-  if (f) f.reset();
+  const form = document.getElementById("addProductForm");
+  if (form) {
+    form.reset();
+  }
+
   openModal("addProductModal");
-  setTimeout(
-    () =>
+  setTimeout(() =>
       checkScrollIndicator(
         document.querySelector("#addProductModal .modal-form-content")
-      ),
-    100
-  );
+      ), 100);
 }
 
 function showGameFields(isGame) {
@@ -124,6 +162,7 @@ function showGameFields(isGame) {
     "editReqRec",
     "editScreenshots",
   ];
+
   ids.forEach((id) => {
     const el = document.getElementById(id);
     const group = el ? el.closest(".form-group") : null;
@@ -138,6 +177,7 @@ function displayGames(games) {
     grid.innerHTML = `<div class="empty-state"><i class="fas fa-gamepad"></i><h3>No games found</h3><p>Add your first game to get started!</p></div>`;
     return;
   }
+
   grid.innerHTML = games
     .map(
       (g) => `
@@ -178,6 +218,7 @@ function displayProducts(products) {
     grid.innerHTML = `<div class="empty-state"><i class="fas fa-box"></i><h3>No products found</h3><p>Add your first gaming product to get started!</p></div>`;
     return;
   }
+
   grid.innerHTML = products
     .map(
       (p) => `
@@ -225,30 +266,29 @@ function escapeHtml(s) {
   );
 }
 
-async function loadGames() {
+function loadGames() {
   try {
-    await ensureDbInitialized();
-    const games = await window.gameDB.getAll("games");
+    const games = getStore('games');
     displayGames(games || []);
   } catch (e) {
-    console.error("loadGames error", e);
+    console.log("loadGames error", e);
     showMessage("Error loading games", "error");
   }
 }
 
-async function loadProducts() {
+function loadProducts() {
   try {
-    await ensureDbInitialized();
-    const products = await window.gameDB.getAll("products");
+    const products = getStore('products');
     displayProducts(products || []);
   } catch (e) {
-    console.error("loadProducts error", e);
+    console.log("loadProducts error", e);
     showMessage("Error loading products", "error");
   }
 }
 
-async function onAddGame(e) {
+function onAddGame(e) {
   e.preventDefault();
+
   const game = {
     name: document.getElementById("gameName").value.trim(),
     tagline: document.getElementById("gameTagline").value.trim(),
@@ -281,21 +321,26 @@ async function onAddGame(e) {
       .map((s) => s.trim())
       .filter(Boolean),
   };
+
   try {
-    await ensureDbInitialized();
-    await window.gameDB.add("games", game);
-    showMessage("Game added", "success");
-    closeModal("addGameModal");
-    await loadGames();
-    await refreshStats();
+    const games = getStore('games');
+    game.id = generateId();
+    games.push(game);
+    
+    saveStore('games', games);
+    showMessage('Game added', 'success');
+    closeModal('addGameModal');
+    loadGames();
+    refreshStats();
   } catch (e) {
-    console.error("add game", e);
-    showMessage("Error adding game", "error");
+    console.log('add game', e);
+    showMessage('Error adding game', 'error');
   }
 }
 
-async function onAddProduct(e) {
+function onAddProduct(e) {
   e.preventDefault();
+  
   const p = {
     name: document.getElementById("productName").value.trim(),
     category: document.getElementById("productCategory").value,
@@ -306,76 +351,69 @@ async function onAddProduct(e) {
       ? document.getElementById("productTagline").value.trim()
       : "",
   };
+
   try {
-    await ensureDbInitialized();
-    await window.gameDB.add("products", p);
-    showMessage("Product added", "success");
-    closeModal("addProductModal");
-    await loadProducts();
-    await refreshStats();
+    const products = getStore('products');
+    p.id = generateId();
+    products.push(p);
+    saveStore('products', products);
+    showMessage('Product added', 'success');
+    closeModal('addProductModal');
+    loadProducts();
+    refreshStats();
   } catch (e) {
-    console.error("add product", e);
-    showMessage("Error adding product", "error");
+    console.log('add product', e);
+    showMessage('Error adding product', 'error');
   }
 }
 
-async function editGame(id) {
+function editGame(id) {
   try {
-    await ensureDbInitialized();
-    const games = await window.gameDB.getAll("games");
-    const g = games.find((x) => x.id === id);
-    if (!g) return showMessage("Game not found", "error");
+    const games = getStore('games');
+    const game = games.find((x) => x.id === id);
+    if (!game) {
+      return showMessage("Game not found", "error");
+    }
+
     document.getElementById("editModalTitle").textContent = "Edit Game";
     document.getElementById("editId").value = id;
     document.getElementById("editType").value = "game";
-    document.getElementById("editName").value = g.name || "";
-    document.getElementById("editTagline").value = g.tagline || "";
-    document.getElementById("editCategory").value = g.category || "";
-    document.getElementById("editPrice").value = g.price || 0;
-    document.getElementById("editImage").value = g.image || "";
-    document.getElementById("editDescription").value = g.description || "";
-    document.getElementById("editDeveloper").value = g.developer || "";
-    document.getElementById("editPublisher").value = g.publisher || "";
-    document.getElementById("editReleaseDate").value = g.releaseDate || "";
-    document.getElementById("editPlatforms").value = Array.isArray(g.platforms)
-      ? g.platforms.join(", ")
-      : g.platforms || "";
-    document.getElementById("editRating").value = g.rating || "";
-    document.getElementById("editFeatures").value = Array.isArray(g.features)
-      ? g.features.join("\n")
-      : "";
-    document.getElementById("editReqMin").value = stringifyKeyValue(
-      g.requirements?.minimum || {}
-    );
-    document.getElementById("editReqRec").value = stringifyKeyValue(
-      g.requirements?.recommended || {}
-    );
-    document.getElementById("editScreenshots").value = Array.isArray(
-      g.screenshots
-    )
-      ? g.screenshots.join("\n")
-      : "";
+    document.getElementById("editName").value = game.name || "";
+    document.getElementById("editTagline").value = game.tagline || "";
+    document.getElementById("editCategory").value = game.category || "";
+    document.getElementById("editPrice").value = game.price || 0;
+    document.getElementById("editImage").value = game.image || "";
+    document.getElementById("editDescription").value = game.description || "";
+    document.getElementById("editDeveloper").value = game.developer || "";
+    document.getElementById("editPublisher").value = game.publisher || "";
+    document.getElementById("editReleaseDate").value = game.releaseDate || "";
+    document.getElementById("editPlatforms").value = Array.isArray(game.platforms) ? game.platforms.join(", ") : game.platforms || "";
+    document.getElementById("editRating").value = game.rating || "";
+    document.getElementById("editFeatures").value = Array.isArray(game.features) ? game.features.join("\n") : "";
+    document.getElementById("editReqMin").value = stringifyKeyValue(game.requirements?.minimum || {});
+    document.getElementById("editReqRec").value = stringifyKeyValue(game.requirements?.recommended || {});
+    document.getElementById("editScreenshots").value = Array.isArray(game.screenshots) ? game.screenshots.join("\n"): "";
+    
     showGameFields(true);
     openModal("editModal");
-    setTimeout(
-      () =>
-        checkScrollIndicator(
+    setTimeout(() => checkScrollIndicator(
           document.querySelector("#editModal .modal-form-content")
-        ),
-      100
-    );
+        ), 100);
   } catch (e) {
-    console.error("editGame", e);
+    console.log("editGame", e);
     showMessage("Error loading game for edit", "error");
   }
 }
 
-async function editProduct(id) {
+function editProduct(id) {
   try {
-    await ensureDbInitialized();
-    const ps = await window.gameDB.getAll("products");
-    const p = ps.find((x) => x.id === id);
-    if (!p) return showMessage("Product not found", "error");
+    const products = getStore('products');
+    const product = products.find((x) => x.id === id);
+
+    if (!product) {
+      return showMessage("Product not found", "error");
+    }
+
     document.getElementById("editModalTitle").textContent = "Edit Product";
     document.getElementById("editId").value = id;
     document.getElementById("editType").value = "product";
@@ -384,23 +422,19 @@ async function editProduct(id) {
     document.getElementById("editPrice").value = p.price || 0;
     document.getElementById("editImage").value = p.image || "";
     document.getElementById("editDescription").value = p.description || "";
+    
     showGameFields(false);
     openModal("editModal");
-    setTimeout(
-      () =>
-        checkScrollIndicator(
-          document.querySelector("#editModal .modal-form-content")
-        ),
-      100
-    );
+    setTimeout(() => checkScrollIndicator(document.querySelector("#editModal .modal-form-content")), 100);
   } catch (e) {
-    console.error("editProduct", e);
+    console.log("editProduct", e);
     showMessage("Error loading product for edit", "error");
   }
 }
 
-async function onEditSubmit(e) {
+function onEditSubmit(e) {
   e.preventDefault();
+  
   const id = parseInt(document.getElementById("editId").value, 10);
   const type = document.getElementById("editType").value;
   const item = {
@@ -428,7 +462,8 @@ async function onEditSubmit(e) {
       .split("\n")
       .map((s) => s.trim())
       .filter(Boolean);
-    item.requirements = {
+    
+      item.requirements = {
       minimum: parseKeyValueText(
         document.getElementById("editReqMin").value || ""
       ),
@@ -436,6 +471,7 @@ async function onEditSubmit(e) {
         document.getElementById("editReqRec").value || ""
       ),
     };
+
     item.screenshots = (document.getElementById("editScreenshots").value || "")
       .split("\n")
       .map((s) => s.trim())
@@ -443,24 +479,49 @@ async function onEditSubmit(e) {
   }
 
   try {
-    await ensureDbInitialized();
-    if (type === "game") await window.gameDB.put("games", item);
-    else await window.gameDB.put("products", item);
-    showMessage("Updated successfully", "success");
-    closeModal("editModal");
-    await loadGames();
-    await loadProducts();
-    await refreshStats();
+    if (type === 'game') {
+      const games = getStore('games');
+      
+      const idx = games.findIndex((x) => Number(x.id) === Number(id));
+      if (idx === -1) {
+        games.push(item);
+      } else {
+        games[idx] = item;
+      }
+
+      saveStore('games', games);
+    } else {
+      const products = getStore('products');
+      const idx = products.findIndex((x) => Number(x.id) === Number(id));
+
+      if (idx === -1) {
+        products.push(item);
+      } else {
+        products[idx] = item;
+      }
+
+      saveStore('products', products);
+    }
+
+    showMessage('Updated successfully', 'success');
+    closeModal('editModal');
+    loadGames();
+    loadProducts();
+    refreshStats();
   } catch (e) {
-    console.error("edit submit", e);
+    console.log("edit submit", e);
     showMessage("Error updating item", "error");
   }
 }
 
 function showConfirmModal(title, message, onConfirm) {
   const msg = document.getElementById("confirmMessage");
-  if (msg) msg.textContent = message;
+  if (msg) {
+    msg.textContent = message;
+  }
+  
   openModal("confirmModal");
+  
   const confirmButton = document.getElementById("confirmButton");
   const newBtn = confirmButton.cloneNode(true);
   confirmButton.parentNode.replaceChild(newBtn, confirmButton);
@@ -470,159 +531,177 @@ function showConfirmModal(title, message, onConfirm) {
   });
 }
 
-async function deleteGame(id) {
+function deleteGame(id) {
   showConfirmModal(
     "Delete Game",
     "Are you sure you want to delete this game? This action cannot be undone.",
-    async () => {
+      () => {
       try {
-        await ensureDbInitialized();
-        await window.gameDB.delete("games", id);
-        showMessage("Game deleted", "success");
-        await loadGames();
-        await refreshStats();
+        const games = getStore('games');
+        const filtered = games.filter((x) => Number(x.id) !== Number(id));
+        saveStore('games', filtered);
+        showMessage('Game deleted', 'success');
+        loadGames();
+        refreshStats();
       } catch (e) {
-        console.error("deleteGame", e);
-        showMessage("Error deleting game", "error");
+        console.log('deleteGame', e);
+        showMessage('Error deleting game', 'error');
       }
     }
   );
 }
 
-async function deleteProduct(id) {
+function deleteProduct(id) {
   showConfirmModal(
     "Delete Product",
     "Are you sure you want to delete this product? This action cannot be undone.",
-    async () => {
+      () => {
       try {
-        await ensureDbInitialized();
-        await window.gameDB.delete("products", id);
-        showMessage("Product deleted", "success");
-        await loadProducts();
-        await refreshStats();
+        const products = getStore('products');
+        const filtered = products.filter((x) => Number(x.id) !== Number(id));
+        saveStore('products', filtered);
+        showMessage('Product deleted', 'success');
+        loadProducts();
+        refreshStats();
       } catch (e) {
-        console.error("deleteProduct", e);
-        showMessage("Error deleting product", "error");
+        console.log('deleteProduct', e);
+        showMessage('Error deleting product', 'error');
       }
     }
   );
 }
 
 function searchGames() {
-  const term = (
-    document.getElementById("gameSearch").value || ""
-  ).toLowerCase();
+  const term = (document.getElementById("gameSearch").value || "").toLowerCase();
+  
   document.querySelectorAll("#gamesGrid .item-card").forEach((card) => {
-    const name = (
-      card.querySelector(".item-name")?.textContent || ""
-    ).toLowerCase();
-    const category = (
-      card.querySelector(".item-category")?.textContent || ""
-    ).toLowerCase();
-    card.style.display =
-      name.includes(term) || category.includes(term) ? "block" : "none";
+    const name = (card.querySelector(".item-name")?.textContent || "").toLowerCase();
+    const category = (card.querySelector(".item-category")?.textContent || "").toLowerCase();
+    card.style.display = name.includes(term) || category.includes(term) ? "block" : "none";
   });
 }
 
 function searchProducts() {
-  const term = (
-    document.getElementById("productSearch").value || ""
-  ).toLowerCase();
+  const term = (document.getElementById("productSearch").value || "").toLowerCase();
+ 
   document.querySelectorAll("#productsGrid .item-card").forEach((card) => {
-    const name = (
-      card.querySelector(".item-name")?.textContent || ""
-    ).toLowerCase();
-    const category = (
-      card.querySelector(".item-category")?.textContent || ""
-    ).toLowerCase();
-    card.style.display =
-      name.includes(term) || category.includes(term) ? "block" : "none";
+    const name = (card.querySelector(".item-name")?.textContent || "").toLowerCase();
+    const category = (card.querySelector(".item-category")?.textContent || "").toLowerCase();
+    card.style.display = name.includes(term) || category.includes(term) ? "block" : "none";
   });
 }
 
-async function refreshStats() {
+function refreshStats() {
   try {
-    await ensureDbInitialized();
-    const games = await window.gameDB.getAll("games");
-    const products = await window.gameDB.getAll("products");
+    const games = getStore('games');
+    const products = getStore('products');
     const gamesCount = games.length;
     const productsCount = products.length;
+   
     document.getElementById("gamesCount").textContent = gamesCount;
     document.getElementById("productsCount").textContent = productsCount;
-    document.getElementById("dbSize").textContent =
-      Math.round(
-        new Blob([JSON.stringify([...games, ...products])]).size / 1024
-      ) + " KB";
+    document.getElementById("dbSize").textContent = Math.round(new Blob([JSON.stringify([...games, ...products])]).size / 1024) + " KB";
   } catch (e) {
-    console.error("refreshStats", e);
+    console.log("refreshStats", e);
   }
 }
 
-async function exportData() {
+function exportData() {
   try {
-    await ensureDbInitialized();
-    const games = await window.gameDB.getAll("games");
-    const products = await window.gameDB.getAll("products");
+    const games = getStore('games');
+    const products = getStore('products');
     const data = {
       games,
       products,
       exportDate: new Date().toISOString(),
       version: "1.0",
     };
+
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
+
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = `gamezoid-data-${new Date().toISOString().split("T")[0]}.json`;
     a.click();
+
     showMessage("Data exported", "success");
   } catch (e) {
-    console.error("export", e);
+    console.log("export", e);
     showMessage("Error exporting data", "error");
   }
 }
 
-async function clearDatabase() {
+function clearDatabase() {
   showConfirmModal(
     "Clear Database",
     "Are you sure you want to clear all data? This will delete games and products.",
-    async () => {
+    () => {
       try {
-        await ensureDbInitialized();
-        const games = await window.gameDB.getAll("games");
-        for (const g of games) await window.gameDB.delete("games", g.id);
-        const products = await window.gameDB.getAll("products");
-        for (const p of products) await window.gameDB.delete("products", p.id);
-        showMessage("Database cleared", "success");
-        await loadGames();
-        await loadProducts();
-        await refreshStats();
+        saveStore('games', []);
+        saveStore('products', []);
+        showMessage('Database cleared', 'success');
+        
+        loadGames();
+        loadProducts();
+        refreshStats();
       } catch (e) {
-        console.error("clearDatabase", e);
-        showMessage("Error clearing database", "error");
+        console.log('clearDatabase', e);
+        showMessage('Error clearing database', 'error');
       }
     }
   );
 }
 
-async function populateDefaultData() {
+function populateDefaultData() {
   showConfirmModal(
     "Populate Default Data",
     "This will add default games and products from data/default-data.json. Continue?",
-    async () => {
+    () => {
       try {
-        if (window.storageAPI && typeof window.storageAPI.populateDefaultData === 'function') {
-          await window.storageAPI.populateDefaultData();
-        } else {
-          throw new Error('Storage API not available');
+        let data = null;
+        try {
+          const resp = fetch('/assets/data/default-data.json');
+          if (resp && resp.ok) {
+            data = resp.json();
+          }
+
+        } catch (err) {
+          console.log("fetch default data", err);
         }
+
+        if (!data) {
+          throw new Error('Default data not found');
+        }
+
+        const games = Array.isArray(data.games) ? data.games : [];
+        const products = Array.isArray(data.products) ? data.products : [];
+
+        const existingGames = getStore('games');
+        const existingProducts = getStore('products');
+
+        for (const g of games) {
+          const copy = Object.assign({}, g);
+          copy.id = generateId();
+          existingGames.push(copy);
+        }
+
+        for (const p of products) {
+          const copy = Object.assign({}, p);
+          copy.id = generateId();
+          existingProducts.push(copy);
+        }
+
+        saveStore('games', existingGames);
+        saveStore('products', existingProducts);
         showMessage("Default data populated", "success");
-        await loadGames();
-        await loadProducts();
-        await refreshStats();
+        
+        loadGames();
+        loadProducts();
+        refreshStats();
       } catch (e) {
-        console.error("populateDefaultData", e);
+        console.log("populateDefaultData", e);
         showMessage("Error populating default data", "error");
       }
     }
@@ -630,37 +709,21 @@ async function populateDefaultData() {
 }
 
 function accountRoute() {
-  const currentUser =
-    sessionStorage.getItem("currentUser") ||
-    localStorage.getItem("currentUser");
-  if (currentUser) window.location.href = "./account.html";
-  else window.location.href = "./login.html";
+  const currentUser = sessionStorage.getItem('currentUser');
+  if (currentUser) window.location.href = './account.html';
+  else window.location.href = './login.html';
 }
 
-window.showTab = showTab;
-window.showAddGameModal = showAddGameModal;
-window.showAddProductModal = showAddProductModal;
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.editGame = editGame;
-window.editProduct = editProduct;
-window.deleteGame = deleteGame;
-window.deleteProduct = deleteProduct;
-window.searchGames = searchGames;
-window.searchProducts = searchProducts;
-window.populateDefaultData = populateDefaultData;
-window.exportData = exportData;
-window.clearDatabase = clearDatabase;
-window.refreshStats = refreshStats;
-window.accountRoute = accountRoute;
-
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   const addGameForm = document.getElementById("addGameForm");
-  if (addGameForm) addGameForm.addEventListener("submit", onAddGame);
+  if (addGameForm) {
+    addGameForm.addEventListener("submit", onAddGame);
+  }
+
   const addProductForm = document.getElementById("addProductForm");
-  if (addProductForm) addProductForm.addEventListener("submit", onAddProduct);
-  const editForm = document.getElementById("editForm");
-  if (editForm) editForm.addEventListener("submit", onEditSubmit);
+  if (addProductForm) {
+    addProductForm.addEventListener("submit", onAddProduct);
+  }
 
   window.addEventListener("click", (ev) => {
     document.querySelectorAll(".modal").forEach((m) => {
@@ -676,11 +739,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   try {
-    await ensureDbInitialized();
-    await loadGames();
-    await loadProducts();
-    await refreshStats();
+    loadGames();
+    loadProducts();
+    refreshStats();
   } catch (e) {
-    console.error("Admin init error", e);
+    console.log("Admin intialization error", e);
   }
 });

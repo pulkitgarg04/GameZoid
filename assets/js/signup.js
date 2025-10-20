@@ -1,26 +1,57 @@
 function accountRoute() {
-  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
-  
+  const currentUser = sessionStorage.getItem('currentUser');
   if (currentUser) {
     window.location.href = './account.html';
-  } else {
-    window.location.href = './login.html';
+    return;
+  }
+
+  window.location.href = './login.html';
+}
+
+function getUsers() {
+  try {
+    const users = localStorage.getItem('users');
+    return users ? JSON.parse(users) : [];
+  } catch (e) {
+    console.log('Error parsing users from localStorage:', e);
+    return [];
   }
 }
 
-let userDB;
-
-document.addEventListener('DOMContentLoaded', async () => {
+function saveUsers(users) {
   try {
-    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
-      await window.storageAPI.init();
-    }
-    
-    userDB = window.storageAPI;
-  } catch (error) {
-    console.error('Failed to initialize user database:', error);
+    localStorage.setItem('users', JSON.stringify(users));
+  } catch (e) {
+    console.log('Error saving users to localStorage:', e);
   }
-});
+}
+
+function findUserByEmail(email) {
+  if (!email) {
+    return null;
+  }
+
+  const users = getUsers();
+  return users.find(u => String(u.email).toLowerCase() === String(email).toLowerCase()) || null;
+}
+
+function addUser(user) {
+  if (!user || !user.email) {
+    return null;
+  }
+
+  const users = getUsers();
+  user.email = String(user.email).toLowerCase();
+  users.push(user);
+
+  saveUsers(users);
+  
+  return user;
+}
+
+if (!localStorage.getItem('users')) {
+  saveUsers([]);
+}
 
 document.querySelectorAll('.password-toggle-icon').forEach(icon => {
   icon.addEventListener('click', function () {
@@ -37,53 +68,49 @@ document.querySelectorAll('.password-toggle-icon').forEach(icon => {
 
 async function signupUser(event) {
   event.preventDefault();
-  
+
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim().toLowerCase();
   const password = document.getElementById('password').value;
   const confirmPassword = document.getElementById('confirm-password').value;
-  
+
   if (!name || !email || !password || !confirmPassword) {
     alert('Please fill in all fields');
     return;
   }
-  
+
   if (password !== confirmPassword) {
     alert('Passwords do not match');
     return;
   }
-  
+
   if (password.length < 6) {
     alert('Password must be at least 6 characters long');
     return;
   }
-  
+
   try {
-    const existingUser = await userDB.getUserByEmail(email);
-    
+    const existingUser = findUserByEmail(email);
     if (existingUser) {
       alert('Email already registered. Please use a different email or try logging in.');
       return;
     }
-    
-    const newUser = { 
-      name, 
-      email, 
-      password, 
+
+    const newUser = {
+      name,
+      email,
+      password,
       isAdmin: false,
       createdAt: new Date().toISOString()
     };
+
+    addUser(newUser);
     
-    await userDB.addUser(newUser);
     alert('Account created successfully! Please log in.');
+
     window.location.href = './login.html';
-    
   } catch (error) {
     console.error('Signup error:', error);
-    if (error.name === 'ConstraintError') {
-      alert('Email already registered. Please use a different email.');
-    } else {
-      alert('An error occurred during registration. Please try again.');
-    }
+    alert('An error occurred during registration. Please try again.');
   }
 }

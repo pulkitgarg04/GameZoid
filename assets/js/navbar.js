@@ -1,5 +1,5 @@
 function accountRoute() {
-    const currentUser = localStorage.getItem('currentUser');
+    const currentUser = sessionStorage.getItem('currentUser');
     
     if (currentUser) {
         window.location.href = './account.html';

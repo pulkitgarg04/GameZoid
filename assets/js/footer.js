@@ -1,10 +1,7 @@
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
 function accountRoute() {
-  const currentUser =
-    sessionStorage.getItem("currentUser") ||
-    localStorage.getItem("currentUser");
-
+  const currentUser = sessionStorage.getItem("currentUser");
   if (currentUser) {
     window.location.href = "./account.html";
   } else {

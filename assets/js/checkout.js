@@ -1,5 +1,5 @@
 function accountRoute() {
-  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  const currentUser = sessionStorage.getItem('currentUser');
   
   if (currentUser) {
     window.location.href = './account.html';
@@ -8,47 +8,68 @@ function accountRoute() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+function getStore(name) {
   try {
-    if (window.storageAPI && typeof window.storageAPI.init === 'function') await window.storageAPI.init();
-    await loadCheckoutItems();
+    const item = localStorage.getItem(name);
+    return item ? JSON.parse(item) : [];
+  } catch (e) {
+    console.error(`Error parsing ${name} from localStorage`, e);
+    return [];
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    loadCheckoutItems();
     setupFormValidation();
   } catch (error) {
-    console.error('Failed to initialize checkout database:', error);
+    console.error('Failed to load checkout items:', error);
     showCheckoutMessage('Failed to load checkout items', 'error');
   }
 });
 
-async function loadCheckoutItems() {
+function loadCheckoutItems() {
   try {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    if (cart.length === 0) {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    if (!Array.isArray(cart) || cart.length === 0) {
       showCheckoutMessage('Your cart is empty', 'error');
-      setTimeout(() => {
-        window.location.href = './cart.html';
-      }, 2000);
+      setTimeout(() => { window.location.href = './cart.html'; }, 2000);
       return;
     }
 
-    const checkoutItems = [];
-    for (const cartItem of cart) {
+    const games = getStore('games');
+    const products = getStore('products');
+
+    const checkoutItems = cart.map(cartItem => {
       let item = null;
       if (cartItem.type === 'game') {
-        item = await window.storageAPI.getById('games', cartItem.id);
+        item = (games || []).find(g => String(g.id) === String(cartItem.id));
       } else if (cartItem.type === 'product') {
-        item = await window.storageAPI.getById('products', cartItem.id);
+        item = (products || []).find(p => String(p.id) === String(cartItem.id));
       }
-      
+
       if (item) {
-        checkoutItems.push({
+        return {
           ...item,
           cartId: cartItem.id,
           type: cartItem.type,
           addedAt: cartItem.addedAt
-        });
+        };
       }
-    }
+
+      return {
+        id: cartItem.id,
+        cartId: cartItem.id,
+        type: cartItem.type,
+        name: cartItem.name || cartItem.productName || cartItem.gameName || 'Item',
+        image: cartItem.image || '../assets/media/favicon.png',
+        category: cartItem.category || '',
+        price: Number(cartItem.price || 0),
+        quantity: Number(cartItem.quantity || 1),
+        addedAt: cartItem.addedAt
+      };
+    });
 
     displayCheckoutItems(checkoutItems);
     updateCheckoutSummary(checkoutItems);

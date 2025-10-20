@@ -1,5 +1,5 @@
 function accountRoute() {
-  const currentUser = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  const currentUser = sessionStorage.getItem('currentUser');
   
   if (currentUser) {
     window.location.href = './pages/account.html';
@@ -8,13 +8,20 @@ function accountRoute() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+function getStore(name) {
   try {
-    if (window.storageAPI && typeof window.storageAPI.init === 'function') {
-      await window.storageAPI.init();
-    }
-    await loadHomeData();
-  } catch (error) {
+    const item = localStorage.getItem(name);
+    return item ? JSON.parse(item) : [];
+  } catch (e) {
+    console.error(`Error parsing ${name} from localStorage`, e);
+    return [];
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    loadHomeData();
+  } catch (e) {
     showEmptyStates();
   }
 });
@@ -39,31 +46,31 @@ function showEmptyStates() {
   }
 }
 
-async function loadHomeData() {
-  try {
-    const [games, products] = await Promise.all([
-      window.storageAPI.getAll('games'),
-      window.storageAPI.getAll('products')
-    ]);
+function loadHomeData() {
+  const games = getStore('games');
+  const products = getStore('products');
 
-    const sections = Array.from(document.querySelectorAll('section.new-section'));
-    const gamesSection = sections.find(sec => sec.querySelector('h2')?.textContent?.toLowerCase().includes('new games'));
-    const productsSection = sections.find(sec => sec.querySelector('h2')?.textContent?.toLowerCase().includes('gaming product'));
+  const sections = Array.from(document.querySelectorAll('section.new-section'));
+  const gamesSection = sections.find(sec => sec.querySelector('h2')?.textContent?.toLowerCase().includes('new games'));
+  const productsSection = sections.find(sec => sec.querySelector('h2')?.textContent?.toLowerCase().includes('gaming product'));
 
-    if (gamesSection) renderGamesToSection(gamesSection, games);
-    if (productsSection) renderProductsToSection(productsSection, products);
-  } catch (error) {
-    showEmptyStates();
+  if ((!Array.isArray(games) || games.length === 0) && (!Array.isArray(products) || products.length === 0)) {
+    return showEmptyStates();
   }
+
+  if (gamesSection) renderGamesToSection(gamesSection, games || []);
+  if (productsSection) renderProductsToSection(productsSection, products || []);
 }
 
 function renderGamesToSection(section, games) {
   const container = section.querySelector('.product-container');
   if (!container) return;
+  
   if (!Array.isArray(games) || games.length === 0) {
     container.innerHTML = `<div class="product-empty">No games available - Visit the admin panel to add games</div>`;
     return;
   }
+
   container.innerHTML = games.slice(0, 8).map(game => `
     <div class="product" onclick="window.location.href='./pages/game.html?id=${game.id}'">
       <img src="${game.image}" onerror="this.src='./assets/media/favicon.png'">
@@ -84,10 +91,12 @@ function renderGamesToSection(section, games) {
 function renderProductsToSection(section, products) {
   const container = section.querySelector('.product-container');
   if (!container) return;
+  
   if (!Array.isArray(products) || products.length === 0) {
     container.innerHTML = `<div class="product-empty">No products available - Visit the admin panel to add products</div>`;
     return;
   }
+  
   container.innerHTML = products.slice(0, 8).map(p => `
     <div class="product" onclick="window.location.href='./pages/product.html?id=${p.id}'">
       <img src="${p.image}" onerror="this.src='./assets/media/favicon.png'">
@@ -106,7 +115,7 @@ function renderProductsToSection(section, products) {
 }
 
 function homeAddToCart(id, type) {
-  const currentUserStr = sessionStorage.getItem('currentUser') || localStorage.getItem('currentUser');
+  const currentUserStr = sessionStorage.getItem('currentUser');
   const currentUser = JSON.parse(currentUserStr || 'null');
   
   if (!currentUser) {
@@ -117,7 +126,7 @@ function homeAddToCart(id, type) {
   
   let cart = JSON.parse(localStorage.getItem('cart') || '[]');
   
-  if (cart.find(i => i.id === id && i.type === type)) {
+  if (cart.find(i => String(i.id) === String(id) && i.type === type)) {
     alert('This item is already in your cart!');
     return;
   }
@@ -132,5 +141,3 @@ function homeAddToCart(id, type) {
   localStorage.setItem('cart', JSON.stringify(cart));
   alert('Item added to cart!');
 }
-
-
