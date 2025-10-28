@@ -18,6 +18,43 @@ function getUsers() {
   }
 }
 
+const PASSWORD_KEY = 12;
+function simpleEncrypt(str, key = PASSWORD_KEY) {
+  try {
+    let out = '';
+    for (let i = 0; i < str.length; i++) {
+      out += String.fromCharCode(str.charCodeAt(i) ^ key);
+    }
+    return btoa(out);
+  } catch (e) {
+    console.error('Encryption error', e);
+    return str;
+  }
+}
+
+function simpleDecrypt(enc, key = PASSWORD_KEY) {
+  try {
+    const decoded = atob(enc);
+    let out = '';
+    for (let i = 0; i < decoded.length; i++) {
+      out += String.fromCharCode(decoded.charCodeAt(i) ^ key);
+    }
+    return out;
+  } catch (e) {
+    console.log('Decryption error', e);
+    return enc;
+  }
+}
+
+function verifyPassword(stored, plain) {
+  if (!stored) return false;
+  try {
+    const dec = simpleDecrypt(stored);
+    if (dec === plain) return true;
+  } catch (e) {}
+  return stored === plain;
+}
+
 function saveUsers(users) {
   try {
     localStorage.setItem('users', JSON.stringify(users));
@@ -42,6 +79,14 @@ function addUser(user) {
 
   const users = getUsers();
   user.email = String(user.email).toLowerCase();
+
+  if (user.password && typeof user.password === 'string') {
+    try {
+      user.password = simpleEncrypt(user.password);
+    } catch (e) {
+      console.error('Failed to encrypt password for new user', e);
+    }
+  }
   users.push(user);
 
   saveUsers(users);

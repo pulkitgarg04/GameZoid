@@ -654,57 +654,52 @@ function clearDatabase() {
   );
 }
 
+async function populateData() {
+  let data = null;
+
+  try {
+    const resp = await fetch('https://gamezoid.pulkitgarg.me/assets/data/default-data.json');
+    if (resp.ok) {
+      const json = await resp.json();
+      data = json;
+    }
+  } catch (err) {
+    console.log('fetch default data', err);
+  }
+
+  if (!data || typeof data !== 'object') {
+    throw new Error('Default data not found');
+  }
+
+  const games = Array.isArray(data.games) ? data.games : [];
+  const products = Array.isArray(data.products) ? data.products : [];
+
+  const existingGames = getStore('games');
+  const existingProducts = getStore('products');
+
+  for (const g of games) {
+    existingGames.push({ ...g, id: generateId() });
+  }
+
+  for (const p of products) {
+    existingProducts.push({ ...p, id: generateId() });
+  }
+
+  saveStore('games', existingGames);
+  saveStore('products', existingProducts);
+  showMessage('Default data populated', 'success');
+
+  loadGames();
+  loadProducts();
+  refreshStats();
+}
+
+
 function populateDefaultData() {
   showConfirmModal(
     "Populate Default Data",
     "This will add default games and products from data/default-data.json. Continue?",
-    () => {
-      try {
-        let data = null;
-        try {
-          const resp = fetch('/assets/data/default-data.json');
-          if (resp && resp.ok) {
-            data = resp.json();
-          }
-
-        } catch (err) {
-          console.log("fetch default data", err);
-        }
-
-        if (!data) {
-          throw new Error('Default data not found');
-        }
-
-        const games = Array.isArray(data.games) ? data.games : [];
-        const products = Array.isArray(data.products) ? data.products : [];
-
-        const existingGames = getStore('games');
-        const existingProducts = getStore('products');
-
-        for (const g of games) {
-          const copy = Object.assign({}, g);
-          copy.id = generateId();
-          existingGames.push(copy);
-        }
-
-        for (const p of products) {
-          const copy = Object.assign({}, p);
-          copy.id = generateId();
-          existingProducts.push(copy);
-        }
-
-        saveStore('games', existingGames);
-        saveStore('products', existingProducts);
-        showMessage("Default data populated", "success");
-        
-        loadGames();
-        loadProducts();
-        refreshStats();
-      } catch (e) {
-        console.log("populateDefaultData", e);
-        showMessage("Error populating default data", "error");
-      }
-    }
+    populateData
   );
 }
 

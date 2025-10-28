@@ -18,6 +18,47 @@ function getUsers() {
   }
 }
 
+const PASSWORD_KEY = 12;
+function simpleEncrypt(str, key = PASSWORD_KEY) {
+  try {
+    let out = '';
+    for (let i = 0; i < str.length; i++) {
+      out += String.fromCharCode(str.charCodeAt(i) ^ key);
+    }
+
+    // reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/btoa
+    return btoa(out);
+  } catch (e) {
+    console.error('Encryption error', e);
+    return str;
+  }
+}
+
+function simpleDecrypt(enc, key = PASSWORD_KEY) {
+  try {
+    const decoded = atob(enc);
+    let out = '';
+    for (let i = 0; i < decoded.length; i++) {
+      out += String.fromCharCode(decoded.charCodeAt(i) ^ key);
+    }
+    return out;
+  } catch (e) {
+    return enc;
+  }
+}
+
+function verifyPassword(stored, plain) {
+  if (!stored) return false;
+  try {
+    const dec = simpleDecrypt(stored);
+    if (dec === plain) return true;
+  } catch (e) {
+    console.log('Error during password verification:', e);
+  }
+
+  return stored === plain;
+}
+
 function saveUsers(users) {
   try {
     localStorage.setItem('users', JSON.stringify(users));
@@ -42,6 +83,14 @@ function addUser(user) {
 
   const users = getUsers();
   user.email = String(user.email).toLowerCase();
+  if (user.password && typeof user.password === 'string') {
+    try {
+      user.password = simpleEncrypt(user.password);
+    } catch (e) {
+      console.error('Failed to encrypt password for new user', e);
+    }
+  }
+  
   users.push(user);
 
   saveUsers(users);
@@ -99,7 +148,7 @@ async function loginUser(event) {
       return;
     }
 
-    if (user.password !== password) {
+    if (!verifyPassword(user.password, password)) {
       alert('Incorrect password');
       return;
     }
