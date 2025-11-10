@@ -1,9 +1,6 @@
 # GameZoid
-
-![Built with](https://img.shields.io/badge/Made_with-HTML-red) ![LICENSE](https://img.shields.io/badge/LICENSE-MIT-green)
-
 <p align="center">
-<img src="https://socialify.git.ci/pulkitgarg04/gamezoid/image?font=Source+Code+Pro&forks=1&language=1&name=1&owner=1&stargazers=1&theme=Dark" alt="gamezoid" width="640" height="320" />
+  <img src="https://socialify.git.ci/pulkitgarg04/gamezoid/image?font=Raleway&forks=1&issues=1&language=1&name=1&owner=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark" alt="gamezoid" />
 </p>
 <p align="center">
   <a href="https://hits.sh/github.com/pulkitgarg04/gamezoid/">
@@ -11,50 +8,64 @@
   </a>
 </p>
 
-GameZoid is a user-friendly e-commerce platform designed for gaming enthusiasts, offering a seamless shopping experience for games, accessories, and more. Built with HTML, CSS, and JavaScript, it provides an engaging and responsive interface for gamers to explore and purchase their favorite products.
+### Introduction
+**GameZoid** is a comprehensive gaming e-commerce platform designed to provide gamers with an all-in-one experience for discovering, purchasing, and managing games and gaming products.
 
-### Project Structure
-```
-GameZoid
-├── assets            # Images, icons, and other media files
-├── pages             # All pages
-├── index.html        # Home page
-└── README.md         # Project documentation
-```
-
-### Installation
+### Setup and Installation
+#### Installation
 1. Clone the repository:
-  ```bash
-  git clone https://github.com/pulkitgarg04/gamezoid.git
-  ```
+```bash
+git clone https://github.com/pulkitgarg04/GameZoid.git
+cd GameZoid
+```
 
-2. Open the project folder:
-  ```bash
-  cd gamezoid
-  ```
+2. Run a local server:
+```bash
+npm install
 
-3. Run the application:
-Open `index.html` in your browser.
+npm run start
+```
+
+3. Open your browser and navigate to:
+```
+http://localhost:8080
+```
+
+### Tech Stack
+#### Frontend
+- **HTML5**: Semantic markup for structure and accessibility
+- **CSS3**: Advanced styling with Flexbox, Grid, and modern CSS features
+- **JavaScript (ES6+)**: Interactive functionality and dynamic content management
+- **Font Awesome**: Icon library for consistent iconography
+- **Google Fonts**: Typography enhancement with Spartan font family
+
+#### Backend Storage
+- **IndexedDB**: Client-side database for storing games and products data
+- **Local Storage**: User session management and preferences
+- **Session Storage**: Temporary data storage for user sessions
 
 ### Contributing
-We appreciate your interest in contributing to **GameZoid**!
+We welcome contributions to GameZoid! Whether you're fixing bugs, adding features, or improving documentation, your help is appreciated.
 
-Your contributions help us improve and grow. Please feel free to submit pull requests, report issues, or suggest new features. Your feedback and participation are highly valued as we continue to develop and enhance the platform.
+#### How to Contribute
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
-- Fork the repository.
-    - Create a new branch:
-        ```bash
-        git checkout -b feature-name  
-        ```
-- Commit your changes:
-        ```bash
-        git commit -m "Add feature-name"  
-        ```
-- Push to the branch:
-        ```bash
-        git push origin feature-name  
-        ```
-- Open a Pull Request.
+#### Development Guidelines
+- Follow existing code style and conventions
+- Test your changes across different browsers
+- Update documentation as needed
+- Ensure responsive design compatibility
 
-## License
-This project is licensed under the MIT License (LICENSE). See the [LICENSE](LICENSE) file for details.
+### Changelog
+Refer to [CHANGELOG.md](CHANGELOG.md) for version history and updates.
+
+### Security
+For security-related issues, please refer to our [SECURITY.md](SECURITY.md) file for reporting guidelines.
+
+### License
+GameZoid is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -26,7 +26,7 @@
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
         <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
-        <li><a href="./login.html"><i class="fa-regular fa-circle-user"></i></a></li>
+        <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
         <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
       </ul>
     </nav>
@@ -49,7 +49,7 @@
   
   <Section id="tournament-container">
     <div class="tournament-boxes">
-      <!-- BOX1 -->
+      
       <div class="box">
         <div class="upper-part">
           <h2><i class="fa-solid fa-trophy"></i>25000</h2>
@@ -71,7 +71,7 @@
           </ul>
         </div>
       </div>
-      <!-- BOX2 -->
+      
       <div class="box">
         <div class="upper-part">
           <h2><i class="fa-solid fa-trophy"></i>55000</h2>
@@ -93,7 +93,7 @@
           </ul>
         </div>
       </div>
-      <!-- BOX3 -->
+      
       <div class="box">
         <div class="upper-part">
           <h2><i class="fa-solid fa-trophy"></i>75000</h2>
@@ -205,8 +205,7 @@
   <footer class="section-p1">
     <div class="col logo-col">
       <img src="../assets/media/logo.webp" class="logo">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
-        qui id.</p>
+      <p>GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.</p>
       <div class="follow">
         <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
         <div class="icon">
@@ -241,7 +240,7 @@
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
       <div class="row">
-        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/app.jpg" alt="" style="margin-right: 10px;">
         <img src="../assets/media/pay/play.jpg" alt="">
       </div>
       <p>Secured Payment Gateways</p>
@@ -249,9 +248,11 @@
     </div>
 
     <div class="copyright">
-      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+      <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
+  
+  <script src="../assets/js/footer.js"></script>
 </body>
 
 </html>

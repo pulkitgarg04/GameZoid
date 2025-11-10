@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart - GameZoid</title>
+  <title>Game Details - GameZoid</title>
   <link rel="icon" type="image/x-icon" href="../assets/media/favicon.png">
   <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/cart.css">
-  <link rel="stylesheet" href="../assets/css/newletter.css">
   <link rel="stylesheet" href="../assets/css/footer.css">
+  <link rel="stylesheet" href="../assets/css/game.css">
+  <link rel="stylesheet" href="../assets/css/newletter.css">
   <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
   <header class="sticky">
     <div id="logo"><img src="../assets/media/logo.webp" alt="logo" id="logo"></div>
@@ -33,60 +31,71 @@
     <div id="mobile">
       <span class="material-symbols-outlined">local_mall</span>
       <span id="hamburger" class="material-symbols-outlined">menu</span>
-  </div>
+    </div>
   </header>
 
-  <section id="cart-hero">
-    <h2>SHOPPING <span style="color: var(--color)">CART</span></h2>
-    <p>
-      <a href="/">HOME</a>
-      <i class="fa-solid fa-angles-right" style="font-weight: 600"></i> CART
-    </p>
+  <section id="game-hero">
+    <div class="hero-content">
+      <h1 id="game-title">Loading...</h1>
+      <p id="game-tagline"></p>
+      <div class="hero-actions">
+        <button id="buy-now" class="btn-primary"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+        <button id="wishlist" class="btn-secondary"><i class="fas fa-heart"></i> Add to Wishlist</button>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img id="game-cover" src="" alt="Game Cover" onerror="this.src='../assets/media/favicon.png'">
+    </div>
   </section>
 
-  <section id="cart-content" class="section-p1">
-    <div class="cart-container">
-      <div class="cart-header">
-        <h1>Your Cart</h1>
-        <div class="cart-actions">
-          <button class="btn-secondary" onclick="clearCart()">
-            <i class="fas fa-trash"></i> Clear Cart
-          </button>
-          <button class="btn-primary" onclick="continueShopping()">
-            <i class="fas fa-arrow-left"></i> Continue Shopping
-          </button>
-        </div>
-      </div>
+  <section id="game-content" class="section-p1">
+    <div class="layout">
+      <main class="main">
+        <section class="about">
+          <h2 class="section-title">About the game</h2>
+          <p id="game-description"></p>
+        </section>
 
-      <div id="cart-items" class="cart-items">
+        <section class="features">
+          <h2 class="section-title">Key Points</h2>
+          <ul id="game-features" class="features-list"></ul>
+        </section>
+
+        <section class="system">
+          <h2 class="section-title">System Requirements</h2>
+          <div class="requirements">
+            <div>
+              <h3 class="section-title-2">Minimum</h3>
+              <ul id="req-min" class="requirements-list"></ul>
+            </div>
+            <div>
+              <h3 class="section-title-2">Recommended</h3>
+              <ul id="req-rec" class="requirements-list"></ul>
+            </div>
+          </div>
+        </section>
+
         
-      </div>
-
-      <div id="empty-cart" class="empty-cart" style="display: none;">
-        <i class="fas fa-shopping-cart"></i>
-        <h3>Your cart is empty</h3>
-        <p>Add some games or products to get started!</p>
-        <button class="btn-primary" onclick="continueShopping()">
-          Browse Store <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-
-      <div id="cart-summary" class="cart-summary">
-        <div class="summary-card">
-          <h3>Order Summary</h3>
-          <div class="summary-row">
-            <span>Subtotal:</span>
-            <span id="subtotal">$0.00</span>
-          </div>
-          <div class="summary-row total">
-            <span>Total:</span>
-            <span id="total">$0.00</span>
-          </div>
-          <button class="checkout-btn" onclick="proceedToCheckout()">
-            <i class="fas fa-credit-card"></i> Proceed to Checkout
-          </button>
+      </main>
+      <aside class="sidebar">
+        <div class="meta">
+          <h3 class="section-title-2">Game Info</h3>
+          <ul class="meta-list">
+            <li><span>Developer</span><span id="developer">-</span></li>
+            <li><span>Publisher</span><span id="publisher">-</span></li>
+            <li><span>Release Date</span><span id="releaseDate">-</span></li>
+            <li><span>Genre</span><span id="genre">-</span></li>
+            <li><span>Platforms</span><span id="platforms">-</span></li>
+            <li><span>Rating</span><span id="rating">-</span></li>
+          </ul>
         </div>
-      </div>
+        <div class="price-card">
+          <div class="price-row">
+            <span>Price</span>
+            <span id="price">$0.00</span>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
@@ -116,7 +125,6 @@
         </div>
       </div>
     </div>
-
     <div class="col">
       <h4>About</h4>
       <a href="#">About Us</a>
@@ -125,7 +133,6 @@
       <a href="#">Terms & Conditions</a>
       <a href="#">Contact Us</a>
     </div>
-
     <div class="col">
       <h4>My Account</h4>
       <a href="#">Sign In</a>
@@ -134,7 +141,6 @@
       <a href="#">Track My Order</a>
       <a href="#">Help</a>
     </div>
-
     <div class="col install">
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
@@ -145,17 +151,16 @@
       <p>Secured Payment Gateways</p>
       <img src="../assets/media/pay/pay.png" alt="">
     </div>
-
     <div class="copyright">
       <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
 
   <script src="../assets/js/storage.js"></script>
-  <script src="../assets/js/cart.js"></script>
+  <script src="../assets/js/game.js"></script>
   <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
-
 </html>
+

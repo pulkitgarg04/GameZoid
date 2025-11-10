@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - GameZoid</title>
+  <link rel="icon" type="image/x-icon" href="../assets/media/favicon.png">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/header.css">
+  <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+  <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <main>
+    <header class="sticky">
+      <div id="logo"><img src="../assets/media/logo.webp" alt="logo" id="logo"></div>
+      <nav>
+        <ul id="navbar">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./store.html">Store</a></li>
+          <li><a href="./tournament.html">Tournaments</a></li>
+          <li><a href="./news.html">News</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="./admin.html" class="active">Admin Panel</a></li>
+          <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+          <li><i onclick="accountRoute()" class="fa-regular fa-circle-user"></i></li>
+          <a href="#"><span id="close-btn"><i class="fa fa-times"></i></span></a>
+        </ul>
+      </nav>
+      <div id="mobile">
+        <span><i class="fa fa-bars"></i></span>
+      </div>
+    </header>
+
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1><i class="fas fa-cogs"></i> Admin Panel</h1>
+        <p>Manage your games and products database</p>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="tab-btn active" onclick="showTab('games')">
+          <i class="fas fa-gamepad"></i> Games
+        </button>
+        <button class="tab-btn" onclick="showTab('products')">
+          <i class="fas fa-box"></i> Gaming Products
+        </button>
+        <button class="tab-btn" onclick="showTab('database')">
+          <i class="fas fa-database"></i> Database Info
+        </button>
+      </div>
+
+      <div id="games-tab" class="tab-content active">
+        <div class="section-header">
+          <h2>Games Management</h2>
+          <button class="btn-primary" onclick="showAddGameModal()">
+            <i class="fas fa-plus"></i> Add New Game
+          </button>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" id="gameSearch" placeholder="Search games..." onkeyup="searchGames()">
+          <i class="fas fa-search"></i>
+        </div>
+
+        <div class="games-grid" id="gamesGrid">
+        </div>
+      </div>
+
+      <div id="products-tab" class="tab-content">
+        <div class="section-header">
+          <h2>Gaming Products Management</h2>
+          <button class="btn-primary" onclick="showAddProductModal()">
+            <i class="fas fa-plus"></i> Add New Product
+          </button>
+        </div>
+
+        <div class="search-bar">
+          <input type="text" id="productSearch" placeholder="Search products..." onkeyup="searchProducts()">
+          <i class="fas fa-search"></i>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+        </div>
+      </div>
+
+      <div id="database-tab" class="tab-content">
+        <div class="section-header">
+          <h2>Database Information</h2>
+          <button class="btn-secondary" onclick="exportData()">
+            <i class="fas fa-download"></i> Export Data
+          </button>
+          <button class="btn-danger" onclick="clearDatabase()">
+            <i class="fas fa-trash"></i> Clear Database
+          </button>
+        </div>
+
+        <div class="database-stats">
+          <div class="stat-card">
+            <i class="fas fa-gamepad"></i>
+            <h3 id="gamesCount">0</h3>
+            <p>Total Games</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-box"></i>
+            <h3 id="productsCount">0</h3>
+            <p>Total Products</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-database"></i>
+            <h3 id="dbSize">0 KB</h3>
+            <p>Database Size</p>
+          </div>
+        </div>
+
+        <div class="database-actions">
+          <button class="btn-primary" onclick="populateDefaultData()">
+            <i class="fas fa-upload"></i> Populate Default Data
+          </button>
+          <button class="btn-secondary" onclick="refreshStats()">
+            <i class="fas fa-sync"></i> Refresh Stats
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="addGameModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Game</h3>
+          <span class="close" onclick="closeModal('addGameModal')">&times;</span>
+        </div>
+        <form id="addGameForm">
+          <div class="modal-form-content">
+            <div class="form-group">
+              <label for="gameName">Game Name</label>
+              <input type="text" id="gameName" required>
+            </div>
+            <div class="form-group">
+              <label for="gameTagline">Tagline</label>
+              <input type="text" id="gameTagline">
+            </div>
+            <div class="form-group">
+              <label for="gameCategory">Category</label>
+              <select id="gameCategory" required>
+                <option value="">Select Category</option>
+                <option value="Battle Royale">Battle Royale</option>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="RPG">RPG</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Sports">Sports</option>
+                <option value="Racing">Racing</option>
+                <option value="Fighting">Fighting</option>
+                <option value="Puzzle">Puzzle</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Horror">Horror</option>
+                <option value="Platformer">Platformer</option>
+                <option value="Tactical Shooter">Tactical Shooter</option>
+                <option value="Open World">Open World</option>
+                <option value="Base-Building">Base-Building</option>
+                <option value="Hack and Slash">Hack and Slash</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="gameDeveloper">Developer</label>
+              <input type="text" id="gameDeveloper">
+            </div>
+            <div class="form-group">
+              <label for="gamePublisher">Publisher</label>
+              <input type="text" id="gamePublisher">
+            </div>
+            <div class="form-group">
+              <label for="gameReleaseDate">Release Date</label>
+              <input type="date" id="gameReleaseDate">
+            </div>
+            <div class="form-group">
+              <label for="gamePrice">Price ($)</label>
+              <input type="number" id="gamePrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="gameImage">Image URL</label>
+              <input type="url" id="gameImage" required>
+            </div>
+            <div class="form-group">
+              <label for="gameDescription">Description</label>
+              <textarea id="gameDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gamePlatforms">Platforms (comma separated)</label>
+              <input type="text" id="gamePlatforms" placeholder="PC, PS5, Xbox">
+            </div>
+            <div class="form-group">
+              <label for="gameRating">Rating (0-10)</label>
+              <input type="number" id="gameRating" step="0.1" min="0" max="10">
+            </div>
+            <div class="form-group">
+              <label for="gameFeatures">Features (one per line)</label>
+              <textarea id="gameFeatures" rows="4" placeholder="Feature ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gameReqMin">Requirements Minimum (Key: Value per line)</label>
+              <textarea id="gameReqMin" rows="4" placeholder="CPU: ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gameReqRec">Requirements Recommended (Key: Value per line)</label>
+              <textarea id="gameReqRec" rows="4" placeholder="CPU: ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="gameScreenshots">Screenshot URLs (one per line)</label>
+              <textarea id="gameScreenshots" rows="4" placeholder="https://example.com/screenshot1.jpg"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal('addGameModal')">Cancel</button>
+            <button type="submit" class="btn-primary">Add Game</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="addProductModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Gaming Product</h3>
+          <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+        </div>
+        <form id="addProductForm">
+          <div class="modal-form-content">
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+              <label for="productCategory">Category</label>
+              <select id="productCategory" required>
+                <option value="">Select Category</option>
+                <option value="VR BOX">VR BOX</option>
+                <option value="HEADPHONES">HEADPHONES</option>
+                <option value="X-BOX">X-BOX</option>
+                <option value="GRAPHICS">GRAPHICS</option>
+                <option value="KEYBOARD">KEYBOARD</option>
+                <option value="MOUSE">MOUSE</option>
+                <option value="MONITOR">MONITOR</option>
+                <option value="CONTROLLER">CONTROLLER</option>
+                <option value="ACCESSORIES">ACCESSORIES</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="productPrice">Price ($)</label>
+              <input type="number" id="productPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="productImage">Image URL</label>
+              <input type="url" id="productImage" required>
+            </div>
+            <div class="form-group">
+              <label for="productDescription">Description</label>
+              <textarea id="productDescription" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal('addProductModal')">Cancel</button>
+            <button type="submit" class="btn-primary">Add Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="editModalTitle">Edit Item</h3>
+          <span class="close" onclick="closeModal('editModal')">&times;</span>
+        </div>
+        <form id="editForm">
+          <div class="modal-form-content">
+            <input type="hidden" id="editId">
+            <input type="hidden" id="editType">
+            <div class="form-group">
+              <label for="editName">Name</label>
+              <input type="text" id="editName" required>
+            </div>
+            <div class="form-group">
+              <label for="editTagline">Tagline</label>
+              <input type="text" id="editTagline">
+            </div>
+            <div class="form-group">
+              <label for="editCategory">Category</label>
+              <select id="editCategory" required>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editPrice">Price ($)</label>
+              <input type="number" id="editPrice" step="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="editImage">Image URL</label>
+              <input type="url" id="editImage" required>
+            </div>
+            <div class="form-group">
+              <label for="editDescription">Description</label>
+              <textarea id="editDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editDeveloper">Developer</label>
+              <input type="text" id="editDeveloper">
+            </div>
+            <div class="form-group">
+              <label for="editPublisher">Publisher</label>
+              <input type="text" id="editPublisher">
+            </div>
+            <div class="form-group">
+              <label for="editReleaseDate">Release Date</label>
+              <input type="date" id="editReleaseDate">
+            </div>
+            <div class="form-group">
+              <label for="editPlatforms">Platforms (comma separated)</label>
+              <input type="text" id="editPlatforms">
+            </div>
+            <div class="form-group">
+              <label for="editRating">Rating (0-10)</label>
+              <input type="number" id="editRating" step="0.1" min="0" max="10">
+            </div>
+            <div class="form-group">
+              <label for="editFeatures">Features (one per line)</label>
+              <textarea id="editFeatures" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editReqMin">Requirements Minimum (Key: Value per line)</label>
+              <textarea id="editReqMin" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editReqRec">Requirements Recommended (Key: Value per line)</label>
+              <textarea id="editReqRec" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="editScreenshots">Screenshot URLs (one per line)</label>
+              <textarea id="editScreenshots" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal('editModal')">Cancel</button>
+            <button type="submit" class="btn-primary">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Confirm Action</h3>
+          <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p id="confirmMessage">Are you sure you want to perform this action?</p>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
+          <button type="button" class="btn-danger" id="confirmButton">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="section-p1">
+    <div class="col logo-col">
+      <img src="../assets/media/logo.webp" class="logo">
+      <p>GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.</p>
+      <div class="follow">
+        <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
+        <div class="icon">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-pinterest"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Delivery Information</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col">
+      <h4>My Account</h4>
+      <a href="#">Sign In</a>
+      <a href="#">View Cart</a>
+      <a href="#">My Wishlist</a>
+      <a href="#">Track My Order</a>
+      <a href="#">Help</a>
+    </div>
+
+    <div class="col install">
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <div class="row">
+        <img src="../assets/media/pay/app.jpg" alt="" style="margin-right: 10px;">
+        <img src="../assets/media/pay/play.jpg" alt="">
+      </div>
+      <p>Secured Payment Gateways</p>
+      <img src="../assets/media/pay/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+      <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/admin.js"></script>
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

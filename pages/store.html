@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="../assets/css/store2.css" />
   <link rel="stylesheet" href="../assets/css/header.css" />
-  <link rel="stylesheet" href="../assets/css/newletter.css" />
   <link rel="stylesheet" href="../assets/css/footer.css" />
   <script src="https://kit.fontawesome.com/69a72a2c24.js" crossorigin="anonymous"></script>
 </head>
@@ -38,7 +37,7 @@
           <a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
         </li>
         <li>
-          <a href="./login.html"><i class="fa-regular fa-circle-user"></i></a>
+          <i onclick="accountRoute()" class="fa-regular fa-circle-user"></i>
         </li>
       </ul>
     </nav>
@@ -57,94 +56,22 @@
   </section>
 
   <section id="latest-games" class="section-p1">
-    <h1>LATEST GAMES</h1>
+    <div class="store-header">
+      <h1>LATEST GAMES</h1>
+      <div class="store-controls">
+        <div class="search-bar">
+          <input type="text" id="storeSearch" placeholder="Search games..." onkeyup="searchStore()">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn active" onclick="filterByCategory('all')">All</button>
+          <button class="filter-btn" onclick="filterByCategory('battle royale')">Battle Royale</button>
+          <button class="filter-btn" onclick="filterByCategory('action')">Action</button>
+          <button class="filter-btn" onclick="filterByCategory('adventure')">Adventure</button>
+        </div>
+      </div>
+    </div>
     <div class="main">
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/1.jpeg" />
-        </div>
-        <div class="title">
-          <h3>LEAGUE OF LEGENDS</h3>
-        </div>
-        <div class="des">
-          <p>Price: $20.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/2.jpeg" />
-        </div>
-        <div class="title">
-          <h3>VALHEIM</h3>
-        </div>
-        <div class="des">
-          <p>Price: $14.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/3.jpeg" />
-        </div>
-        <div class="title">
-          <h3>RAINBOW SIX:SEIGE</h3>
-        </div>
-        <div class="des">
-          <p>Price: $10.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/4.jpeg" />
-        </div>
-        <div class="title">
-          <h3>MONSTER HUNTER WORLD</h3>
-        </div>
-        <div class="des">
-          <p>Price: $12.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/5.jpeg" />
-        </div>
-        <div class="title">
-          <h3>DEAD BY DAYLIGHT</h3>
-        </div>
-        <div class="des">
-          <p>Price: $20.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-      <div class="cards">
-        <div class="image">
-          <img src="../assets/games/1.jpeg" />
-        </div>
-        <div class="title">
-          <h3>HALO INFINITE</h3>
-        </div>
-        <div class="des">
-          <p>Price: $8.99</p>
-          <button>Buy Now</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="newsletter" class="section-p1">
-    <div class="newstext">
-      <h4>Sign Up for Newsletters</h4>
-      <p>
-        Get E-mail updates about our latest shop and
-        <span>special offers.</span>
-      </p>
-    </div>
-    <div class="form">
-      <input type="text" placeholder="Your email address" />
-      <button class="normal">Sign Up</button>
     </div>
   </section>
 
@@ -152,8 +79,7 @@
     <div class="col logo-col">
       <img src="../assets/media/logo.webp" class="logo" />
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut
-        perspiciatis eum illum blanditiis facilis? In qui id.
+        GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.
       </p>
       <div class="follow">
         <h4>
@@ -200,10 +126,14 @@
 
     <div class="copyright">
       <p>
-        Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span>
+        Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span>
       </p>
     </div>
   </footer>
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/store.js"></script>
+  <script src="../assets/js/footer.js"></script>
 </body>
 
 </html>

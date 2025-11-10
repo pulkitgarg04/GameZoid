@@ -26,7 +26,7 @@
         <li><a href="./about.html">About</a></li>
         <li><a href="./contact.html">Contact</a></li>
         <li><a href="./cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
-        <li><a class="icon-active" href="./login.html"><i class="fa-regular fa-circle-user"></i></a></li>
+        <li><i onclick="accountRoute()" class="fa-regular fa-circle-user icon-active"></i></li>
       </ul>
     </nav>
     <div id="mobile">
@@ -71,8 +71,7 @@
   <footer class="section-p1">
     <div class="col logo-col">
       <img src="../assets/media/logo.webp" class="logo">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ut perspiciatis eum illum blanditiis facilis? In
-        qui id.</p>
+      <p>GameZoid is a leading platform for gamers, offering the latest news, reviews, and insights.</p>
       <div class="follow">
         <h4>Active <span>With Us <i class="fa-solid fa-forward"></i></span></h4>
         <div class="icon">
@@ -107,64 +106,22 @@
       <h4>Install App</h4>
       <p>From App Store or Google Play</p>
       <div class="row">
-        <img src="../assets/media/pay/app.jpg" alt="">
+        <img src="../assets/media/pay/app.jpg" alt="" style="margin-right: 10px;">
         <img src="../assets/media/pay/play.jpg" alt="">
       </div>
       <p>Secured Payment Gateways</p>
       <img src="../assets/media/pay/pay.png" alt="">
     </div>
 
-    <div class="copyright">
-      <p>Copyright &#169; 2024 - All Rights Reserved by <span>GameZoid</span></p>
+        <div class="copyright">
+      <p>Copyright &#169; <span id="current-year">2025</span> - All Rights Reserved by <span>GameZoid</span></p>
     </div>
   </footer>
-  
+
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/login.js"></script>
   <script>
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-
-    document.querySelectorAll('.password-toggle-icon').forEach(icon => {
-        icon.addEventListener('click', function () {
-            const passwordInput = this.previousElementSibling;
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-
-            } else {
-                passwordInput.type = 'password';
-                this.innerHTML = '<i class="fas fa-eye"></i>';
-            }
-        });
-    });
-
-    function loginUser(event) {
-        event.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-
-        const existingUser = users.find(user => user.email === email);
-
-        if (!existingUser) {
-            alert('No user found with this email!');
-            return;
-        }
-
-        if (existingUser.password !== password) {
-            alert('Incorrect password!');
-            return;
-        }
-
-        alert(`Welcome back, ${existingUser.name}!`);
-
-        localStorage.setItem('currentUser', JSON.stringify(existingUser));
-
-        setTimeout(() => {
-            window.location.href = './account.html';
-        }, 1000);
-    }
+    document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
 
